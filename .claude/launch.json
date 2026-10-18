@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "monitoring-api",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "uvicorn", "app.main:app", "--app-dir", "D:/turkmen gips/turkmen-gips-monitoring/backend", "--host", "127.0.0.1", "--port", "8010"],
+      "port": 8010
+    },
+    {
+      "name": "monitoring-web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "D:/turkmen gips/turkmen-gips-monitoring/frontend", "run", "start"],
+      "port": 3010
+    }
+  ]
+}

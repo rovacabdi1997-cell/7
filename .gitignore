@@ -1,0 +1,12 @@
+node_modules/
+.next/
+frontend/next-env.d.ts
+*.tsbuildinfo
+__pycache__/
+.pytest_cache/
+*.pyc
+.env
+.env.*
+.claude/sessions/
+.claude/state/
+frontend/.claude/

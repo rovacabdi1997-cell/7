@@ -1,0 +1,11 @@
+-- STATUS: CANDIDATE (not verified against the factory system)
+-- Source: WinCC OLE DB provider (WinCC Connectivity Pack) ALARMVIEW syntax.
+-- The project is in Chinese, so the view is probably AlgViewChs. Check the
+-- column names (MsgNr, State, DateTime, Text1, Text2, Classname) with the
+-- first read-only test.
+-- Connection: Provider=WinCCOLEDBProvider.1;Catalog=<runtime DB>;Data Source=<PC>\WINCC
+-- Archive runtime DB name: CC_chengxin_23_04_09_13_06_06R (UALogFile.txt, 2023-11-03)
+--
+-- Comments in this file are for people. The adapter loads only the query
+-- line in tag_mapping.json; the read-only guard rejects comments.
+ALARMVIEW:SELECT * FROM AlgViewChs WHERE DateTime > '2026-01-01 00:00:00'

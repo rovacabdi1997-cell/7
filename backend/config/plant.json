@@ -1,0 +1,41 @@
+{
+  "timezone": "UTC+05:00 (Aşgabat)",
+  "productionDayStartHour": 8,
+  "lines": {
+    "gipsokarton": {
+      "name": "Gipsokarton önümçiligi",
+      "section": "A bölümi",
+      "unit": "m²",
+      "rateUnit": "m/min",
+      "nominalPerHour": 2500,
+      "nominalSource": "Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
+      "boardWidthM": 1.2,
+      "planPerDay": 56000,
+      "planSource": "SIMULÝASIÝA: resmi gündelik meýilnama ýok"
+    },
+    "gury-garyndy": {
+      "name": "Gury garyndy önümçiligi",
+      "section": "B bölümi",
+      "unit": "t",
+      "rateUnit": "t/sag",
+      "nominalPerHour": 25,
+      "nominalSource": "Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
+      "bagKg": 25,
+      "packedShare": 0.92,
+      "planPerDay": 500,
+      "planSource": "SIMULÝASIÝA: resmi gündelik meýilnama ýok"
+    }
+  },
+  "shifts": [
+    {"id": "I", "name": "I çalşyk", "start": "08:00", "end": "16:00", "breakStart": "12:00", "breakEnd": "12:30"},
+    {"id": "II", "name": "II çalşyk", "start": "16:00", "end": "00:00", "breakStart": "20:00", "breakEnd": "20:30"},
+    {"id": "III", "name": "III çalşyk", "start": "00:00", "end": "08:00", "breakStart": "04:00", "breakEnd": "04:30"}
+  ],
+  "shiftSource": "SIMULÝASIÝA: çalşyk tertibi zawod tarapyndan tassyklanmadyk",
+  "safetyNotices": [
+    "Şahsy gorag serişdelerini hemişe geýiň.",
+    "Işleýän enjamyň goragyny açmaň.",
+    "Ýük göterijiniň hereket zolagynda durmaň.",
+    "Tozan süzgüjiniň basyşyny her çalşykda barlaň."
+  ]
+}
