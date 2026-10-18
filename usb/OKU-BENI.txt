@@ -1,0 +1,43 @@
+TURKMEN GIPS - ÜRETİM İZLEME SİSTEMİ (USB SUNUM PAKETİ)
+==========================================================
+
+KURULUM GEREKMEZ. İnternet gerekmez. Herhangi bir Windows 10/11 bilgisayarda çalışır.
+
+ÇALIŞTIRMA
+1. Klasörü USB'den masaüstüne kopyalayın (USB'den de çalışır ama daha yavaş).
+2. BASLAT.bat dosyasına çift tıklayın. Tarayıcıda yönetim paneli açılır.
+3. TV için: TV-BASLAT.bat. Edge tam ekran açılır. Çıkış: Alt+F4.
+4. Kapatmak için: siyah "serwer" penceresini kapatın.
+
+Windows "Bilinmeyen yayımcı" veya güvenlik duvarı uyarısı verirse "Yine de çalıştır" / "Erişime izin ver" seçin.
+
+EKRANLAR
+  http://localhost:3010/              Baş dolandyryş paneli
+  http://localhost:3010/gipsokarton/  Gipsokarton önümçiligi
+  http://localhost:3010/gury-garyndy/ Gury garyndy önümçiligi
+  http://localhost:3010/duyduryslar/  Duýduryşlar we durmalar
+  http://localhost:3010/calsyk/       Çalşyk we işgärler
+  http://localhost:3010/tv/           TV görnüşi (15 sn'de bir slayt değişir)
+
+TV'de sabit slayt: /tv/?slide=0 (genel), 1 (gipsokarton), 2 (gury garyndy), 3 (alarmlar)
+
+SUNUM İPUCU: SAATİ SABİTLEMEK
+Her adresin sonuna ?saat=SS:DD ekleyerek ekranı istediğiniz saate sabitleyebilirsiniz.
+Kritik arıza göstermek için 21:15 iyi bir saattir (gipsokarton garyşdyryjy arızası):
+  http://localhost:3010/?saat=21:15
+  http://localhost:3010/gipsokarton/?saat=21:15
+  http://localhost:3010/duyduryslar/?saat=21:15
+  http://localhost:3010/tv/?slide=3&saat=21:15
+Diğer senaryolar: 10:45 planlı duruş, 15:25 kesiji arızası, 09:35 gaplaýjy arızası.
+
+SUNUMDA SÖYLENECEK ÖNEMLİ NOT
+Ekrandaki bütün değerler SİMÜLASYONDUR ("SIMULÝASIÝA" etiketi). Gerçek WinCC
+verisine bağlantı henüz doğrulanmadı. Sistem, gerçek veri kaynağı onaylandığında
+yalnız veri adaptörü değiştirilerek canlıya geçecek şekilde kuruldu.
+Değerler günün saatine göre değişir; aynı saatte her zaman aynı değer görünür.
+
+KLASÖRLER
+  EKRAN-GORUNTULERI\  Sunuma eklenebilecek 1920x1080 ekran görüntüleri
+  BELGELER\           Analiz, veri eşleme, mimari, güvenlik, kurulum belgeleri
+  KAYNAK-KOD\         Tam kaynak kod (backend + frontend + testler)
+  site\, runtime\     Çalışan sistem (dokunmayın)

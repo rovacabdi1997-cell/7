@@ -48,6 +48,20 @@ msedge --kiosk "http://<sunucu>:3010/tv" --edge-kiosk-type=fullscreen --no-first
 - 1920×1080 ve 3840×2160 çözünürlükte taşma olmadan test edildi.
 - Kiosk dışı tarayıcıda "Doly ekran" düğmesi tam ekrana geçer.
 
+## Çevrimdışı USB paketi
+
+Kurulum ve internet gerektirmeyen sunum paketi. Python gerekmez, Node paketin içinde.
+
+```bash
+python scripts/export_replay.py
+cd frontend
+NEXT_PUBLIC_DATA_SOURCE=replay npx next build
+```
+
+Çıktı `frontend/.next-usb/` klasörüne yazılır. Paket düzeni: `usb/` içindeki dosyalar, `runtime/node.exe`, `site/` (= `.next-usb`). Başlatma: `BASLAT.bat` veya `TV-BASLAT.bat`.
+
+Paket, demo adaptörünün bir günlük çıktısını (3 dakikada bir) içerir ve günün saatine göre doğru anı gösterir. `?saat=21:15` ekranı belirli bir saate sabitler.
+
 ## Testler
 
 ```bash

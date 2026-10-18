@@ -1,5 +1,7 @@
 node_modules/
 .next/
+.next-usb/
+frontend/public/replay/
 frontend/next-env.d.ts
 *.tsbuildinfo
 __pycache__/
