@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="560" viewBox="0 0 1920 560">
+  <defs>
+    <pattern id="iso" width="96" height="56" patternUnits="userSpaceOnUse">
+      <path d="M0 28 48 0 96 28 48 56Z" fill="none" stroke="#E2E6EC" stroke-width="1" opacity=".42"/>
+    </pattern>
+  </defs>
+  <rect width="1920" height="560" fill="#F2F4F7"/>
+  <rect width="1920" height="560" fill="url(#iso)"/>
+</svg>

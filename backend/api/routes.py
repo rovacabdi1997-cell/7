@@ -1,4 +1,5 @@
 import asyncio
+import itertools
 import json
 from datetime import datetime
 from typing import Literal, Optional
@@ -6,7 +7,7 @@ from typing import Literal, Optional
 from fastapi import APIRouter, HTTPException, Query, Request
 from fastapi.responses import StreamingResponse
 
-from app.config import API_VERSION, tag_mapping
+from app.config import API_VERSION, plant_config, tag_mapping, tv_config
 from app.models import Alarm, Line, ShiftState, Snapshot
 
 router = APIRouter(prefix="/api")
@@ -76,22 +77,69 @@ def _default(value):
     raise TypeError(type(value))
 
 
+# One counter for the whole process: every SSE event gets a unique, rising id.
+_seq = itertools.count(1)
+PING_SECONDS = 5.0
+
+
+def _line_snapshot(snap: Snapshot, line_id: Optional[str]) -> Snapshot:
+    if not line_id:
+        return snap
+    return snap.model_copy(update={
+        "lines": [x for x in snap.lines if x.id == line_id],
+        "alarms": [a for a in snap.alarms if a.lineId == line_id],
+    })
+
+
 @router.get("/stream")
-async def stream(request: Request, limit: int = Query(0, ge=0, description="0 = sonsuz; synag üçin")):
-    """Server-Sent Events: one full snapshot per refresh interval."""
-    interval = request.app.state.settings.refresh_seconds
+async def stream(request: Request, limit: int = Query(0, ge=0, description="0 = sonsuz; synag üçin"),
+                 line: Optional[str] = Query(None, description="gipsokarton | gury-garyndy; boş = iki liniýa")):
+    """Server-Sent Events: one snapshot per refresh interval, `: ping` comments in
+    between. With `line` the payload carries only that line and its alarms."""
+    if line and line not in plant_config()["lines"]:
+        raise HTTPException(status_code=404, detail=f"Liniýa tapylmady: {line}")
+    settings = request.app.state.settings
+    interval = settings.refresh_seconds
 
     async def events():
         sent = 0
+        yield "retry: 3000\n\n"
         while True:
             if await request.is_disconnected():
                 break
-            payload = json.dumps(_snapshot(request).model_dump(), default=_default, ensure_ascii=False)
-            yield f"event: snapshot\ndata: {payload}\n\n"
+            seq = next(_seq)
+            data = _line_snapshot(_snapshot(request), line).model_dump()
+            data.update(seq=seq, staleAfterSec=settings.stale_after_seconds)
+            payload = json.dumps(data, default=_default, ensure_ascii=False)
+            yield f"id: {seq}\nevent: snapshot\ndata: {payload}\n\n"
             sent += 1
             if limit and sent >= limit:
                 break
-            await asyncio.sleep(interval)
+            waited = 0.0
+            while waited < interval:
+                step = min(PING_SECONDS, interval - waited)
+                await asyncio.sleep(step)
+                waited += step
+                if waited < interval:
+                    yield ": ping\n\n"
 
     return StreamingResponse(events(), media_type="text/event-stream",
                              headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+
+@router.get("/tv/{tv_id}")
+def tv(tv_id: str) -> dict:
+    """Fixed layout of one factory TV: its line, KPIs and machine order with asset keys."""
+    screens = tv_config()
+    if tv_id not in screens:
+        raise HTTPException(status_code=404, detail=f"TV tapylmady: {tv_id}")
+    screen = screens[tv_id]
+    line_cfg = plant_config()["lines"][screen["lineId"]]
+    machines = [
+        {"id": f"{screen['lineId']}-{order:02d}", "order": order, "name": e["name"],
+         "assetKey": e["assetKey"], "kind": e["kind"], "feedsInto": e.get("feedsInto"),
+         "ref": e.get("ref", "")}
+        for order, e in enumerate(line_cfg["equipment"], start=1)
+    ]
+    return {"tvId": tv_id, **screen, "section": line_cfg["section"], "lineCode": line_cfg["lineCode"],
+            "machines": machines, "equipmentSource": line_cfg["equipmentSource"]}

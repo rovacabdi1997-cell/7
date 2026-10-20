@@ -8,6 +8,7 @@ import { StatusPill } from "@/components/StatusPill";
 import { SeverityTag } from "@/components/AlarmTable";
 import { TrendChart, TrendLegend } from "@/components/TrendChart";
 import { PageTitle, WithSnapshot } from "@/components/AppShell";
+import { ProcessFlow } from "@/components/ProcessFlow";
 import type { Line, Snapshot } from "@/features/data/types";
 import { LINE_SHORT, clock, duration, num } from "@/features/i18n/tk";
 
@@ -32,6 +33,9 @@ function Body({ s }: { s: Snapshot }) {
   return (
     <>
       <PageTitle title="Baş dolandyryş paneli" />
+      <div className="mb-4 grid grid-cols-1 gap-4 2xl:grid-cols-2">
+        {s.lines.map((line) => <ProcessFlow key={line.id} line={line} compact />)}
+      </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         <PerLine title="Umumy önümçilik" lines={s.lines} pick={(l) => l.outputMonth} />
         <PerLine title="Şu günki önümçilik" lines={s.lines} pick={(l) => l.outputToday} />

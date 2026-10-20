@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "machines": {
+    "gk:gips-berijisi": {"part":"screw","motion":"axial","baseDurationMs":1500,"anchor":[0.56,0.65]},
+    "gk:garysdyryjy": {"part":"rotor","motion":"rotate","baseDurationMs":1200,"anchor":[0.58,0.53]},
+    "gk:kopuk-generatory": {"part":"pump-impeller","motion":"rotate","baseDurationMs":1000,"anchor":[0.31,0.67]},
+    "gk:formirleme-stoly": {"part":"paper-rolls","motion":"rotate","baseDurationMs":2200,"anchor":[0.31,0.30]},
+    "gk:gatama-lentasy": {"part":"belt","motion":"belt","baseDurationMs":1800,"anchor":[0.56,0.51]},
+    "gk:kesiji": {"part":"knife-drum","motion":"rotate","baseDurationMs":900,"anchor":[0.57,0.48]},
+    "gk:guradyjy": {"part":"roof-fans","motion":"fan","baseDurationMs":1000,"anchor":[0.56,0.26]},
+    "gk:gyra-kesiji": {"part":"saw-blades","motion":"rotate","baseDurationMs":850,"anchor":[0.53,0.48]},
+    "gk:gaplayjy": {"part":"lift-table","motion":"lift","baseDurationMs":2600,"anchor":[0.52,0.65]},
+    "gk:kagyz-bobinasy": {"part":"paper-reels-and-webs","motion":"rotate","baseDurationMs":2400,"anchor":[0.53,0.48]},
+    "gg:cig-mal-silosy": {"part":"discharge-valve","motion":"pulse","baseDurationMs":1800,"anchor":[0.51,0.80]},
+    "gg:dozirleyji": {"part":"dosing-screws","motion":"axial","baseDurationMs":1500,"anchor":[0.55,0.62]},
+    "gg:garysdyryjy": {"part":"ploughshaft","motion":"rotate","baseDurationMs":1250,"anchor":[0.55,0.54]},
+    "gg:elewator": {"part":"bucket-chain","motion":"lift","baseDurationMs":1700,"anchor":[0.55,0.54]},
+    "gg:tayyar-onum-bunkeri": {"part":"slide-gate","motion":"slide","baseDurationMs":2000,"anchor":[0.66,0.73]},
+    "gg:gaplayjy-masyn": {"part":"filling-spout","motion":"pulse","baseDurationMs":2200,"anchor":[0.48,0.66]},
+    "gg:palet-oruji": {"part":"gripper-arm","motion":"lift","baseDurationMs":2800,"anchor":[0.58,0.43]}
+  }
+}

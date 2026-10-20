@@ -13,3 +13,5 @@ __pycache__/
 .claude/state/
 frontend/.claude/
 .claude/memory/
+.next-live/
+**/.claude/state/

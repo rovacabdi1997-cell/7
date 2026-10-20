@@ -5,7 +5,7 @@ from app.config import Settings
 
 def build_adapter(settings: Settings):
     if settings.data_source == "demo":
-        return DemoAdapter()
+        return DemoAdapter(scenario=settings.demo_scenario)
     if settings.data_source == "wincc":
         executor = AdoExecutor(settings.wincc_connection) if settings.wincc_connection else None
         return WinCCSqlAdapter(executor)

@@ -11,6 +11,7 @@ from adapters.readonly_guard import assert_read_only
 from app.config import plant_config, tag_mapping
 from app.models import Alarm, Line, Metric, ShiftInfo, ShiftState, Snapshot
 from app.timeutil import TM_TZ, now_tm, production_day_start
+from services.flow import build_equipment, build_flow, machine_states
 from services.kpi import pct
 from services.shifts import shift_state
 
@@ -105,6 +106,8 @@ class WinCCSqlAdapter:
             fulfil = Metric(value=pct(m["outputToday"].value, m["planToday"].value), unit="%",
                             mode="HAKYKY", source="outputToday / planToday")
         any_real = any(x.mode == "HAKYKY" for x in m.values())
+        # No verified per-machine tags yet: every machine is UNKNOWN / ÝOK.
+        equipment = build_equipment(line_id, cfg, machine_states(cfg, None, "ÝOK"), "ÝOK")
         return Line(
             id=line_id, name=cfg["name"], section=cfg["section"], unit=cfg["unit"], rateUnit=cfg["rateUnit"],
             status="UNKNOWN", mode="HAKYKY" if any_real else "ÝOK",
@@ -114,7 +117,7 @@ class WinCCSqlAdapter:
             fulfilmentPct=fulfil, efficiencyPct=empty,
             bagsToday=m["bagsToday"] if line_id == "gury-garyndy" else None,
             stopsToday=m["stopsToday"], stopMinutesToday=m["stopMinutesToday"], errorsToday=m["errorsToday"],
-            trend=[], equipment=[],
+            trend=[], equipment=equipment, flow=build_flow(equipment, cfg, 0.0),
         )
 
     def _alarms(self, now: datetime) -> list[Alarm]:

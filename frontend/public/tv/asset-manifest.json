@@ -1,0 +1,176 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-10-20",
+  "dataMode": "SIMULATED",
+  "machines": [
+    {
+      "tv": "tv-1",
+      "line": "gk",
+      "order": 1,
+      "assetKey": "gips-berijisi",
+      "file": "assets/machines/tg-gk-01-gips-berijisi-base.png",
+      "moving": "assets/machines/tg-gk-01-gips-berijisi-moving.png"
+    },
+    {
+      "tv": "tv-1",
+      "line": "gk",
+      "order": 2,
+      "assetKey": "garysdyryjy",
+      "file": "assets/machines/tg-gk-02-garysdyryjy-base.png",
+      "moving": "assets/machines/tg-gk-02-garysdyryjy-moving.png"
+    },
+    {
+      "tv": "tv-1",
+      "line": "gk",
+      "order": 3,
+      "assetKey": "kopuk-generatory",
+      "file": "assets/machines/tg-gk-03-kopuk-generatory-base.png",
+      "moving": "assets/machines/tg-gk-03-kopuk-generatory-moving.png"
+    },
+    {
+      "tv": "tv-1",
+      "line": "gk",
+      "order": 4,
+      "assetKey": "formirleme-stoly",
+      "file": "assets/machines/tg-gk-04-formirleme-stoly-base.png",
+      "moving": "assets/machines/tg-gk-04-formirleme-stoly-moving.png"
+    },
+    {
+      "tv": "tv-1",
+      "line": "gk",
+      "order": 5,
+      "assetKey": "gatama-lentasy",
+      "file": "assets/machines/tg-gk-05-gatama-lentasy-base.png",
+      "moving": "assets/machines/tg-gk-05-gatama-lentasy-moving.png"
+    },
+    {
+      "tv": "tv-1",
+      "line": "gk",
+      "order": 6,
+      "assetKey": "kesiji",
+      "file": "assets/machines/tg-gk-06-kesiji-base.png",
+      "moving": "assets/machines/tg-gk-06-kesiji-moving.png"
+    },
+    {
+      "tv": "tv-1",
+      "line": "gk",
+      "order": 7,
+      "assetKey": "guradyjy",
+      "file": "assets/machines/tg-gk-07-guradyjy-base.png",
+      "moving": "assets/machines/tg-gk-07-guradyjy-moving.png"
+    },
+    {
+      "tv": "tv-1",
+      "line": "gk",
+      "order": 8,
+      "assetKey": "gyra-kesiji",
+      "file": "assets/machines/tg-gk-08-gyra-kesiji-base.png",
+      "moving": "assets/machines/tg-gk-08-gyra-kesiji-moving.png"
+    },
+    {
+      "tv": "tv-1",
+      "line": "gk",
+      "order": 9,
+      "assetKey": "gaplayjy",
+      "file": "assets/machines/tg-gk-09-gaplayjy-base.png",
+      "moving": "assets/machines/tg-gk-09-gaplayjy-moving.png"
+    },
+    {
+      "tv": "tv-1",
+      "line": "gk",
+      "order": 10,
+      "assetKey": "kagyz-bobinasy",
+      "file": "assets/machines/tg-gk-10-kagyz-bobinasy-base.png",
+      "moving": "assets/machines/tg-gk-10-kagyz-bobinasy-moving.png"
+    },
+    {
+      "tv": "tv-2",
+      "line": "gg",
+      "order": 1,
+      "assetKey": "cig-mal-silosy",
+      "file": "assets/machines/tg-gg-01-cig-mal-silosy-base.png",
+      "moving": "assets/machines/tg-gg-01-cig-mal-silosy-moving.png"
+    },
+    {
+      "tv": "tv-2",
+      "line": "gg",
+      "order": 2,
+      "assetKey": "dozirleyji",
+      "file": "assets/machines/tg-gg-02-dozirleyji-base.png",
+      "moving": "assets/machines/tg-gg-02-dozirleyji-moving.png"
+    },
+    {
+      "tv": "tv-2",
+      "line": "gg",
+      "order": 3,
+      "assetKey": "garysdyryjy",
+      "file": "assets/machines/tg-gg-03-garysdyryjy-base.png",
+      "moving": "assets/machines/tg-gg-03-garysdyryjy-moving.png"
+    },
+    {
+      "tv": "tv-2",
+      "line": "gg",
+      "order": 4,
+      "assetKey": "elewator",
+      "file": "assets/machines/tg-gg-04-elewator-base.png",
+      "moving": "assets/machines/tg-gg-04-elewator-moving.png"
+    },
+    {
+      "tv": "tv-2",
+      "line": "gg",
+      "order": 5,
+      "assetKey": "tayyar-onum-bunkeri",
+      "file": "assets/machines/tg-gg-05-tayyar-onum-bunkeri-base.png",
+      "moving": "assets/machines/tg-gg-05-tayyar-onum-bunkeri-moving.png"
+    },
+    {
+      "tv": "tv-2",
+      "line": "gg",
+      "order": 6,
+      "assetKey": "gaplayjy-masyn",
+      "file": "assets/machines/tg-gg-06-gaplayjy-masyn-base.png",
+      "moving": "assets/machines/tg-gg-06-gaplayjy-masyn-moving.png"
+    },
+    {
+      "tv": "tv-2",
+      "line": "gg",
+      "order": 7,
+      "assetKey": "palet-oruji",
+      "file": "assets/machines/tg-gg-07-palet-oruji-base.png",
+      "moving": "assets/machines/tg-gg-07-palet-oruji-moving.png"
+    },
+    {
+      "tv": "tv-1",
+      "line": "gk",
+      "order": 11,
+      "assetKey": "bukjalayjy",
+      "file": "assets/machines/tg-gk-11-bukjalayjy-base.png",
+      "moving": "assets/machines/tg-gk-11-bukjalayjy-moving.png"
+    },
+    {
+      "tv": "tv-2",
+      "line": "gg",
+      "order": 8,
+      "assetKey": "sarfiyat-silosy",
+      "file": "assets/machines/tg-gg-08-sarfiyat-silosy-base.png",
+      "moving": "assets/machines/tg-gg-08-sarfiyat-silosy-moving.png"
+    }
+  ],
+  "support": {
+    "gkFlow": "assets/support/tg-flow-gk.png",
+    "ggFlow": "assets/support/tg-flow-gg.png",
+    "boardToken": "assets/support/tg-material-board.png",
+    "bagToken": "assets/support/tg-material-bag.png",
+    "floorGrid": "assets/backgrounds/tg-floor-grid.svg"
+  },
+  "motionAssets": {
+    "rotate": "assets/overlays/motion-rotate.svg",
+    "fan": "assets/overlays/motion-rotate.svg",
+    "axial": "assets/overlays/motion-axial.svg",
+    "slide": "assets/overlays/motion-axial.svg",
+    "belt": "assets/overlays/motion-belt.svg",
+    "lift": "assets/overlays/motion-lift.svg",
+    "pulse": "assets/overlays/status-lamp.svg",
+    "statusLamp": "assets/overlays/status-lamp.svg"
+  }
+}

@@ -4,14 +4,39 @@
     {
       "name": "monitoring-api",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "uvicorn", "app.main:app", "--app-dir", "D:/turkmen gips/turkmen-gips-monitoring/backend", "--host", "127.0.0.1", "--port", "8010"],
+      "runtimeArgs": [
+        "-m",
+        "uvicorn",
+        "app.main:app",
+        "--app-dir",
+        "D:/turkmen gips/turkmen-gips-monitoring/backend",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8010"
+      ],
       "port": 8010
     },
     {
       "name": "monitoring-web",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "D:/turkmen gips/turkmen-gips-monitoring/frontend", "run", "start"],
+      "runtimeArgs": [
+        "--prefix",
+        "D:/turkmen gips/turkmen-gips-monitoring/frontend",
+        "run",
+        "start"
+      ],
       "port": 3010
+    },
+    {
+      "name": "monitoring-api-sunum",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": [
+        "-NoProfile",
+        "-Command",
+        "$env:DEMO_SCENARIO='presentation'; python -m uvicorn app.main:app --app-dir 'D:/turkmen gips/turkmen-gips-monitoring/backend' --host 127.0.0.1 --port 8011"
+      ],
+      "port": 8011
     }
   ]
 }

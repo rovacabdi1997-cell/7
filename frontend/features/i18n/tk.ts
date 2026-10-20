@@ -7,7 +7,8 @@ export const NAV = [
   { href: "/gury-garyndy", label: "Gury garyndy" },
   { href: "/duyduryslar", label: "Duýduryşlar" },
   { href: "/calsyk", label: "Çalşyk" },
-  { href: "/tv", label: "TV görnüşi" },
+  { href: "/tv/1", label: "TV 1 · Gipsokarton" },
+  { href: "/tv/2", label: "TV 2 · Gury garyndy" },
 ] as const;
 
 export const STATUS: Record<RunStatus, string> = {

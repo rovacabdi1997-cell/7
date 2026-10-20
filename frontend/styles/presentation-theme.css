@@ -1,0 +1,16 @@
+/* ANA-SARTNAME v1, 2026-10-20. Shared presentation palette. */
+:root {
+  --bg:#EDF2F7; --surface:#FFFFFF; --surface2:#F6F9FC; --floor:#E7EEF4;
+  --line:#DAE4EC; --line2:#C2D3E0; --txt:#132330; --muted:#63788A;
+  --acc:#1E9BE0; --acc2:#0C6FB8; --acc3:#8FD3F7;
+  --warn:#E0871F; --crit:#DC3A50; --ok:#1E9E6A;
+}
+:root[data-tema="koyu"] {
+  --bg:#071017; --surface:#0D1820; --surface2:#111F29; --floor:#152630;
+  --line:#1D3441; --line2:#2B4A5A; --txt:#EAF3F7; --muted:#8FA7B5;
+  --acc:#34C6F4; --acc2:#61D4F7; --acc3:#A2E6FA;
+  --warn:#FFB454; --crit:#FF6678; --ok:#3DDC97;
+  color-scheme:dark;
+}
+body { font-weight:700; }
+h1,h2,h3,h4 { font-family:Bahnschrift,"Segoe UI Semibold","Segoe UI",sans-serif; font-weight:900; }

@@ -1,0 +1,20 @@
+{
+  "tv-1": {
+    "lineId": "gipsokarton",
+    "title": "Gipsokarton önümçiligi",
+    "assetBase": "/tv/",
+    "flowAsset": "support/tg-flow-gk.png",
+    "materialAsset": "support/tg-material-board.png",
+    "kpis": ["speed", "outputToday", "fulfilmentPct"],
+    "alarmLimit": 3
+  },
+  "tv-2": {
+    "lineId": "gury-garyndy",
+    "title": "Gury garyndy önümçiligi",
+    "assetBase": "/tv/",
+    "flowAsset": "support/tg-flow-gg.png",
+    "materialAsset": "support/tg-material-bag.png",
+    "kpis": ["speed", "outputToday", "fulfilmentPct"],
+    "alarmLimit": 3
+  }
+}

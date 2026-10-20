@@ -6,6 +6,7 @@ import { Card } from "@/components/Card";
 import { EquipmentGrid } from "@/components/EquipmentGrid";
 import { Kpi, Progress } from "@/components/Kpi";
 import { StatusPill } from "@/components/StatusPill";
+import { ProcessFlow } from "@/components/ProcessFlow";
 import { TrendChart, TrendLegend } from "@/components/TrendChart";
 import type { Line, Snapshot } from "@/features/data/types";
 import { duration, num } from "@/features/i18n/tk";
@@ -47,6 +48,8 @@ function Body({ s, lineId }: { s: Snapshot; lineId: Line["id"] }) {
           <StatusPill status={l.status} large />
         </div>
       </PageTitle>
+
+      <div className="mb-4"><ProcessFlow line={l} /></div>
 
       <Card>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">{isBoard ? <Board l={l} /> : <DryMix l={l} />}</div>

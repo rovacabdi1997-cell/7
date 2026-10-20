@@ -5,11 +5,26 @@ KURULUM GEREKMEZ. İnternet gerekmez. Herhangi bir Windows 10/11 bilgisayarda ç
 
 ÇALIŞTIRMA
 1. Klasörü USB'den masaüstüne kopyalayın (USB'den de çalışır ama daha yavaş).
-2. BASLAT.bat dosyasına çift tıklayın. Tarayıcıda yönetim paneli açılır.
-3. TV için: TV-BASLAT.bat. Edge tam ekran açılır. Çıkış: Alt+F4.
-4. Kapatmak için: siyah "serwer" penceresini kapatın.
+2. BASLAT.bat dosyasına çift tıklayın. İki TV ekranı iki pencerede açılır:
+     TV 1 Gipsokarton: http://localhost:3010/tv/1/
+     TV 2 Gury garyndy: http://localhost:3010/tv/2/
+   Pencereyi diğer ekrana taşımak: Win+Shift+Sol/Sağ ok. Tam ekran: F11.
+3. Tam ekran (kiosk) için: TV-BASLAT.bat. Çıkış: Alt+F4.
+4. Yönetim paneli: http://localhost:3010/
+5. Kapatmak için: siyah "serwer" penceresini kapatın.
 
 Windows "Bilinmeyen yayımcı" veya güvenlik duvarı uyarısı verirse "Yine de çalıştır" / "Erişime izin ver" seçin.
+
+IKI TV (YENI, 2026-10-20)
+  BASLAT.bat        Bu bilgisayarda iki TV ekranini birlikte acar.
+  TV 1 Gipsokarton:  http://localhost:3010/tv/1/
+  TV 2 Gury garyndy: http://localhost:3010/tv/2/
+  TV ekranlari 6 dakikalik sunum dongusunu oynatir: normal calisma, ariza,
+  toparlanma. Iki TV ayni ani gosterir.
+    TV 1 arizasi: her 6 dakikanin 2:30-3:30 arasi (Kesiji)
+    TV 2 arizasi: her 6 dakikanin 3:30-4:30 arasi (Garysdyryjy)
+  Gunun saatine bagli gorunum icin adresin sonuna ?sunum=0 ekleyin.
+  Fabrikada iki ayri TV bilgisayari icin: IKI-TV-KURULUM.txt
 
 EKRANLAR
   http://localhost:3010/              Baş dolandyryş paneli
@@ -17,9 +32,8 @@ EKRANLAR
   http://localhost:3010/gury-garyndy/ Gury garyndy önümçiligi
   http://localhost:3010/duyduryslar/  Duýduryşlar we durmalar
   http://localhost:3010/calsyk/       Çalşyk we işgärler
-  http://localhost:3010/tv/           TV görnüşi (15 sn'de bir slayt değişir)
-
-TV'de sabit slayt: /tv/?slide=0 (genel), 1 (gipsokarton), 2 (gury garyndy), 3 (alarmlar)
+  http://localhost:3010/tv/1/         TV 1 · Gipsokarton
+  http://localhost:3010/tv/2/         TV 2 · Gury garyndy
 
 SUNUM İPUCU: SAATİ SABİTLEMEK
 Her adresin sonuna ?saat=SS:DD ekleyerek ekranı istediğiniz saate sabitleyebilirsiniz.
@@ -27,7 +41,7 @@ Kritik arıza göstermek için 21:15 iyi bir saattir (gipsokarton garyşdyryjy a
   http://localhost:3010/?saat=21:15
   http://localhost:3010/gipsokarton/?saat=21:15
   http://localhost:3010/duyduryslar/?saat=21:15
-  http://localhost:3010/tv/?slide=3&saat=21:15
+  http://localhost:3010/tv/1/?sunum=0&saat=21:15
 Diğer senaryolar: 10:45 planlı duruş, 15:25 kesiji arızası, 09:35 gaplaýjy arızası.
 
 SUNUMDA SÖYLENECEK ÖNEMLİ NOT

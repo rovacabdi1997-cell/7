@@ -11,10 +11,24 @@ export interface Metric {
   source: string;
 }
 
+export type EquipmentKind = "process" | "buffer" | "feed";
+
 export interface Equipment {
   id: string;
   name: string;
   status: RunStatus;
+  order: number;
+  assetKey: string;
+  kind: EquipmentKind;
+  mode: DataMode;
+}
+
+/** Material link between two machines; decided by the backend, never guessed here. */
+export interface Flow {
+  fromId: string;
+  toId: string;
+  active: boolean;
+  flowRate: number;
 }
 
 export interface TrendPoint {
@@ -44,6 +58,7 @@ export interface Line {
   errorsToday: Metric;
   trend: TrendPoint[];
   equipment: Equipment[];
+  flow: Flow[];
 }
 
 export interface Alarm {
@@ -89,4 +104,7 @@ export interface Snapshot {
   alarms: Alarm[];
   shift: ShiftState;
   notes: string[];
+  /** Present on SSE events only. */
+  seq?: number;
+  staleAfterSec?: number;
 }

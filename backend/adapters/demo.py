@@ -5,8 +5,9 @@ from datetime import datetime, timedelta
 from typing import Callable, Optional
 
 from app.config import plant_config
-from app.models import Alarm, Equipment, Line, Metric, ShiftInfo, ShiftState, Snapshot, TrendPoint
+from app.models import Alarm, Line, Metric, ShiftInfo, ShiftState, Snapshot, TrendPoint
 from app.timeutil import hhmm_to_minutes, now_tm, production_day_start
+from services.flow import build_equipment, build_flow, machine_states
 from services.kpi import overlap_minutes, pct
 from services.shifts import shift_state
 
@@ -24,22 +25,26 @@ STOPS = {
     "gury-garyndy": [
         ("09:30", 20, "fault", "Gaplaýjy maşyn", "Gaplaýjy maşynda halta dykylmasy", "CRITICAL"),
         ("14:00", 45, "planned", "Garyşdyryjy", "Meýilleşdirilen arassalaýyş", "INFO"),
-        ("01:00", 20, "fault", "Elewator", "Elewatoryň guşagy typýar", "CRITICAL"),
+        ("01:00", 20, "fault", "Tartym bunkeri", "Tartym bunkeriniň agram datçigi ýalňyşlyk berdi", "CRITICAL"),
     ],
 }
 
 # Warnings do not stop the line. (line, equipment, message, clock time, minutes)
 WARNINGS = [
     ("gipsokarton", "Guradyjy", "Guradyjynyň 2-nji zolagynda temperatura ýokary", "18:00", 90),
-    ("gury-garyndy", "Çig mal silosy", "Silosdaky material derejesi pes", "11:15", 50),
+    ("gury-garyndy", "Çig mal silolary", "Silosdaky material derejesi pes", "11:15", 50),
 ]
 
-EQUIPMENT = {
-    "gipsokarton": ["Gips berijisi", "Garyşdyryjy", "Köpük generatory", "Formirleme stoly",
-                    "Gatama lentasy", "Kesiji", "Guradyjy", "Gyra kesiji", "Gaplaýjy"],
-    "gury-garyndy": ["Çig mal silosy", "Dozirleýji", "Garyşdyryjy", "Elewator",
-                     "Taýýar önüm bunkeri", "Gaplaýjy maşyn", "Palet örüji"],
-}
+# Presentation loop (DEMO_SCENARIO=presentation): a 6-minute cycle so a fault
+# and its recovery are always seen within a few minutes, on both TVs at once.
+# (line, start second, end second, kind, equipment, message, severity)
+PRESENTATION_CYCLE_S = 360
+PRESENTATION_STOPS = [
+    ("gipsokarton", 150, 210, "fault", "Kesiji", "Kesijiniň ýerleşiş datçigi ýalňyşlyk berdi", "CRITICAL"),
+    ("gury-garyndy", 210, 270, "fault", "Garyşdyryjy", "Garyşdyryjynyň motor togy çäkden ýokary", "CRITICAL"),
+]
+# After a presentation stop the line ramps from 60% back to full speed.
+PRESENTATION_RAMP_S = 60
 
 STAFF = {"I": 46, "II": 41, "III": 28}
 
@@ -57,8 +62,9 @@ def _metric(value: Optional[float], unit: str, source: str = SOURCE) -> Metric:
 class DemoAdapter:
     name = "demo"
 
-    def __init__(self, clock: Callable[[], datetime] = now_tm) -> None:
+    def __init__(self, clock: Callable[[], datetime] = now_tm, scenario: str = "clock") -> None:
         self.clock = clock
+        self.scenario = scenario
         self.cfg = plant_config()
         self._day_cache: dict[tuple[str, int], float] = {}
 
@@ -100,7 +106,21 @@ class DemoAdapter:
             self._day_cache[key] = self._produce(line_id, day_key, 24 * 60)[0]
         return self._day_cache[key]
 
-    def _line(self, line_id: str, day_start: datetime, elapsed: float) -> Line:
+    def _presentation(self, line_id: str, now: datetime) -> tuple[Optional[dict], float]:
+        """Current presentation stop for the line and a speed factor (0.6..1)."""
+        second = (now.minute * 60 + now.second) % PRESENTATION_CYCLE_S
+        factor = 1.0
+        for lid, start, end, kind, equipment, message, severity in PRESENTATION_STOPS:
+            if lid != line_id:
+                continue
+            if start <= second < end:
+                return {"kind": kind, "equipment": equipment, "message": message, "severity": severity,
+                        "ageSec": second - start}, 0.0
+            if end <= second < end + PRESENTATION_RAMP_S:
+                factor = 0.6 + 0.4 * (second - end) / PRESENTATION_RAMP_S
+        return None, factor
+
+    def _line(self, line_id: str, day_start: datetime, elapsed: float, now: Optional[datetime] = None) -> Line:
         cfg = self.cfg["lines"][line_id]
         stops = self._stops(line_id)
         day_key = day_start.toordinal()
@@ -113,10 +133,14 @@ class DemoAdapter:
         month_total = total + sum(self._full_day(line_id, day_key - back) for back in range(1, day_start.day))
 
         current_stop = stop_at(elapsed)
+        factor = 1.0
+        if self.scenario == "presentation" and now is not None:
+            current_stop, factor = self._presentation(line_id, now)
         status = "RUNNING"
         if current_stop:
             status = "FAULT" if current_stop["kind"] == "fault" else "STOPPED"
-        speed = 0.0 if current_stop else self._rate(line_id, int(elapsed), day_key)
+        running_rate = self._rate(line_id, int(elapsed), day_key) * factor
+        speed = 0.0 if current_stop else running_rate
 
         started = [s for s in stops if s["start"] <= elapsed]
         stop_minutes = sum(overlap_minutes(s["start"], s["end"], 0, elapsed) for s in started)
@@ -134,12 +158,11 @@ class DemoAdapter:
             for h in range(int(elapsed // 60) + 1)
         ]
 
-        equipment = []
-        for index, name in enumerate(EQUIPMENT[line_id]):
-            eq_status = "RUNNING"
-            if current_stop:
-                eq_status = "FAULT" if current_stop["equipment"] == name and current_stop["kind"] == "fault" else "STOPPED"
-            equipment.append(Equipment(id=f"{line_id}-{index + 1:02d}", name=name, status=eq_status))
+        states = machine_states(cfg, current_stop, MODE)
+        equipment = build_equipment(line_id, cfg, states, MODE)
+        # Nominal running speed: m/min for board (m²/h over board width), t/h for dry mix.
+        nominal = cfg["nominalPerHour"] / cfg["boardWidthM"] / 60 if is_board else cfg["nominalPerHour"]
+        flow = build_flow(equipment, cfg, running_rate / nominal)
 
         bags = None
         if not is_board:
@@ -161,12 +184,15 @@ class DemoAdapter:
             errorsToday=_metric(errors, "san"),
             trend=trend,
             equipment=equipment,
+            flow=flow,
         )
 
-    def _alarms(self, day_start: datetime, elapsed: float) -> list[Alarm]:
+    def _alarms(self, day_start: datetime, elapsed: float, now: Optional[datetime] = None) -> list[Alarm]:
         alarms = []
         entries = []
-        for line_id in STOPS:
+        # In the presentation loop the clock-based stops are not happening, so
+        # their alarms would contradict a running line; only warnings remain.
+        for line_id in STOPS if self.scenario != "presentation" else []:
             for s in self._stops(line_id):
                 entries.append((line_id, s["equipment"], s["message"], s["severity"], s["start"], s["end"] - s["start"]))
         for line_id, equipment, message, clock_time, minutes in WARNINGS:
@@ -186,6 +212,16 @@ class DemoAdapter:
                 startedAt=day_start + timedelta(minutes=start),
                 durationMin=round(age if active else minutes, 1), mode=MODE,
             ))
+        if self.scenario == "presentation":
+            for line_id in STOPS:
+                stop, _ = self._presentation(line_id, now)
+                if stop:
+                    alarms.append(Alarm(
+                        id=f"SIM-SUNUM-{line_id}", lineId=line_id, equipment=stop["equipment"],
+                        message=stop["message"], severity=stop["severity"], state="ACTIVE",
+                        startedAt=now - timedelta(seconds=stop["ageSec"]),
+                        durationMin=round(stop["ageSec"] / 60, 1), mode=MODE,
+                    ))
         order = {"ACTIVE": 0, "ACKNOWLEDGED": 1, "CLEARED": 2}
         return sorted(alarms, key=lambda a: (order[a.state], -a.startedAt.timestamp()))
 
@@ -205,8 +241,8 @@ class DemoAdapter:
         elapsed = (now - day_start).total_seconds() / 60
         return Snapshot(
             timestamp=now, dataMode=MODE, adapter=self.name, productionDayStart=day_start,
-            lines=[self._line(line_id, day_start, elapsed) for line_id in ("gipsokarton", "gury-garyndy")],
-            alarms=self._alarms(day_start, elapsed),
+            lines=[self._line(line_id, day_start, elapsed, now) for line_id in ("gipsokarton", "gury-garyndy")],
+            alarms=self._alarms(day_start, elapsed, now),
             shift=self._shift(now),
             notes=["Ähli bahalar SIMULÝASIÝA. Hakyky çeşme tassyklanmadyk."],
         )

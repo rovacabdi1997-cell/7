@@ -31,29 +31,38 @@ export function SimulationNote() {
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const { snapshot } = useData();
+  const { snapshot, connection } = useData();
   return (
-    <div className="flex min-h-screen flex-col lg:flex-row">
-      <aside className="border-b border-brand-900 bg-brand-900 text-white lg:w-60 lg:shrink-0 lg:border-b-0">
-        <div className="px-5 py-5">
-          <div className="text-xs uppercase tracking-[0.18em] text-brand-200">Önümçilik</div>
-          <div className="text-lg font-semibold leading-tight">Gözegçilik ulgamy</div>
+    <div className="app-frame flex min-h-screen flex-col lg:flex-row">
+      <aside className="app-sidebar border-b border-brand-900 text-white lg:w-64 lg:shrink-0 lg:border-b-0">
+        <div className="border-b border-white/10 px-5 py-6">
+          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-white text-brand-700">
+            <span className="text-lg font-black">TG</span>
+          </div>
+          <div className="text-[10px] uppercase tracking-[0.28em] text-brand-200">Türkmen Gips</div>
+          <div className="mt-1 text-lg font-semibold leading-tight">Önümçilik gözegçiligi</div>
         </div>
         <nav className="flex gap-1 overflow-x-auto px-3 pb-3 lg:flex-col lg:overflow-visible">
           {NAV.map((item) => {
             const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
             return (
               <Link key={item.href} href={item.href}
-                className={`whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium transition-colors ${active ? "bg-brand-600 text-white" : "text-brand-100 hover:bg-brand-700"}`}>
-                {item.label}
+                className={`nav-link whitespace-nowrap rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${active ? "is-active bg-white text-brand-700" : "text-brand-100 hover:bg-white/10"}`}>
+                <span className="nav-index">{String(NAV.indexOf(item) + 1).padStart(2, "0")}</span>{item.label}
               </Link>
             );
           })}
         </nav>
       </aside>
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-surface px-6 py-3">
-          <div className="text-sm text-muted">{snapshot ? longDate(snapshot.timestamp) : "Maglumat ýüklenýär"}</div>
+        <header className="topbar flex flex-wrap items-center justify-between gap-3 border-b border-line bg-surface px-6 py-3">
+          <div>
+            <div className="text-sm font-semibold text-brand-900">{snapshot ? longDate(snapshot.timestamp) : "Maglumat ýüklenýär"}</div>
+            <div className="mt-0.5 flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-muted">
+              <span className={`h-2 w-2 rounded-full ${connection === "live" ? "bg-ok" : "bg-bad"}`} />
+              {snapshot?.adapter === "wincc" ? "SQL / WinCC · salt-okunur" : "SQL taýýar · demo adapteri"}
+            </div>
+          </div>
           <div className="flex items-center gap-4">
             {snapshot && <ModeBadge mode={snapshot.dataMode} />}
             <div className="tabular text-2xl font-semibold text-brand-900">{snapshot ? clock(snapshot.timestamp) : "--:--"}</div>
@@ -69,8 +78,11 @@ export function AppShell({ children }: { children: ReactNode }) {
 
 export function PageTitle({ title, children }: { title: string; children?: ReactNode }) {
   return (
-    <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
-      <h1 className="text-2xl font-semibold text-brand-900">{title}</h1>
+    <div className="page-title mb-5 flex flex-wrap items-end justify-between gap-3">
+      <div>
+        <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-brand-400">Zawod maglumat ulgamy</span>
+        <h1 className="mt-1 text-3xl font-semibold text-brand-900">{title}</h1>
+      </div>
       {children}
     </div>
   );

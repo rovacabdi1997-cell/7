@@ -9,6 +9,9 @@ DataMode = Literal["SIMULÝASIÝA", "HAKYKY", "ÝOK"]
 RunStatus = Literal["RUNNING", "STOPPED", "FAULT", "UNKNOWN"]
 Severity = Literal["CRITICAL", "WARNING", "INFO"]
 AlarmState = Literal["ACTIVE", "ACKNOWLEDGED", "CLEARED"]
+# process = on the main chain, buffer = silo/bunker that decouples the chain,
+# feed = side input into a main-chain machine (paper reels).
+EquipmentKind = Literal["process", "buffer", "feed"]
 
 
 class Metric(BaseModel):
@@ -22,6 +25,21 @@ class Equipment(BaseModel):
     id: str
     name: str
     status: RunStatus
+    order: int = 0
+    assetKey: str = ""
+    kind: EquipmentKind = "process"
+    mode: DataMode = "ÝOK"
+    # Baumak inventory code (1-005-605) or Sanjin item number; "" if unknown.
+    ref: str = ""
+
+
+class Flow(BaseModel):
+    """Material link between two machines. The TV draws moving material only
+    when `active`; animation speed follows `flowRate` (0..1 of nominal)."""
+    fromId: str
+    toId: str
+    active: bool
+    flowRate: float
 
 
 class TrendPoint(BaseModel):
@@ -51,6 +69,7 @@ class Line(BaseModel):
     errorsToday: Metric
     trend: list[TrendPoint]
     equipment: list[Equipment]
+    flow: list[Flow] = []
 
 
 class Alarm(BaseModel):

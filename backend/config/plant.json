@@ -11,7 +11,79 @@
       "nominalSource": "Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
       "boardWidthM": 1.2,
       "planPerDay": 56000,
-      "planSource": "SIMULÝASIÝA: resmi gündelik meýilnama ýok"
+      "planSource": "SIMULÝASIÝA: resmi gündelik meýilnama ýok",
+      "lineCode": "gk",
+      "flowModel": "continuous",
+      "equipment": [
+        {
+          "name": "Gips berijisi",
+          "assetKey": "gips-berijisi",
+          "kind": "process",
+          "ref": "Sanjin 1.1"
+        },
+        {
+          "name": "Garyşdyryjy",
+          "assetKey": "garysdyryjy",
+          "kind": "process",
+          "ref": "Sanjin 6"
+        },
+        {
+          "name": "Köpük generatory",
+          "assetKey": "kopuk-generatory",
+          "kind": "process",
+          "ref": "Sanjin 67"
+        },
+        {
+          "name": "Formirleme stoly",
+          "assetKey": "formirleme-stoly",
+          "kind": "process",
+          "ref": "Sanjin 7–9"
+        },
+        {
+          "name": "Gatama lentasy",
+          "assetKey": "gatama-lentasy",
+          "kind": "process",
+          "ref": "Sanjin 10–12"
+        },
+        {
+          "name": "Kesiji",
+          "assetKey": "kesiji",
+          "kind": "process",
+          "ref": "Sanjin 13"
+        },
+        {
+          "name": "Guradyjy",
+          "assetKey": "guradyjy",
+          "kind": "process",
+          "ref": "Sanjin 18 L4041"
+        },
+        {
+          "name": "Gyra kesiji",
+          "assetKey": "gyra-kesiji",
+          "kind": "process",
+          "ref": "Saha: REF 07 · kenar testereleri"
+        },
+        {
+          "name": "Bukjalaýjy",
+          "assetKey": "bukjalayjy",
+          "kind": "process",
+          "ref": "Sanjin 24/25/29"
+        },
+        {
+          "name": "Gaplaýjy",
+          "assetKey": "gaplayjy",
+          "kind": "process",
+          "ref": "Sanjin 36/39"
+        },
+        {
+          "name": "Kagyz bobinasy",
+          "assetKey": "kagyz-bobinasy",
+          "kind": "feed",
+          "feedsInto": "formirleme-stoly",
+          "ref": "Sanjin 1–5"
+        }
+      ],
+      "equipmentSource": "Sanjin teklifi (üpjün ediji resminamasy), bölüm 2; tertip zawod tarapyndan tassyklanmadyk"
     },
     "gury-garyndy": {
       "name": "Gury garyndy önümçiligi",
@@ -23,13 +95,75 @@
       "bagKg": 25,
       "packedShare": 0.92,
       "planPerDay": 500,
-      "planSource": "SIMULÝASIÝA: resmi gündelik meýilnama ýok"
+      "planSource": "SIMULÝASIÝA: resmi gündelik meýilnama ýok",
+      "lineCode": "gg",
+      "flowModel": "buffered",
+      "equipment": [
+        {
+          "name": "Çig mal silolary",
+          "assetKey": "cig-mal-silosy",
+          "kind": "buffer",
+          "ref": "1-005-510…590"
+        },
+        {
+          "name": "Tartym bunkeri",
+          "assetKey": "dozirleyji",
+          "kind": "process",
+          "ref": "1-005-600"
+        },
+        {
+          "name": "Garyşdyryjy",
+          "assetKey": "garysdyryjy",
+          "kind": "process",
+          "ref": "1-005-605"
+        },
+        {
+          "name": "Taýýar önüm bunkeri",
+          "assetKey": "tayyar-onum-bunkeri",
+          "kind": "buffer",
+          "ref": "1-005-610"
+        },
+        {
+          "name": "Gaplaýjy maşyn",
+          "assetKey": "gaplayjy-masyn",
+          "kind": "process",
+          "ref": "1-005-615"
+        },
+        {
+          "name": "Palet örüji",
+          "assetKey": "palet-oruji",
+          "kind": "process",
+          "ref": "1-005-692/820/825"
+        }
+      ],
+      "equipmentSource": "Baumak enjam sanawy, Mixing line-1 (1-005-xxx); zawod tarapyndan tassyklanmadyk"
     }
   },
   "shifts": [
-    {"id": "I", "name": "I çalşyk", "start": "08:00", "end": "16:00", "breakStart": "12:00", "breakEnd": "12:30"},
-    {"id": "II", "name": "II çalşyk", "start": "16:00", "end": "00:00", "breakStart": "20:00", "breakEnd": "20:30"},
-    {"id": "III", "name": "III çalşyk", "start": "00:00", "end": "08:00", "breakStart": "04:00", "breakEnd": "04:30"}
+    {
+      "id": "I",
+      "name": "I çalşyk",
+      "start": "08:00",
+      "end": "16:00",
+      "breakStart": "12:00",
+      "breakEnd": "12:30"
+    },
+    {
+      "id": "II",
+      "name": "II çalşyk",
+      "start": "16:00",
+      "end": "00:00",
+      "breakStart": "20:00",
+      "breakEnd": "20:30"
+    },
+    {
+      "id": "III",
+      "name": "III çalşyk",
+      "start": "00:00",
+      "end": "08:00",
+      "breakStart": "04:00",
+      "breakEnd": "04:30"
+    }
   ],
   "shiftSource": "SIMULÝASIÝA: çalşyk tertibi zawod tarapyndan tassyklanmadyk",
   "safetyNotices": [

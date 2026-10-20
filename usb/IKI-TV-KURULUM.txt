@@ -1,0 +1,54 @@
+TURKMEN GIPS - IKI TV KURULUMU
+
+TV 1: Gipsokarton hatti; sabit sayfa /tv/?slide=1
+TV 2: Kuru karisim hatti; sabit sayfa /tv/?slide=2
+Her ekran kendi cozumune olceklenir. Onerilen ayar: yatay 1920x1080.
+
+AG YAPISI
+WinCC / SQL -> merkez bilgisayar -> fabrika agi -> TV 1 ve TV 2
+SQL baglantisi sadece merkez bilgisayarda bulunur.
+TV'ler icin uygun tarayici veya HDMI ile bagli birer Windows mini PC gerekir.
+
+1. MERKEZ ADRESINI AYARLAYIN
+Merkez bilgisayarin sabit yerel IP'sini belirleyin.
+Paketin IKI-TV-AYARLARI.json dosyasinda serverUrl degerini degistirin.
+Ornek: { "serverUrl": "http://192.168.1.50:3010" }
+Bu IP yalniz ornektir; fabrikanin gercek merkez IP'sini yazin.
+Ayni dosyayi TV bilgisayarlarina da kopyalayin.
+localhost sadece TV tarayicisi merkez bilgisayarin kendisinde calisiyorsa kullanilir.
+
+2. MERKEZDE BIR KEZ BASLATIN
+Sunum icin: MERKEZ-DEMO-BASLAT.bat
+Canli SQL icin: SQL-AYARLARI.bat dosyasini doldurup MERKEZ-SQL-BASLAT.bat
+Canli mod mevcut Python, WinCC saglayicisi ve dogrulanmis tag eslemesini gerektirir.
+Bu adim SQL kurmaz veya tag eslemesini kendiliginden tamamlamaz.
+Canli modu acmak dogrulanmamis alanlari gercek veri yapmaz.
+Baslatma dosyasi merkez adresini API erisim listesine ekler.
+Ag yoneticisi TV bilgisayarlarindan merkezin TCP 3010 portuna,
+canli modda ayrica TCP 8010 portuna erisim saglamalidir.
+
+3. TV'LERDE ACIN
+TV 1 Windows bilgisayari: TV-1-GIPSOKARTON.bat
+TV 2 Windows bilgisayari: TV-2-KURU-KARISIM.bat
+Bu dosyalar merkezde ikinci bir sunucu baslatmaz; hazir sunucuya baglanir.
+Iki TV'ye de merkezle ayni surum paketi ve ayni serverUrl ayari verilmelidir.
+Cikis: Alt+F4.
+TV'nin kendi tarayicisi varsa baslatma dosyasi yerine yukaridaki iki URL'yi kullanin.
+
+TEK BILGISAYARA IKI HDMI EKRAN BAGLIYSA
+Windows ekran ayarini Genislet yapin. Her TV icin ilgili dosyayi acin.
+Iki pencere ayri Edge profiliyle acilir. Pencereyi dogru TV'ye tasimak icin
+Win+Shift+Sag/Sol ok kisayolunu kullanin. Otomatik monitor yerlestirmesi yoktur.
+
+ISLETIM
+Merkez bilgisayar ve ag acik kaldikca ekranlar veri alir.
+Sunucu arka planda calisir; kayitlar CALISMA-KAYITLARI klasorundedir.
+Bilgisayar yeniden baslarsa merkez baslatma dosyasini ve TV dosyalarini tekrar acin.
+Otomatik Windows servisi kurulumu bu pakette yapilmamistir.
+Sunucuyu kapatmak icin Gorev Yoneticisi > Ayrintilar'da bu baslatma icin
+olusan node.exe ve canli moddaki Python uvicorn sureclerini belirleyerek sonlandirin.
+Sunucuyu ikinci kez baslatma denemesi port dolu mesaji verir.
+
+MEVCUT DURUM
+Sunum degerleri SIMULYASIYA/SIMULATED'dir.
+Gercek SQL, cihaz, sayaç ve tag bilgileriyle sahada dogrulanmalidir.

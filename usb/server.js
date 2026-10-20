@@ -5,7 +5,8 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 
-const root = path.join(__dirname, "site");
+const siteDir = process.env.SITE_DIR || "site";
+const root = path.resolve(__dirname, siteDir);
 const port = Number(process.env.PORT || 3010);
 const types = {
   ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8",
@@ -34,10 +35,11 @@ http.createServer((req, res) => {
   const ips = Object.values(os.networkInterfaces()).flat()
     .filter((n) => n && n.family === "IPv4" && !n.internal).map((n) => n.address);
   console.log("");
-  console.log("  Onumcilik gozegciligi isleyar (SIMULYASIYA)");
+  console.log(`  Onumcilik gozegciligi isleyar (${siteDir})`);
   console.log(`  Bu kompyuter : http://localhost:${port}/`);
-  console.log(`  TV gornusi   : http://localhost:${port}/tv/`);
-  ips.forEach((ip) => console.log(`  Tor arkaly   : http://${ip}:${port}/tv/`));
+  console.log(`  TV 1         : http://localhost:${port}/tv/1/`);
+  console.log(`  TV 2         : http://localhost:${port}/tv/2/`);
+  ips.forEach((ip) => console.log(`  Tor arkaly   : http://${ip}:${port}/tv/1/  we  /tv/2/`));
   console.log("");
   console.log("  Yapmak ucin su penjireni yapyn.");
 });

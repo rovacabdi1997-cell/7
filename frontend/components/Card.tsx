@@ -7,10 +7,10 @@ export function Card({ title, aside, children, className = "" }: {
   className?: string;
 }) {
   return (
-    <section className={`rounded-lg border border-line bg-surface ${className}`}>
+    <section className={`panel-card rounded-lg border border-line bg-surface ${className}`}>
       {title && (
-        <header className="flex items-center justify-between gap-3 border-b border-line px-5 py-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">{title}</h2>
+        <header className="panel-card-header flex items-center justify-between gap-3 border-b border-line px-5 py-3">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-brand-700">{title}</h2>
           {aside}
         </header>
       )}
