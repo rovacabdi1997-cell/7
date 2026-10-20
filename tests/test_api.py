@@ -9,7 +9,7 @@ from app.main import create_app
 
 @pytest.fixture
 def client(fixed_clock):
-    return TestClient(create_app(DemoAdapter(fixed_clock(15, 25))))
+    return TestClient(create_app(DemoAdapter(fixed_clock(15, 25))), client=("127.0.0.1", 50000))
 
 
 def test_health(client):
@@ -52,3 +52,8 @@ def test_stream_sends_snapshot_events(client):
 
 def test_only_get_is_allowed(client):
     assert client.post("/api/snapshot").status_code == 405
+
+
+def test_mapping_is_local_only(fixed_clock):
+    remote = TestClient(create_app(DemoAdapter(fixed_clock(15, 25))), client=("192.168.1.77", 50000))
+    assert remote.get("/api/mapping").status_code == 403

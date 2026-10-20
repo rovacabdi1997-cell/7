@@ -1,6 +1,7 @@
 import asyncio
 import itertools
 import json
+import os
 from datetime import datetime
 from typing import Literal, Optional
 
@@ -67,7 +68,11 @@ def shift(request: Request) -> ShiftState:
 
 
 @router.get("/mapping")
-def mapping() -> dict:
+def mapping(request: Request) -> dict:
+    """Tag map of the plant: only from the central PC itself unless MAPPING_REMOTE=1."""
+    host = request.client.host if request.client else ""
+    if host not in ("127.0.0.1", "::1") and os.getenv("MAPPING_REMOTE") != "1":
+        raise HTTPException(status_code=403, detail="Diňe merkez kompýuterden")
     return tag_mapping()
 
 

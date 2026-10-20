@@ -58,7 +58,7 @@
   border-bottom: 1px solid var(--ltv-line);
 }
 .ltv-scene-tag {
-  position: absolute; top: 22px; left: 48px; z-index: 5; display: flex; align-items: center; gap: 18px;
+  position: absolute; top: 22px; right: 48px; z-index: 5; display: flex; align-items: center; gap: 18px;
   font-size: 22px; color: var(--ltv-ink-2);
 }
 .ltv-scene-tag b { font-family: var(--ltv-mono); font-size: 20px; letter-spacing: 0.18em; color: var(--ltv-brand); }
@@ -213,7 +213,8 @@
 .ltv-scene { background:var(--floor); }
 .ltv-scene::before { content:""; position:absolute; inset:0; background-position:center; background-size:cover; opacity:.08; pointer-events:none; }
 .ltv-scene-gk::before { background-image:url('/photos/IMG_6191.jpeg'); }
-.ltv-scene-gg::before { background-image:url('/photos/IMG_6211.jpeg'); }
+/* Logo-free hall photo: the BEUMER machine photo carries the supplier name. */
+.ltv-scene-gg::before { background-image:url('/photos/IMG_6185.jpeg'); }
 .ltv-machine-name { position:absolute; top:92%; left:50%; transform:translateX(-50%); width:176px; text-align:center; font-size:23px; font-weight:900; line-height:1.15; color:var(--txt); }
 .ltv-flow .is-live .rail { stroke:url(#ltv-flow-grad); stroke-width:8px; }
 .ltv-flow .is-live .pulse-line { stroke:var(--acc3); stroke-width:6; stroke-dasharray:1 25; }

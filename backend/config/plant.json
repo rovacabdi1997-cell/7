@@ -10,8 +10,8 @@
       "nominalPerHour": 2500,
       "nominalSource": "Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
       "boardWidthM": 1.2,
-      "planPerDay": 56000,
-      "planSource": "SIMULÝASIÝA: resmi gündelik meýilnama ýok",
+      "planPerDay": 54795,
+      "planSource": "SIMULÝASIÝA: kuwwat hasaby 20 mln m²/ýyl ÷ 365",
       "lineCode": "gk",
       "flowModel": "continuous",
       "equipment": [
@@ -94,8 +94,8 @@
       "nominalSource": "Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
       "bagKg": 25,
       "packedShare": 0.92,
-      "planPerDay": 500,
-      "planSource": "SIMULÝASIÝA: resmi gündelik meýilnama ýok",
+      "planPerDay": 685,
+      "planSource": "SIMULÝASIÝA: kuwwat hasaby 250 000 t/ýyl (teklip) ÷ 365",
       "lineCode": "gg",
       "flowModel": "buffered",
       "equipment": [

@@ -17,17 +17,25 @@ const DataContext = createContext<DataState>({ snapshot: null, connection: "conn
 // Same host as the page by default, so a TV on the plant network works
 // without any per-device setting. `?api=http://IP:8010` overrides it on site,
 // so a TV can be pointed at another server without rebuilding.
+function apiFromUrl(): string | null {
+  if (typeof window === "undefined") return null;
+  const fromUrl = new URLSearchParams(window.location.search).get("api");
+  return fromUrl && /^https?:\/\/[^/?#]+$/.test(fromUrl) ? fromUrl : null;
+}
+
 export function apiBase(): string {
-  if (typeof window !== "undefined") {
-    const fromUrl = new URLSearchParams(window.location.search).get("api");
-    if (fromUrl && /^https?:\/\/[^/?#]+$/.test(fromUrl)) return fromUrl;
-  }
+  const fromUrl = apiFromUrl();
+  if (fromUrl) return fromUrl;
   if (process.env.NEXT_PUBLIC_API_URL) return process.env.NEXT_PUBLIC_API_URL;
   if (typeof window === "undefined") return "http://localhost:8010";
   return `${window.location.protocol}//${window.location.hostname}:8010`;
 }
 
-const REPLAY = process.env.NEXT_PUBLIC_DATA_SOURCE === "replay";
+// One offline build serves both modes: it plays the recorded loop, unless the
+// address carries ?api=http://IP:8010 — then it reads the live API instead.
+function replayMode(): boolean {
+  return process.env.NEXT_PUBLIC_DATA_SOURCE === "replay" && !apiFromUrl();
+}
 
 interface ReplayDay {
   stepMinutes: number;
@@ -63,7 +71,7 @@ function onlyLine(snapshot: Snapshot, line?: string): Snapshot {
     - Other screens follow the production day; `?saat=21:15` pins a time of day. */
 function useReplay(setState: (s: DataState) => void, line?: string) {
   useEffect(() => {
-    if (!REPLAY) return;
+    if (!replayMode()) return;
     const params = new URLSearchParams(window.location.search);
     const loop = Boolean(line) && params.get("sunum") !== "0";
     let day: ReplayDay | null = null;
@@ -104,7 +112,7 @@ export function DataProvider({ children, line }: { children: ReactNode; line?: s
   useReplay(setState, line);
 
   useEffect(() => {
-    if (REPLAY) return;
+    if (replayMode()) return;
     // EventSource reconnects by itself after a dropped connection.
     const query = line ? `?line=${encodeURIComponent(line)}` : "";
     const source = new EventSource(`${apiBase()}/api/stream${query}`);

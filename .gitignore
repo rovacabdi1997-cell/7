@@ -15,3 +15,12 @@ frontend/.claude/
 .claude/memory/
 .next-live/
 **/.claude/state/
+# Sunum medya dosyaları: büyük, değişmeyen girdiler. Diskte sunum/ altında durur, git'e girmez.
+sunum/assets/
+sunum/photos/
+sunum/visuals/
+sunum/tehniki-integrasiya-4k/
+sunum/raporlar/
+sunum/belgeler/
+sunum/*.pdf
+sunum/*TEK-DOSYA*

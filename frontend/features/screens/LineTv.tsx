@@ -422,7 +422,7 @@ export function LineTv({ tvId }: { tvId: TvId }) {
   const line = snapshot?.lines.find((l) => l.id === screen.lineId) ?? null;
   const staleMs = (snapshot?.staleAfterSec ?? 15) * 1000;
   const stale = connection === "lost" || !receivedAt || now - receivedAt > staleMs;
-  const mode = line?.mode === "SIMULÝASIÝA" ? "SIMULATED · SIMULÝASIÝA" : snapshot ? MODE[line?.mode ?? snapshot.dataMode] : MODE["ÝOK"];
+  const mode = line?.mode === "SIMULÝASIÝA" ? "SIMULÝASIÝA" : snapshot ? MODE[line?.mode ?? snapshot.dataMode] : MODE["ÝOK"];
   const alarms = (snapshot?.alarms ?? []).filter(a => a.lineId === screen.lineId);
   const critical = alarms.find(a => a.state !== "CLEARED" && a.severity === "CRITICAL");
 

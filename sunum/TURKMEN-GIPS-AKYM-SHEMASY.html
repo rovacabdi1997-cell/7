@@ -1,0 +1,1039 @@
+<meta charset="utf-8">
+<title>Akylly Zawod Ulgamy</title>
+<style>
+:root{
+  --bg:#EDF2F7; --surface:#FFFFFF; --surface2:#F6F9FC; --floor:#E7EEF4;
+  --line:#DAE4EC; --line2:#C2D3E0;
+  --txt:#132330; --muted:#63788A; --dim:#9AAEBE;
+  --acc:#1E9BE0; --acc2:#0C6FB8; --acc3:#8FD3F7;
+  --warn:#E0871F; --crit:#DC3A50; --hold:#7A5AF8;
+  --disp:"Bahnschrift","DIN Alternate","Segoe UI Semibold",system-ui,sans-serif;
+  --body:"Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--body);min-height:100vh;overflow-x:hidden}
+.wrap{display:grid;grid-template-columns:214px minmax(0,1fr) 310px;grid-template-rows:auto 1fr auto;min-height:100vh}
+
+/* ---------- ýokarky zolak ---------- */
+.top{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:9px 18px;background:var(--surface);
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px}
+.brand svg{width:36px;height:30px;flex:none}
+.brand b{font-family:var(--disp);font-size:14.5px;letter-spacing:.11em;display:block}
+.brand span{font-size:9px;letter-spacing:.07em;color:var(--muted);text-transform:uppercase;white-space:nowrap}
+.top .sep{flex:1}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;padding:5px 9px;border:1px solid var(--line2);
+  border-radius:3px;color:var(--muted);text-transform:uppercase;white-space:nowrap;background:var(--surface2)}
+.tag.sim{color:#9A5B05;border-color:#F0D3A6;background:#FEF6E9}
+.tag.doc{color:var(--acc2);border-color:#B9DFF6;background:#EBF6FD}
+.chipbar{display:flex;gap:6px;flex-wrap:wrap}
+.clock{font-family:var(--mono);font-size:16px;font-variant-numeric:tabular-nums}
+
+/* ---------- çep menýu ---------- */
+.rail{grid-column:1/2;grid-row:2/4;background:var(--surface);border-right:1px solid var(--line);
+  padding:9px 8px;overflow-y:auto}
+.rail h6{font-family:var(--mono);font-size:8.5px;letter-spacing:.17em;color:var(--dim);text-transform:uppercase;
+  margin:11px 8px 6px}
+.mi{display:grid;grid-template-columns:44px 1fr;gap:9px;align-items:center;width:100%;padding:5px;border-radius:9px;
+  border:1px solid transparent;background:none;cursor:pointer;font:inherit;text-align:left;color:var(--txt);
+  transition:.15s;margin-bottom:2px}
+.mi img{width:44px;height:30px;object-fit:cover;border-radius:5px;display:block;filter:saturate(.85)}
+.mi .ph{width:44px;height:30px;border-radius:5px;background:var(--floor)}
+.mi b{display:block;font-size:11.5px;font-weight:600;line-height:1.25}
+.mi i{display:block;font-style:normal;font-family:var(--mono);font-size:8px;letter-spacing:.11em;
+  color:var(--muted);text-transform:uppercase;margin-top:1px}
+.mi:hover{background:var(--surface2);border-color:var(--line)}
+.mi[aria-current="true"]{background:#EBF6FD;border-color:#B9DFF6}
+.mi[aria-current="true"] b{color:var(--acc2)}
+.mi[aria-current="true"] img{filter:none}
+.mi:focus-visible{outline:2px solid var(--acc2);outline-offset:1px}
+
+/* ---------- esasy meýdan ---------- */
+.stage{grid-column:2/3;grid-row:2/3;display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));background:var(--surface);border-bottom:1px solid var(--line);flex:none}
+.kpi{padding:8px 11px;border-right:1px solid var(--line);min-width:0}
+.kpi:last-child{border-right:0}
+.kpi label{display:block;font-size:8.5px;letter-spacing:.13em;color:var(--muted);text-transform:uppercase;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi .v{font-family:var(--disp);font-size:23px;margin-top:1px;font-variant-numeric:tabular-nums;line-height:1.15}
+.kpi .v small{font-size:10.5px;color:var(--muted);margin-left:3px;font-family:var(--body)}
+.kpi.is-warn .v{color:var(--warn)}
+.kpi.is-crit .v{color:var(--crit)}
+.spark{display:block;width:100%;height:13px;margin-top:2px}
+.kpi .d{font-family:var(--mono);font-size:9px;color:var(--dim);margin-top:3px}
+
+.scroll{overflow-y:auto;flex:1;min-height:0;padding:14px}
+
+/* ---------- bölüm başy ---------- */
+.hero{position:relative;border-radius:12px;overflow:hidden;margin-bottom:14px;background:#0B1D2A;
+  border:1px solid var(--line2)}
+.hero img{width:100%;height:190px;object-fit:cover;display:block}
+.hero .ov{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:16px 20px;
+  background:linear-gradient(90deg,rgba(6,20,30,.86) 0%,rgba(6,20,30,.55) 46%,rgba(6,20,30,.12) 100%)}
+.hero .kicker{font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:#8FD3F7;text-transform:uppercase}
+.hero h1{font-family:var(--disp);font-size:27px;margin:5px 0 0;color:#fff;letter-spacing:.01em}
+.hero p{margin:6px 0 0;font-size:12.5px;color:#C6DDEB;max-width:62ch;line-height:1.5}
+
+.cols{display:grid;grid-template-columns:290px minmax(0,1fr);gap:14px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:14px 16px}
+.card h4{font-family:var(--disp);font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);
+  margin:0 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+.enters{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.enters li{display:grid;grid-template-columns:15px 1fr;gap:8px;font-size:12.3px;line-height:1.45}
+.enters li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--acc);margin:6px 0 0 4px}
+.enters li b{font-weight:600}
+.flowbox{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:10px;overflow-x:auto}
+svg.flow{width:100%;height:auto;min-width:640px;display:block}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
+.mc{background:var(--surface2);border:1px solid var(--line);border-radius:9px;padding:11px 12px}
+.mc label{display:block;font-size:8.5px;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}
+.mc b{font-family:var(--disp);font-size:21px;display:block;margin-top:2px;font-variant-numeric:tabular-nums}
+.mc i{font-style:normal;font-family:var(--mono);font-size:9.5px;color:var(--dim);display:block;margin-top:2px}
+.mc.ok b{color:var(--acc2)} .mc.w b{color:var(--warn)} .mc.c b{color:var(--crit)} .mc.h b{color:var(--hold)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  text-align:left;padding:6px 8px;border-bottom:1px solid var(--line2)}
+td{padding:7px 8px;border-bottom:1px solid var(--line)}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+.pill{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;padding:2px 7px;border-radius:9px;
+  text-transform:uppercase}
+.p-ok{background:#EBF6FD;color:var(--acc2)} .p-w{background:#FDF2E4;color:#9A5B05}
+.p-c{background:#FDECEE;color:#A32333} .p-h{background:#F1ECFE;color:#5A3ED6}
+.aiwarn{background:#FDF2E4;border:1px solid #F0D3A6;border-radius:10px;padding:12px 14px;font-size:12.5px;
+  line-height:1.55;color:#7A4A05}
+.aiwarn b{display:block;font-family:var(--disp);font-size:12px;letter-spacing:.09em;text-transform:uppercase;margin-bottom:4px}
+
+/* ---------- shema düwünleri ---------- */
+.nd{cursor:pointer}
+.nd:focus-visible{outline:none}
+.nd:focus-visible .nbox{stroke:var(--acc2);stroke-width:3}
+text{font-family:var(--body);fill:var(--muted)}
+.t-name{font-size:11px;fill:#22333F}
+.t-tag{font-family:var(--mono);font-size:8px;fill:var(--dim)}
+.t-val{font-family:var(--mono);font-size:8.5px}
+.t-band{font-family:var(--disp);font-size:11px;letter-spacing:.17em;fill:#9DB2C2}
+
+/* ---------- ssenariý ---------- */
+.scen{grid-column:2/3;grid-row:3/4;display:flex;gap:7px;align-items:center;padding:8px 14px;
+  background:var(--surface);border-top:1px solid var(--line);overflow-x:auto}
+.scen b{font-family:var(--mono);font-size:9px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;white-space:nowrap}
+.sc{font:inherit;font-size:11.5px;padding:6px 12px;border:1px solid var(--line2);background:var(--surface);
+  color:var(--muted);border-radius:15px;cursor:pointer;white-space:nowrap;transition:.15s}
+.sc:hover{color:var(--acc2);border-color:var(--acc)}
+.sc[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.sc.risk[aria-pressed="true"]{background:var(--warn);border-color:var(--warn)}
+.sc.bad[aria-pressed="true"]{background:var(--crit);border-color:var(--crit)}
+.sc:focus-visible{outline:2px solid var(--acc2);outline-offset:2px}
+
+/* ---------- wakalar ---------- */
+.side{grid-column:3/4;grid-row:2/4;background:var(--surface);border-left:1px solid var(--line);
+  display:flex;flex-direction:column;min-height:0}
+.side h2{font-family:var(--disp);font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);
+  margin:0;padding:12px 15px 10px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+.side h2 em{font-style:normal;font-family:var(--mono);font-size:10px}
+.feed{overflow-y:auto;flex:1;min-height:0}
+.ev{display:grid;grid-template-columns:3px 1fr;gap:10px;padding:10px 15px;border-bottom:1px solid var(--line)}
+.ev .bar{border-radius:2px;background:var(--acc)}
+.ev.s-crit .bar{background:var(--crit)} .ev.s-warn .bar{background:var(--warn)} .ev.s-hold .bar{background:var(--hold)}
+.ev .h{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.ev .src{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.ev .t{font-family:var(--mono);font-size:9px;color:var(--dim);font-variant-numeric:tabular-nums}
+.ev p{margin:4px 0 0;font-size:12px;line-height:1.45;color:var(--txt)}
+.ev .meta{margin-top:4px;font-family:var(--mono);font-size:9px;color:var(--muted)}
+.ev.new{animation:sl .4s ease-out}
+@keyframes sl{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
+
+/* ---------- çekmece ---------- */
+.drawer{position:fixed;top:0;right:0;width:min(400px,92vw);height:100vh;background:var(--surface);
+  border-left:1px solid var(--line2);transform:translateX(103%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  z-index:40;display:flex;flex-direction:column;box-shadow:-24px 0 48px rgba(19,35,48,.13)}
+.drawer.open{transform:none}
+.drawer header{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;
+  align-items:flex-start;gap:12px}
+.drawer h3{font-family:var(--disp);font-size:18px;margin:0}
+.drawer .sub{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;color:var(--muted);text-transform:uppercase;margin-top:5px}
+.x{background:none;border:1px solid var(--line2);color:var(--muted);width:28px;height:28px;border-radius:50%;
+  cursor:pointer;font-size:14px;line-height:1;flex:none}
+.dbody{overflow-y:auto;padding:15px 18px;display:flex;flex-direction:column;gap:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
+.cell{background:var(--surface2);padding:9px 11px}
+.cell label{display:block;font-size:8.5px;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}
+.cell b{font-family:var(--disp);font-size:17px;font-weight:500;display:block;margin-top:2px;font-variant-numeric:tabular-nums}
+.chain{display:flex;flex-direction:column}
+.chain .step{display:grid;grid-template-columns:20px 1fr;gap:10px;padding:7px 0}
+.chain .dot{width:9px;height:9px;border-radius:50%;background:var(--acc);margin:5px 0 0 5px;position:relative}
+.chain .step:not(:last-child) .dot::after{content:"";position:absolute;left:4px;top:11px;width:1px;
+  height:calc(100% + 7px);background:var(--line2)}
+.chain .mod-n{font-family:var(--mono);font-size:8.5px;letter-spacing:.11em;color:var(--muted);text-transform:uppercase}
+.chain p{margin:2px 0 0;font-size:12px;line-height:1.45}
+.act{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:inherit;font-size:11.5px;padding:8px 13px;border-radius:6px;cursor:pointer;background:var(--surface);
+  border:1px solid var(--line2);color:var(--txt)}
+.btn.p{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.btn:hover{border-color:var(--acc)}
+.note{font-size:10.5px;color:var(--muted);line-height:1.5;border-left:2px solid var(--line2);padding-left:10px}
+h4.dh{font-family:var(--disp);font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);
+  margin:0 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:1240px){
+  .wrap{grid-template-columns:214px 1fr;grid-template-rows:auto auto auto auto}
+  .rail{grid-row:2/5}
+  .stage{grid-column:2/3;grid-row:2/3}
+  .scen{grid-column:2/3;grid-row:3/4}
+  .side{grid-column:2/3;grid-row:4/5;border-left:0;border-top:1px solid var(--line);max-height:270px}
+  .cols{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(3,1fr)}
+}
+
+/* ============================================================
+   PRESENTATION VISUAL UPGRADE · 2026-09-11
+   Premium local demo skin; operational logic remains unchanged.
+   ============================================================ */
+:root{
+  --bg:#071017; --surface:#0D1820; --surface2:#111F29; --floor:#152630;
+  --line:#1D3441; --line2:#2B4A5A;
+  --txt:#EAF3F7; --muted:#8FA7B5; --dim:#587180;
+  --acc:#34C6F4; --acc2:#61D4F7; --acc3:#A2E6FA;
+  --warn:#FFB454; --crit:#FF6678; --hold:#9A7BFF;
+}
+body{
+  background:
+    radial-gradient(circle at 48% -10%,rgba(52,198,244,.12),transparent 36%),
+    linear-gradient(145deg,#071017 0%,#09141C 48%,#061016 100%);
+  color:var(--txt);overflow:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.18;
+  background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+  background-size:32px 32px;mask-image:linear-gradient(to bottom,black,transparent 70%);
+}
+.wrap{grid-template-columns:204px minmax(0,1fr) 296px;isolation:isolate;height:100vh;min-height:0}
+.top{
+  min-height:62px;padding:10px 18px;background:rgba(9,20,28,.94);border-bottom-color:var(--line2);
+  box-shadow:0 14px 34px rgba(0,0,0,.25);backdrop-filter:blur(18px);position:relative;z-index:3
+}
+.brand svg{width:43px;height:34px;filter:drop-shadow(0 0 13px rgba(52,198,244,.32))}
+.brand b{font-size:15px;letter-spacing:.15em;color:#F5FAFC}
+.brand span{color:#7893A2;letter-spacing:.12em}
+.tag{background:#101F29;border-color:#284453;color:#92A9B6;border-radius:999px;padding:6px 10px}
+.tag.sim{color:#FFD28F;border-color:rgba(255,180,84,.38);background:rgba(255,180,84,.09);box-shadow:inset 0 0 0 1px rgba(255,180,84,.04)}
+.tag.sim::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--warn);margin-right:7px;box-shadow:0 0 9px var(--warn)}
+.tag.doc{color:#83DDF8;border-color:rgba(52,198,244,.32);background:rgba(52,198,244,.08)}
+.clock{color:#D8EBF2;font-size:15px;letter-spacing:.08em;text-shadow:0 0 14px rgba(52,198,244,.28)}
+
+.rail{background:rgba(8,18,25,.92);border-right-color:var(--line);padding:12px 9px}
+.rail h6{color:#536D7B;margin:15px 9px 7px;font-size:8px}
+.mi{grid-template-columns:48px 1fr;gap:10px;padding:7px;border-radius:10px;color:#CFE0E8;transition:background .18s,border-color .18s,transform .18s}
+.mi img{width:48px;height:34px;border-radius:7px;filter:saturate(.72) contrast(1.08) brightness(.72);opacity:.84}
+.mi b{font-size:11.8px}.mi i{color:#587180}
+.mi:hover{background:#10232E;border-color:#244553;transform:translateX(2px)}
+.mi:hover img{filter:saturate(.92) contrast(1.08) brightness(.9);opacity:1}
+.mi[aria-current="true"]{background:linear-gradient(90deg,rgba(52,198,244,.15),rgba(52,198,244,.045));border-color:rgba(52,198,244,.38);box-shadow:inset 3px 0 0 var(--acc),0 8px 22px rgba(0,0,0,.15)}
+.mi[aria-current="true"] b{color:#CFF5FF}.mi[aria-current="true"] img{filter:saturate(1.05) contrast(1.1) brightness(.96);opacity:1}
+
+.stage{background:linear-gradient(180deg,rgba(10,22,30,.82),rgba(7,16,23,.9))}
+.kpis{background:rgba(9,20,28,.92);border-bottom-color:var(--line);padding:0 5px}
+.kpi{padding:11px 12px 9px;border-right-color:var(--line);position:relative}
+.kpi::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--acc),transparent);opacity:.5}
+.kpi label{color:#7893A2;font-size:8px}.kpi .v{font-size:24px;color:#F4FAFC;letter-spacing:-.025em}
+.kpi .v small{color:#6E8998}.kpi .d{color:#506A79}.spark{height:15px}
+.scroll{padding:16px 17px 26px;scrollbar-color:#2A4857 transparent}
+
+.hero{min-height:236px;border-radius:16px;margin-bottom:16px;border-color:#294654;box-shadow:0 18px 48px rgba(0,0,0,.30),inset 0 1px rgba(255,255,255,.04)}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(52,198,244,.06),transparent 42%),linear-gradient(0deg,rgba(4,12,17,.38),transparent 45%)}
+.hero img{height:236px;filter:saturate(.9) contrast(1.14) brightness(.76);transform:scale(1.015)}
+.hero .ov{z-index:1;padding:23px 25px;background:linear-gradient(90deg,rgba(3,12,18,.96) 0%,rgba(5,17,24,.78) 44%,rgba(4,15,22,.12) 82%),linear-gradient(0deg,rgba(4,12,18,.55),transparent 70%)}
+.hero .kicker{color:#79DDF8;font-size:9.5px;letter-spacing:.23em}.hero h1{font-size:34px;letter-spacing:-.02em;text-shadow:0 3px 22px rgba(0,0,0,.5)}
+.hero p{font-size:13px;color:#B9D0DB;max-width:57ch}
+
+.cols{grid-template-columns:278px minmax(0,1fr);gap:14px}
+.card,.flowbox{background:linear-gradient(145deg,rgba(17,31,41,.96),rgba(11,24,32,.96));border-color:var(--line);box-shadow:0 13px 34px rgba(0,0,0,.16),inset 0 1px rgba(255,255,255,.025)}
+.card{border-radius:13px;padding:15px 16px}.card h4,h4.dh{color:#7793A2;border-bottom-color:#203845}
+.enters li{color:#C6D8E0}.enters li::before{box-shadow:0 0 8px rgba(52,198,244,.7)}
+.flowbox{border-radius:13px;padding:12px}
+.mc{background:linear-gradient(145deg,#142631,#0F202A);border-color:#24404E;border-radius:11px;padding:13px 14px;box-shadow:inset 0 1px rgba(255,255,255,.025)}
+.mc label{color:#7894A3}.mc b{font-size:23px;color:#F0F7FA}.mc i{color:#617D8C}
+.mc.ok b{color:#66D8F8}.mc.w b{color:var(--warn)}.mc.c b{color:var(--crit)}.mc.h b{color:var(--hold)}
+th{color:#6F8998;border-bottom-color:#294653}td{color:#C6D7DF;border-bottom-color:#1B3440}
+.pill{border:1px solid transparent}.p-ok{background:rgba(52,198,244,.12);color:#79DCF8;border-color:rgba(52,198,244,.2)}
+.p-w{background:rgba(255,180,84,.1);color:#FFC879;border-color:rgba(255,180,84,.2)}
+.p-c{background:rgba(255,102,120,.1);color:#FF8B99;border-color:rgba(255,102,120,.2)}
+.p-h{background:rgba(154,123,255,.11);color:#BBA7FF;border-color:rgba(154,123,255,.22)}
+.aiwarn{color:#FFD18D;background:rgba(255,180,84,.075);border-color:rgba(255,180,84,.28)}
+
+svg.flow{filter:drop-shadow(0 8px 18px rgba(0,0,0,.15))}
+.flow .nbox{fill:#10232D!important;stroke-width:2!important}
+.flow .t-name{fill:#D9E9EF!important;font-weight:600}.flow .t-tag{fill:#668493!important}.flow .t-val{fill:#8CA6B3}
+.flow .t-band{fill:#7895A4}.flow line,.flow path{opacity:.74}.flow .nd:hover .nbox{fill:#173541!important;filter:drop-shadow(0 0 7px rgba(52,198,244,.3))}
+
+.scen{background:rgba(9,20,28,.96);border-top-color:var(--line);padding:9px 14px;box-shadow:0 -12px 28px rgba(0,0,0,.16)}
+.scen b{color:#6F8998}.sc{background:#101F29;border-color:#294653;color:#8FA7B5;padding:7px 13px}
+.sc:hover{color:#D8F5FD;border-color:var(--acc);background:#142B36}.sc[aria-pressed="true"]{background:linear-gradient(135deg,#159FD0,#2FC0EC);box-shadow:0 5px 16px rgba(52,198,244,.22)}
+
+.side{background:rgba(8,18,25,.94);border-left-color:var(--line)}
+.side h2{color:#7893A2;border-bottom-color:var(--line);padding:15px 16px 12px}.side h2 em{padding:3px 7px;border-radius:999px;background:rgba(52,198,244,.09)}
+.feed{scrollbar-color:#2A4857 transparent}.ev{border-bottom-color:#19313C;padding:12px 15px;gap:11px;background:transparent;transition:background .18s}
+.ev:hover{background:#0E202A}.ev .src{color:#7592A1}.ev .t{color:#587483}.ev p{color:#D4E2E8;font-size:12.2px}.ev .meta{color:#66808E}
+.ev .bar{box-shadow:0 0 10px rgba(52,198,244,.48)}.ev.s-crit .bar{box-shadow:0 0 11px rgba(255,102,120,.52)}.ev.s-warn .bar{box-shadow:0 0 11px rgba(255,180,84,.48)}
+
+.drawer{background:#0B1921;border-left-color:#294754;box-shadow:-30px 0 70px rgba(0,0,0,.52)}
+.drawer header{border-bottom-color:var(--line)}.drawer h3{color:#F0F7FA}.drawer .sub{color:#71909F}.x{border-color:#31505F;color:#9AB0BB;background:#10242E}
+.cell{background:#10232D}.cell label{color:#73909E}.cell b{color:#EAF3F7}.grid2{background:#294653}
+.chain p,.note{color:#9EB3BE}.chain .dot::after{background:#2A4755!important}.btn{background:#10242E;border-color:#31505F;color:#C9D9E0}.btn.p{background:linear-gradient(135deg,#149ECC,#31C5EF);border-color:#31C5EF;color:#041117}
+
+@media (max-width:1240px){
+  .wrap{grid-template-columns:194px 1fr}.side{background:#091720}.hero,.hero img{min-height:210px;height:210px}
+}
+@media (max-width:820px){
+  body{overflow:auto}.wrap{display:block;height:auto;min-height:100vh}.top{position:sticky;top:0}.rail{display:flex;gap:6px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .rail h6{display:none}.mi{min-width:155px}.kpis{grid-template-columns:repeat(2,1fr)}.cols{grid-template-columns:1fr}.side{max-height:330px}.hero h1{font-size:28px}
+}
+.hero{position:relative}.hero:has(img[src*="visuals/"])::after{content:'WIZUALIZASIÝA';position:absolute;right:16px;bottom:14px;z-index:4;padding:4px 10px;border-radius:999px;background:rgba(2,25,42,.6);color:#fff;font:800 9px/1.4 'Segoe UI',sans-serif;letter-spacing:.12em;pointer-events:none}img[src*="not-yas-uc-operator"]{object-position:32% 36%}img[src*="not-kontrol-odasi"]{object-position:50% 58%}img[src*="not-torbalama"]{object-position:45% 40%}
+</style>
+
+<style>/* ANA-SARTNAME v1, 2026-10-20. Shared presentation palette. */
+:root {
+  --bg:#EDF2F7; --surface:#FFFFFF; --surface2:#F6F9FC; --floor:#E7EEF4;
+  --line:#DAE4EC; --line2:#C2D3E0; --txt:#132330; --muted:#63788A;
+  --acc:#1E9BE0; --acc2:#0C6FB8; --acc3:#8FD3F7;
+  --warn:#E0871F; --crit:#DC3A50; --ok:#1E9E6A;
+}
+:root[data-tema="koyu"] {
+  --bg:#071017; --surface:#0D1820; --surface2:#111F29; --floor:#152630;
+  --line:#1D3441; --line2:#2B4A5A; --txt:#EAF3F7; --muted:#8FA7B5;
+  --acc:#34C6F4; --acc2:#61D4F7; --acc3:#A2E6FA;
+  --warn:#FFB454; --crit:#FF6678; --ok:#3DDC97;
+  color-scheme:dark;
+}
+body { font-weight:700; }
+h1,h2,h3,h4 { font-family:Bahnschrift,"Segoe UI Semibold","Segoe UI",sans-serif; font-weight:900; }
+
+:root{--panel:var(--surface);--panel2:var(--surface2);--text:var(--txt);--cyan:var(--acc);--cyan2:var(--acc2);--green:var(--acc);--amber:var(--warn);--red:var(--crit);--blue:var(--acc2);--shadow:none} *{font-weight:700}h1,h2,h3,h4,b,strong{font-weight:900}button{font-weight:800} .app,.capacity-panel,.ecology-panel,.layout-panel{background:var(--bg)} .sidebar,header,footer,.card,.kpi,.schema-bar,.silo,.cap-input input{background:var(--surface);color:var(--txt);box-shadow:none}.sidebar{border-color:var(--line)}.nav button{color:var(--muted)}.nav button.active{background:var(--acc2);color:var(--surface)}.brand strong,.brand small,.nav-label,.subhead h3,.cap-head h3{color:var(--acc2)}.kpi .label{white-space:normal;line-height:1.3;font-size:10px;min-height:26px;color:var(--muted)}.kpi .unit,.kpi .trend{color:var(--muted)}.kpi{border-top:4px solid var(--acc)}.dot{box-shadow:none;animation:none}.telemetry-tag{display:none}.intro{background:var(--bg)}.intro img.intro-background{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.1}.intro:after{background:linear-gradient(90deg,var(--bg),transparent)}.intro h1{color:var(--acc2)}.intro h2,.intro p{color:var(--txt)}.intro-logo,.brand-logo{background:white;padding:4px;filter:none}.start,.start.secondary{box-shadow:none}.stage-video,.machine-media img{width:100%;height:100%;object-fit:cover}.machine-media:after{content:'WIZUALIZASIÝA'}.stage:before{background:linear-gradient(90deg,rgba(4,15,24,.78),transparent 75%),linear-gradient(0deg,rgba(4,15,24,.65),transparent 50%)}.tank .fill{background:var(--acc);animation:none}.node.done i{border-color:var(--acc);color:var(--acc2)}.node.active i{box-shadow:none}.flow-rail{background:var(--line2);height:8px}.flow-rail:after{background:var(--acc)}.donut{background:conic-gradient(var(--acc2) 0 34%,var(--acc) 34% 63%,var(--acc3) 63% 81%,var(--line2) 81%)}.donut:after{background:var(--surface)}.status{color:var(--acc2);border-color:var(--line2);background:var(--surface2)}.safe,.live{color:var(--acc2)}.v4-panel{position:absolute;inset:56px 0 0;z-index:35;background:var(--bg);overflow:auto;padding:20px}.v4-panel.hidden{display:none}.v4-top{display:flex;align-items:center;gap:16px;margin-bottom:16px}.v4-top h2{margin:0 auto 0 0;font-size:26px}.v4-panel button,.v4-panel select,.v4-panel input,.v4-panel textarea,.tema-button{background:var(--surface);color:var(--txt);border:1px solid var(--line2);border-radius:4px;padding:10px 14px;min-height:44px;font:inherit;font-weight:800}.v4-panel button[aria-selected=true],.v4-panel button.primary{background:var(--acc2);color:var(--surface)}.v4-tv-frame{width:100%;height:calc(100% - 62px);border:1px solid var(--line2);background:var(--floor)}.v4-tag{padding:6px 10px;background:var(--floor);color:var(--acc2);font:800 12px 'Cascadia Mono',monospace}.solar-hero{display:grid;grid-template-columns:1fr 1.3fr;gap:24px;align-items:center}.solar-hero img{width:100%;max-height:320px;object-fit:contain}.solar-hero h3{font-size:40px;margin:10px 0}.solar-hero p{font-size:16px;line-height:1.6}.solar-stats{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--line);margin:20px 0}.solar-stats>div{padding:16px;border-right:1px solid var(--line)}.solar-stats b{display:block;font:900 34px 'Cascadia Mono',monospace}.solar-stats span{color:var(--muted);font-size:12px}.solar-flow{display:grid;grid-template-columns:repeat(6,1fr);align-items:center;gap:12px;border-top:8px solid var(--acc);padding-top:12px}.solar-flow img{width:100%;height:140px;object-fit:contain}.solar-flow h4{font-size:12px;text-align:center}.solar-source{padding:16px;border-left:4px solid var(--acc);background:var(--surface);line-height:1.7}.solar-curve{width:100%;height:120px;overflow:visible}.worker-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px}.worker-layout img{width:100%;max-height:420px;object-fit:cover}.work-form{display:grid;gap:12px}.work-form label{display:grid;gap:5px}.work-log{margin-top:20px;border-top:1px solid var(--line)}.work-log article{padding:12px 0;border-bottom:1px solid var(--line)}.photo-caption{font-size:12px;color:var(--muted);line-height:1.5}.workers-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.workers-gallery img{height:180px}.v4-panel :focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}@media(max-width:900px){.solar-hero,.worker-layout{grid-template-columns:1fr}.solar-flow{grid-template-columns:repeat(3,1fr)}.v4-panel{inset:48px 0 0}.solar-stats b{font-size:23px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}</style>
+<script>document.documentElement.dataset.tema=new URLSearchParams(location.search).get('tema')==='koyu'?'koyu':'acik';function fmtTk(n,d=0){const p=Number(n).toFixed(d).split('.');return p[0].replace(/\B(?=(\d{3})+(?!\d))/g,' ')+(d?','+p[1]:'')}</script><style>body{background:var(--bg);color:var(--txt)}body::before{display:none}*{box-shadow:none!important;text-shadow:none!important;font-weight:700}.top,.rail,.side,.kpis,.scen,.drawer,.card,.flowbox,.mc,.cell{background:var(--surface)!important;color:var(--txt)!important;border-color:var(--line)!important}.brand b,.mi,.mi b,.kpi .v,.mc b,td,.ev p,.drawer h3,.cell b{color:var(--txt)!important}.mi:hover,.mi[aria-current=true],.tag,.sc,.btn,.pill{background:var(--surface2)!important;color:var(--acc2)!important}.mi img,.hero img{filter:none!important}.hero .ov{background:linear-gradient(90deg,rgba(7,16,23,.9),rgba(7,16,23,.1))}.flow .nbox{fill:var(--surface)!important;stroke:var(--line2)!important}.flow .t-name{fill:var(--txt)!important}.flow .t-tag,.flow .t-val{fill:var(--muted)!important}.chain p,.note{color:var(--muted)}.ev .bar{box-shadow:none!important}</style><style>:root{--hold:var(--acc2)}body *{font-weight:700!important}body h1,body h2,body h3,body b,body strong{font-weight:900!important}svg{filter:none!important}.stage,.scroll,.wrap{background:var(--bg)!important}.card,.flowbox,.enters li,.chain p,.note{color:var(--txt)!important}.card h4,.kpi label,.kpi .d,.kpi .v small,.mc label,.mc i,.clock{color:var(--muted)!important}.hero p{color:#EAF3F7!important}.enters li:before{box-shadow:none!important}</style><script id="imgdata">window.__IMG__={"s1":"photos/IMG_6185.jpeg","s2":"photos/IMG_6191.jpeg","s3":"visuals/not-yas-uc-operator.webp","s4":"visuals/not-torbalama.webp","s5":"photos/IMG_6204.jpeg","s6":"photos/IMG_6201.jpeg","s7":"visuals/not-laboratoriya.webp","s8":"photos/IMG_6188.jpeg","s9":"visuals/not-energiya-otaglary.webp","s10":"photos/IMG_6196.jpeg"};</script>
+
+<div class="wrap">
+  <div class="top">
+    <div class="brand">
+      <svg viewBox="0 0 200 120" aria-hidden="true">
+        <path d="M14 112 A86 86 0 1 1 186 112" fill="none" stroke="#3FADEE" stroke-width="11" stroke-linecap="round"/>
+        <rect x="36" y="82" width="18" height="30" fill="#1E9BE0"/>
+        <rect x="60" y="66" width="18" height="46" fill="#0C6FB8"/>
+        <rect x="84" y="50" width="18" height="62" fill="#3FADEE"/>
+        <path d="M108 44 L117 32 L126 44 L126 112 L108 112 Z" fill="#0C6FB8"/>
+        <rect x="132" y="50" width="18" height="62" fill="#3FADEE"/>
+        <rect x="156" y="72" width="18" height="40" fill="#1E9BE0"/>
+      </svg>
+      <div><b>TÜRKMEN GIPS</b><span>hojalyk jemgyýeti · Akylly zawod ulgamy</span></div>
+    </div>
+    <div class="chipbar">
+      <span class="tag sim">SIMULÝASIÝA · Sunum nusgasy</span>
+      <span class="tag doc">TR 02131982-06-2023 tassyklanan shema</span>
+      <span class="tag">A çalşygy</span>
+    </div>
+    <span class="sep"></span>
+    <div class="clock" id="clock">09:42:18</div>
+  </div>
+
+  <nav class="rail" id="rail" aria-label="Bölümler"></nav>
+
+  <div class="stage">
+    <div class="kpis" id="kpis"></div>
+    <div class="scroll" id="scroll"></div>
+  </div>
+
+  <div class="scen">
+    <b>Ssenariý</b>
+    <button class="sc" data-sc="normal" aria-pressed="true">Kadaly önümçilik</button>
+    <button class="sc risk" data-sc="kiln" aria-pressed="false">Peçiň haýallamagy</button>
+    <button class="sc bad" data-sc="crusher" aria-pressed="false">Döwüjiniň titremesi</button>
+    <button class="sc risk" data-sc="mill" aria-pressed="false">Inçelik gyşarmasy</button>
+    <button class="sc risk" data-sc="dryer" aria-pressed="false">Guradyjy gyşarmasy</button>
+    <button class="sc risk" data-sc="board" aria-pressed="false">Karton ýetmezçiligi</button>
+    <button class="sc risk" data-sc="otk" aria-pressed="false">OTK hil saklamasy</button>
+    <button class="sc risk" data-sc="calcite" aria-pressed="false">Kalsit kesilmegi</button>
+    <button class="sc risk" data-sc="energy" aria-pressed="false">Energiýa çür depesi</button>
+  </div>
+
+  <aside class="side">
+    <h2>Wakalar akymy <em id="alarmCount">0 işjeň</em></h2>
+    <div class="feed" id="feed"></div>
+  </aside>
+</div>
+
+<div class="drawer" id="drawer" role="dialog" aria-labelledby="dTitle">
+  <header>
+    <div><h3 id="dTitle">—</h3><div class="sub" id="dSub">—</div></div>
+    <button class="x" id="dClose" aria-label="Ýap">&#10005;</button>
+  </header>
+  <div class="dbody" id="dBody"></div>
+</div>
+
+<script>
+"use strict";
+const IMG = window.__IMG__ || {};
+
+/* ============================================================
+   TR 02131982-06-2023 · 6-njy we 7-nji tassyklanan tehnologiki
+   shemalar esasynda. Silos №1-8, Elewator №1-5 belgilenişi
+   resminama laýyk gelýär.
+   ============================================================ */
+
+/* ---------- ORTAK ÇEKIRDEK ---------- */
+const F_CORE = [
+  {id:"quarry", n:"Koýtendag karýeri",   tag:"Ý-01", x:90,  y:90,  up:0, kpi:["Ugradyş","3 awtoulag"], det:["Çeşme","Koýtendag"]},
+  {id:"truck",  n:"Ýük awtoulagy",       tag:"T-01", x:250, y:90,  up:0, kpi:["Reýs","14 / çalşyk"],   det:["Ýük","22 t"]},
+  {id:"stone",  n:"Daş ammary",          tag:"D-01", x:410, y:90,  up:0, kpi:["Ätiýaç","4 850 t"],     det:["Owradyş","Çekiç"]},
+  {id:"loader", n:"Ýükleýji",            tag:"P-01", x:570, y:90,  up:0, kpi:["Iýmit","118 t/sag"],    det:["Fraksiýa","≤ 350 mm"]},
+  {id:"hopper", n:"Kabul bunkeri",       tag:"B-01", x:730, y:90,  up:0, kpi:["Doluluk","72 %"],       det:["Göwrüm","40 m³"]},
+  {id:"feeder", n:"Wibrasion iýmitlendiriji",tag:"F-01",x:890,y:90,up:0, kpi:["Debit","120 t/sag"],    det:["Görnüş","Nowaly"]},
+  {id:"jaw",    n:"Äňli döwüji",         tag:"K-01", x:1050,y:90,  up:0, kpi:["Kuwwat","120 t/sag"],   det:["Titreme","2,8 mm/s"]},
+  {id:"elev1",  n:"Elewator №1",         tag:"E-01", x:1210,y:90,  up:0, kpi:["Ýük","68 %"],           det:["Görnüş","Dik bedreli"]},
+  {id:"silo1",  n:"Silos №1",            tag:"S-01", x:1370,y:90,  up:0, kpi:["Doluluk","74 %"],       det:["Içindäki","Owradylan daş"]},
+  {id:"belt1",  n:"Konweýer №1 · Magnit",tag:"C-01", x:1370,y:240, up:1, kpi:["Debit","52 t/sag"],     det:["Metal aýyryş","Işjeň"]},
+  {id:"mill",   n:"Çekiçli degirmen",    tag:"O-01", x:1210,y:240, up:1, kpi:["Kuwwat","50 t/sag"],    det:["Inçelik","120 mikron"]},
+  {id:"cyclone",n:"Siklon · Halta süzgüç",tag:"W-01",x:1050,y:240, up:1, kpi:["Zyňyndy","18 mg/m³"],   det:["Süzgüç ΔP","1,4 kPa"]},
+  {id:"elev2",  n:"Elewator №2",         tag:"E-02", x:890, y:240, up:1, kpi:["Ýük","61 %"],           det:["Görnüş","Dik bedreli"]},
+  {id:"silo2",  n:"Silos №2",            tag:"S-02", x:730, y:240, up:1, kpi:["Doluluk","66 %"],       det:["Iýmit","Silos №8 bilen"]},
+  {id:"belt2",  n:"Konweýer №2 · Agram", tag:"C-02", x:570, y:240, up:1, kpi:["Agram","24,6 t/sag"],   det:["Gyşarma","±0,4 %"]},
+  {id:"elev3",  n:"Elewator №3",         tag:"E-03", x:410, y:240, up:1, kpi:["Ýük","64 %"],           det:["Görnüş","Dik bedreli"]},
+  {id:"kiln",   n:"Gips bişiriji peç",   tag:"P-02", x:250, y:240, up:1, kpi:["Debit","24,6 t/sag"],   det:["Çykyş temp.","158 °C"]},
+  {id:"elev4",  n:"Elewator №4",         tag:"E-04", x:90,  y:240, up:1, kpi:["Ýük","59 %"],           det:["Paýlaýyş","Silos №3 / №4"]},
+  {id:"silo8",  n:"Silos №8",            tag:"S-08", x:980, y:308, up:0, side:1, kpi:["Doluluk","41 %"], det:["Wezipe","Silos №2 gaýtadan iýmit"]}
+];
+
+/* ---------- A BÖLÜMI · GIPSOKARTON ---------- */
+const F_A = [
+  {id:"silo3",  n:"Silos №3 · 200 t",   tag:"S-03", x:90,  y:110, up:1, kpi:["Doluluk","69 %"],     det:["Içindäki","Bişirilen gips"]},
+  {id:"silo7",  n:"Silos №7",           tag:"S-07", x:220, y:110, up:0, kpi:["Doluluk","64 %"],     det:["Iýmit","20,4 t/sag"]},
+  {id:"mix",    n:"Garyşdyryjy",        tag:"A-01", x:350, y:110, up:1, kpi:["Aýlaw","920 aýl/min"],det:["Suw / Gips","0,78"]},
+  {id:"form",   n:"Şekillendiriş stoly",tag:"A-02", x:480, y:110, up:0, kpi:["Tizlik","41 m/min"],  det:["Galyňlyk","12,5 mm"]},
+  {id:"set",    n:"Gataýyş konweýeri",  tag:"A-03", x:620, y:110, up:1, kpi:["Uzynlyk","112 m"],    det:["Gataýyş","2,7 min"]},
+  {id:"cut",    n:"Kesiş ulgamy",       tag:"A-04", x:760, y:110, up:0, kpi:["Kesiş","17 /min"],    det:["Uzynlyk","2500 mm"]},
+  {id:"dryA",   n:"Guradyjy ulgam",     tag:"A-05", x:890, y:110, up:1, kpi:["2-nji zolak","162 °C"],det:["Çykyş çyglylygy","0,4 %"]},
+  {id:"trim",   n:"Gyra kesiş",         tag:"A-06", x:1020,y:110, up:0, kpi:["Ýitgi","0,9 %"],      det:["Ini","1200 mm"]},
+  {id:"otk",    n:"OTK · Hil barlagy",  tag:"A-07", x:1150,y:110, up:1, kpi:["Laýyklyk","98,6 %"],  det:["Nusga","42 / 60"]},
+  {id:"pack",   n:"Paddona gaplaýyş",   tag:"A-08", x:1280,y:110, up:0, kpi:["Gaplama","8,4 /min"], det:["Beýiklik","1,2 m"]},
+  {id:"fgA",    n:"Taýýar önüm ammary", tag:"W-01", x:1420,y:110, up:1, kpi:["Paddon","112 / 160"], det:["Doluluk","70 %"]},
+  {id:"addit",  n:"Goşundy dozasy",     tag:"A-09", x:350, y:250, up:0, kpi:["Düzüm","Krahmal · Köpürjik · Him. · Suw"], det:["Gyşarma","±0,6 %"]},
+  {id:"board",  n:"Ýüzlük karton",      tag:"A-10", x:480, y:250, up:0, kpi:["Rulon","2 / 2 işjeň"], det:["Ýüz","Öň + arka"]}
+];
+
+/* ---------- B BÖLÜMI · GURY GARYNDY ---------- */
+const F_B = [
+  {id:"silo4",  n:"Silos №4 · 200 t",   tag:"S-04", x:90,  y:100, up:1, kpi:["Doluluk","71 %"],    det:["Içindäki","Gips baglaýjy"]},
+  {id:"elev5",  n:"Elewator №5",        tag:"E-05", x:230, y:100, up:1, kpi:["Ýük","52 %"],        det:["Görnüş","Dik bedreli"]},
+  {id:"silo5",  n:"Silos №5",           tag:"S-05", x:370, y:100, up:1, kpi:["Doluluk","58 %"],    det:["Iýmit","9,4 t/sag"]},
+  {id:"drymix", n:"Gury garyndy ulgamy",tag:"B-01", x:540, y:100, up:1, kpi:["Debit","9,2 t/sag"], det:["Resept","Gruntowka"]},
+  {id:"bagB",   n:"Halta gaplaýyş",     tag:"B-02", x:710, y:100, up:1, kpi:["Halta","310 /sag"],  det:["Agram","25 kg"]},
+  {id:"fgB",    n:"Ugradyş ammary",     tag:"W-02", x:870, y:100, up:1, kpi:["Paddon","64 / 90"],  det:["Doluluk","71 %"]},
+  {id:"calcite",n:"Silos №6 · Kalsit",  tag:"S-06", x:540, y:220, up:0, side:1, kpi:["Doluluk","46 %"], det:["Doza","18 % resept"]},
+  {id:"bagRaw", n:"Gips poroşogyny gaplaýyş",tag:"B-03",x:230,y:300, up:0, kpi:["Halta","240 /sag"],det:["Önüm","Tebigy gips poroşogy"]},
+  {id:"stackRaw",n:"Paddona ýygnaýyş",  tag:"W-03", x:430, y:300, up:0, kpi:["Paddon","38 / 60"],  det:["Doluluk","63 %"]}
+];
+
+const ALL = F_CORE.concat(F_A, F_B);
+const GRP = {}; F_CORE.forEach(n=>GRP[n.id]="core"); F_A.forEach(n=>GRP[n.id]="A"); F_B.forEach(n=>GRP[n.id]="B");
+const GRP_TR = {core:"Çig mal we bişiriş", A:"Gipsokarton bölümi", B:"Gury garyndy bölümi"};
+
+const ENERGY = [
+  {n:"Bişiriji peç",      v:1.42},
+  {n:"Guradyjy ulgam",    v:1.18},
+  {n:"Üwemek we döwmek",  v:0.74},
+  {n:"A bölümi mehanika", v:0.53},
+  {n:"B bölümi gaplaýyş", v:0.25}
+];
+
+/* ---------- SSENARIÝLER ---------- */
+const SCEN = {
+normal:{ speed:1, kpi:{}, states:{},
+  events:[
+    {t:"09:12",s:"ok",src:"ÖNÜMÇILIK",x:"A bölümi: PO-2411 sargydy başlady — 12,5 mm list, maksat 18 000 m².",m:"A çalşygy"},
+    {t:"09:19",s:"ok",src:"ÖNÜMÇILIK",x:"B bölümi: gruntowka resepti işleýär — 9,2 t/sag.",m:"Silos №5 → Gury garyndy"},
+    {t:"09:31",s:"ok",src:"HIL",      x:"OTK galyňlyk ölçegi tehniki şerte laýyk: 12,48 mm.",m:"Nusga 42 / 60"},
+    {t:"09:38",s:"ok",src:"ENERGIÝA", x:"Häzirki talap 4,12 MW — çalşyk bazis çyzygyndan 3 % pes.",m:"Bazis: 4,25 MW"}
+  ], chain:[]},
+
+kiln:{ speed:.88, kpi:{boardOut:2110,powderOut:15.2,oee:71.2,kiln:19.8},
+  states:{kiln:"warn",elev4:"warn",silo3:"warn",silo4:"warn",silo7:"warn",mix:"warn",form:"warn",silo5:"warn",drymix:"warn"},
+  over:{kiln:["19,8 t/sag","141 °C"],silo3:["54 %","Bişirilen gips"],silo4:["57 %","Gips baglaýjy"],
+        silo7:["51 %","17,2 t/sag"],mix:["840 aýl/min","0,80"],form:["36 m/min","12,5 mm"],drymix:["7,4 t/sag","Gruntowka"]},
+  events:[
+    {t:"09:40",s:"warn",src:"PROSES",   x:"Bişiriji peçiň çykyş debiti 24,6 → 19,8 t/sag. Ýangyç basyşy durnuksyz.",m:"P-02 · çäk 22,0 t/sag"},
+    {t:"09:41",s:"warn",src:"AMMAR",    x:"Silos №3 we №4 doluluk derejesi peselýär. Ätiýaç wagty ≈ 38 min.",m:"S-03 / S-04"},
+    {t:"09:42",s:"warn",src:"ÖNÜMÇILIK",x:"A bölüminiň tizligi 41 → 36 m/min. B bölüminiň debiti 9,2 → 7,4 t/sag.",m:"Iki bölüm hem täsirlendi"},
+    {t:"09:43",s:"warn",src:"ENERGIÝA", x:"Bir m² üçin energiýa 1,64 → 1,81 kWt·sag/m².",m:"Gyşarma +10,4 %"}
+  ],
+  chain:[
+    {m:"PROSES",    p:"Peçiň debiti çäkden pese düşdi — ýeke-täk çäklendiriji şu."},
+    {m:"AMMAR",     p:"Silos №3 / №4 ätiýaç wagty 38 minut."},
+    {m:"ÖNÜMÇILIK", p:"Iki bölüm hem haýallady: 2 110 m²/sag we 7,4 t/sag."},
+    {m:"ENERGIÝA",  p:"Birlik energiýa sarp edişi 10,4 % artdy."},
+    {m:"TEHNIKI",   p:"Gorelka basyş barlagy üçin tabşyryk maslahaty taýýar."}
+  ]},
+
+crusher:{ speed:.8, kpi:{boardOut:1980,powderOut:14.1,oee:68.4},
+  states:{jaw:"crit",feeder:"warn",elev1:"warn",silo1:"warn",belt1:"warn",mill:"warn",kiln:"warn"},
+  over:{jaw:["70 t/sag","7,4 mm/s"],silo1:["48 %","Owradylan daş"],mill:["34 t/sag","120 mikron"],kiln:["21,4 t/sag","152 °C"]},
+  events:[
+    {t:"09:41",s:"crit",src:"MEHANIKI", x:"Äňli döwüjiniň podşipnik titremesi 2,8 → 7,4 mm/s. Kritiki çäk aşyldy.",m:"K-01 · çäk 6,0 mm/s"},
+    {t:"09:41",s:"crit",src:"TEHNIKI",  x:"Awtomatiki maslahat: podşipnik temperaturasy we mufta barlagy. Tassyklama garaşylýar.",m:"Maslahat · adam tassyklamaly"},
+    {t:"09:42",s:"warn",src:"ÖNÜMÇILIK",x:"Döwmek 120 → 70 t/sag. Silos №1 iýmiti ýeterlik däl, degirmen 34 t/sag.",m:"Ätiýaç 4,2 sagat"},
+    {t:"09:43",s:"warn",src:"IŞGÄR",    x:"Mehaniki hünärmen meýdança ugradyldy.",m:"Rugsat: K-01 ✓"}
+  ],
+  chain:[
+    {m:"MEHANIKI",  p:"Titreme 7,4 mm/s — kritiki duýduryş."},
+    {m:"ÖNÜMÇILIK", p:"Döwmek kuwwaty 70 t/sag-a düşdi."},
+    {m:"AMMAR",     p:"Silos №1 ätiýaç wagty 4,2 sagat."},
+    {m:"TEHNIKI",   p:"Tabşyryk maslahaty — operator tassyklamasy bilen açylýar."},
+    {m:"IŞGÄR",     p:"Rugsatly hünärmen bellenildi, LOTO sanawy taýýar."}
+  ]},
+
+mill:{ speed:.95, kpi:{oee:74.1},
+  states:{mill:"warn",cyclone:"warn",silo2:"warn",kiln:"warn",mix:"warn",drymix:"warn"},
+  over:{mill:["50 t/sag","186 mikron"],cyclone:["31 mg/m³","2,2 kPa"],mix:["920 aýl/min","0,81"],drymix:["9,2 t/sag","Gyşarma"]},
+  events:[
+    {t:"09:39",s:"warn",src:"PROSES",   x:"Degirmeniň çykyş inçeligi 120 → 186 mikron. Howa klassifikatorynyň gyşarmasy.",m:"O-01 · şert ≤ 120 µm"},
+    {t:"09:40",s:"warn",src:"PROSES",   x:"Halta süzgüç ΔP 1,4 → 2,2 kPa. Dykylmagyň başlangyjy.",m:"W-01"},
+    {t:"09:41",s:"warn",src:"HIL",      x:"Inçelik tehniki şertden daşary — bişirilen gipsiň reaktiwligi gözegçilige alyndy.",m:"TR 02131982 · 8.3 b."},
+    {t:"09:42",s:"warn",src:"ÖNÜMÇILIK",x:"Garyşdyryjynyň suw/gips gatnaşygy 0,78 → 0,81 düzedildi.",m:"A bölümi öwezini dolmak"}
+  ],
+  chain:[
+    {m:"PROSES",    p:"Inçelik 186 mikron — resminama şerti 120 mikron."},
+    {m:"HIL",       p:"Reaktiwlik töwekgelçiligi, nusga alyş ýygylygy artdyryldy."},
+    {m:"ÖNÜMÇILIK", p:"A bölüminiň suw/gips gatnaşygy düzedildi."},
+    {m:"TEHNIKI",   p:"Klassifikator pyçak sazlamasy we süzgüç arassalamasy maslahat berildi."}
+  ]},
+
+dryer:{ speed:.94, kpi:{oee:74.6},
+  states:{dryA:"warn",trim:"warn",otk:"hold",pack:"hold",fgA:"hold"},
+  over:{dryA:["141 °C","1,9 %"],trim:["1,6 %","1200 mm"],otk:["94,1 %","Çyglylyk barlagy"],
+        pack:["SAKLANDY","1,2 m"],fgA:["6 paddon SAKLANDY","74 %"]},
+  events:[
+    {t:"09:39",s:"warn",src:"PROSES",   x:"Guradyjy ulgamyň 2-nji zolagynyň temperaturasy 162 → 141 °C. Gyşarma 12 minut dowam edýär.",m:"A-05-Z2 · çäk 150 °C"},
+    {t:"09:40",s:"warn",src:"ÖNÜMÇILIK",x:"Çyglylyk töwekgelçiligi sebäpli tizlik 41 → 38 m/min.",m:"Awtomatiki haýallama"},
+    {t:"09:41",s:"hold",src:"HIL",      x:"OTK çyglylyk barlagyny talap etdi. Täsirlenen 6 paddon HIL BOÝUNÇA SAKLANDY.",m:"NCR-0231 açyldy"},
+    {t:"09:42",s:"hold",src:"AMMAR",    x:"Taýýar önüm ammarynyň A-07 … A-12 ýerleri ugradyşa ýapyldy.",m:"Bron ýatyryldy"},
+    {t:"09:43",s:"warn",src:"ENERGIÝA", x:"Guradyjynyň gaz sarp edişi bazis çyzygyndan 7 % pes — gyzdyryş ýeterliksiz.",m:"2-nji zolak gorelkasy"}
+  ],
+  chain:[
+    {m:"PROSES",    p:"2-nji zolagyň temperaturasy 141 °C — çäk 150 °C."},
+    {m:"ÖNÜMÇILIK", p:"List çyglylyk töwekgelçiligi, tizlik peseldildi."},
+    {m:"HIL",       p:"NCR-0231 açyldy, nusga talaby döredildi."},
+    {m:"AMMAR",     p:"6 paddon saklandy, ammar ýeri ýapyldy."},
+    {m:"TEHNIKI",   p:"2-nji zolak gorelka barlagy — tabşyryk tassyklama garaşýar."}
+  ]},
+
+board:{ speed:.9, kpi:{boardOut:2180,oee:72.9},
+  states:{board:"crit",form:"warn",cut:"warn"},
+  over:{board:["22 min galdy","Öň + arka"],form:["37 m/min","12,5 mm"],cut:["15 /min","2500 mm"]},
+  events:[
+    {t:"09:40",s:"crit",src:"ÇIG MAL",  x:"Ýüzlük karton rulon ätiýajy kritiki: galan wagt 22 minut.",m:"A-10 · iň az 45 min"},
+    {t:"09:41",s:"warn",src:"AMMAR",    x:"Ýükleýji tabşyrygy FL-124: Çig mal ammary → Rulon iýmiti.",m:"Çak edilýän 9 min"},
+    {t:"09:42",s:"warn",src:"ÖNÜMÇILIK",x:"Rulon çalyşmagy üçin meýilnamalaýyn duruş penjiresi 09:58.",m:"Çak edilýän 6 min duruş"},
+    {t:"09:43",s:"ok",  src:"IŞGÄR",    x:"Ýükleýji operatory tabşyrygy kabul etdi.",m:"Tabşyryk FL-124"}
+  ],
+  chain:[
+    {m:"ÇIG MAL",   p:"Rulonyň galan wagty 22 minut — kritiki."},
+    {m:"AMMAR",     p:"Ýükleýji tabşyrygy awtomatiki döredildi."},
+    {m:"ÖNÜMÇILIK", p:"Meýilnamalaýyn duruş penjiresi 09:58."},
+    {m:"IŞGÄR",     p:"Operator tabşyrygy kabul etdi."}
+  ]},
+
+otk:{ speed:1, kpi:{oee:75.8},
+  states:{otk:"hold",pack:"hold",fgA:"hold"},
+  over:{otk:["93,4 %","Ýüz kemçiligi"],pack:["SAKLANDY","1,2 m"],fgA:["4 paddon SAKLANDY","70 %"]},
+  events:[
+    {t:"09:40",s:"hold",src:"HIL",      x:"OTK ýüz barlagy: 4 paddon kartonyň ýelmeşme kemçiligi sebäpli saklandy.",m:"NCR-0232"},
+    {t:"09:41",s:"hold",src:"AMMAR",    x:"B-03, B-04 ýerleri HIL BOÝUNÇA SAKLANDY. Ugradyş broni ýatyryldy.",m:"4 paddon · 288 list"},
+    {t:"09:42",s:"warn",src:"ÖNÜMÇILIK",x:"Ýitgi derejesi 0,9 → 2,4 %. Çykdajy täsiri gözegçilikde.",m:"Soňky 1 sagat"},
+    {t:"09:43",s:"ok",  src:"HIL",      x:"Garyşdyryjynyň suw/gips gatnaşyk düzedişi ulanyldy, gözegçilik dowam edýär.",m:"CAPA-0044"}
+  ],
+  chain:[
+    {m:"HIL",       p:"4 paddon hil boýunça saklandy, NCR-0232 açyldy."},
+    {m:"AMMAR",     p:"Ammar ýerleri ugradyşa ýapyldy."},
+    {m:"ÖNÜMÇILIK", p:"Ýitgi derejesi 2,4 % — resept düzedişi ulanyldy."},
+    {m:"TEHNIKI",   p:"Garyşdyryjy pyçagynyň könelmegi barlagy meýilleşdirildi."}
+  ]},
+
+calcite:{ speed:1, kpi:{powderOut:12.8,oee:76.4},
+  states:{calcite:"crit",drymix:"warn",bagB:"warn",fgB:"hold"},
+  over:{calcite:["9 %","Doza kesildi"],drymix:["6,1 t/sag","Resept daşary"],bagB:["190 /sag","25 kg"],fgB:["12 paddon SAKLANDY","71 %"]},
+  events:[
+    {t:"09:40",s:"crit",src:"ÇIG MAL",  x:"Silos №6 kalsit derejesi 46 % → 9 %. Doza kesildi.",m:"S-06 · iň az 15 %"},
+    {t:"09:41",s:"warn",src:"ÖNÜMÇILIK",x:"Gury garyndy debiti 9,2 → 6,1 t/sag. Gruntowka resepti doly däl.",m:"B bölümi"},
+    {t:"09:42",s:"hold",src:"HIL",      x:"Resept daşary öndürilen 12 paddon HIL BOÝUNÇA SAKLANDY.",m:"NCR-0233"},
+    {t:"09:43",s:"warn",src:"AMMAR",    x:"Kalsit üpjünçilik talaby açyldy — çak edilýän ýerine ýetiriş 4 sagat.",m:"Sargyt SP-0871"}
+  ],
+  chain:[
+    {m:"ÇIG MAL",   p:"Kalsit derejesi 9 % — iň az 15 %."},
+    {m:"ÖNÜMÇILIK", p:"B bölüminiň debiti 6,1 t/sag, resept doly däl."},
+    {m:"HIL",       p:"12 paddon saklandy, NCR-0233 açyldy."},
+    {m:"AMMAR",     p:"Üpjünçilik talaby açyldy, 4 sagat."},
+    {m:"TEHNIKI",   p:"Kalsit doza klapanynyň barlagy maslahat berildi."}
+  ]},
+
+energy:{ speed:1, kpi:{power:5.38,oee:76.1},
+  states:{kiln:"warn",dryA:"warn",mill:"warn"},
+  over:{kiln:["24,6 t/sag","1,71 MW"],dryA:["162 °C","1,34 MW"],mill:["50 t/sag","0,92 MW"]},
+  events:[
+    {t:"09:41",s:"warn",src:"ENERGIÝA", x:"Häzirki talap 4,12 → 5,38 MW. Şertnama çür depe çäginden 6 % galdy.",m:"Çäk 5,70 MW"},
+    {t:"09:41",s:"warn",src:"ENERGIÝA", x:"Gysylan howa geçirijisinde syzma güman edilýär: boş sarp ediş 18 %.",m:"Anomaliýa bahasy 0,74"},
+    {t:"09:42",s:"ok",  src:"ÖNÜMÇILIK",x:"Çekiçli degirmeniň ýüki 12 minut süýşürilip çür depe peseldildi.",m:"Maslahat ulanyldy"},
+    {t:"09:43",s:"ok",  src:"ENERGIÝA", x:"Talap 5,38 → 4,86 MW. Çür depe töwekgelçiligi aradan aýryldy.",m:"Çalşyk jemi 31,4 MWt·sag"}
+  ],
+  chain:[
+    {m:"ENERGIÝA",  p:"Çür depe talaby 5,38 MW, çäge 6 %."},
+    {m:"ÖNÜMÇILIK", p:"Degirmeniň ýüki süýşürildi."},
+    {m:"TEHNIKI",   p:"Gysylan howa syzma barlagy maslahat berildi."},
+    {m:"ENERGIÝA",  p:"Talap 4,86 MW-a düşdi."}
+  ]}
+};
+
+const KPI = [
+  {k:"boardOut", l:"A bölümi · Gipsokarton", u:"m²/sag", d:0, base:2380, spark:true, target:2500},
+  {k:"powderOut",l:"B bölümi · Gury garyndy",u:"t/sag",  d:1, base:18.5, spark:true, target:20},
+  {k:"kiln",     l:"Işleýän enjam",          u:"",       d:0, base:17,   spark:true},
+  {k:"oee",      l:"A bölümi · netijelilik", u:"%",      d:1, base:91,   spark:true},
+  {k:"power",    l:"A bölümi · meýilnama",   u:"%",      d:1, base:97,   spark:true},
+  {k:"alarm",    l:"Işjeň duýduryş",         u:"",       d:0, base:0}
+];
+
+/* ---------- BÖLÜMLER ---------- */
+const SECTIONS = [
+{id:"syn", n:"Umumy syn", s:"Dolandyryş merkezi", img:"s1", type:"overview",
+ intro:"Zawodyň ähli bölümleriniň ýeke-täk ekranda gerçek wagtly ýagdaýy. Ýolbaşçy iki minutda näme bolýandygyny görýär.",
+ enters:["Ähli bölümleriň häzirki ýagdaýy","Esasy görkezijiler: önümçilik, samaralylyk, energiýa",
+   "Işjeň duýduryşlar we wakalar akymy","Çalşyk we sargyt maglumaty",
+   "Bölümler arasyndaky täsir zynjyry","Ssenariý dolandyryşy"]},
+
+{id:"core", n:"Çig mal we bişiriş", s:"Ortak çekirdek", img:"s2", type:"flow", flow:"core",
+ intro:"Koýtendag karýerinden gelýän gips daşynyň owradylmagy, üwelmegi we bişirilmegi. Bu bölüm iki önümçilik bölümini hem iýmitlendirýär — zawodyň ýeke-täk çäklendirijisi şu ýerde.",
+ enters:["Karýerden gelýän gips daşynyň kabul edilmegi","Daş ammary, ýükleýji, kabul bunkeri",
+   "<b>Äňli döwüji</b> — 120 t/sag, fraksiýa ≤ 350 mm","<b>Çekiçli degirmen</b> we howa klassifikatory — 120 mikron",
+   "Siklon we halta süzgüç — tozan gözegçiligi","<b>Gips bişiriji peç</b> — 24,6 t/sag",
+   "Elewatorlar №1-4 · Silos №1, №2, №8","Silos №3 we №4-e paýlaýyş"]},
+
+{id:"gk", n:"Gipsokarton bölümi", s:"A bölümi", img:"s3", type:"flow", flow:"A",
+ intro:"Bişirilen gipsden üznüksiz gipsokarton lentasynyň şekillendirilmegi, kesilmegi, guradylmagy we gaplanmagy. 7-nji tassyklanan shema laýyk.",
+ enters:["Silos №3 we №7-den bişirilen gips iýmiti","<b>Goşundy dozasy:</b> krahmal, köpürjik emele getiriji, himiki goşundy, suw",
+   "<b>Ýüzlük karton</b> rulonlary — öň we arka gat","Garyşdyryjy → şekillendiriş stoly — üznüksiz lenta",
+   "Gataýyş konweýeri — 112 m","Kesiş ulgamy → guradyjy ulgam → gyra kesiş",
+   "<b>OTK hil barlagy</b>","Paddona gaplaýyş we taýýar önüm ammary",
+   "<b>Önüm:</b> Gipsokarton listleri"]},
+
+{id:"gg", n:"Gury garyndy bölümi", s:"B bölümi", img:"s4", type:"flow", flow:"B",
+ intro:"Gips baglaýjynyň gaplanmagy we suwag garyndylarynyň öndürilmegi. Iki ugur: göni halta gaplaýyş we kalsit goşundyly gury garyndy.",
+ enters:["Silos №4-den gips baglaýjy","Elewator №5 → Silos №5",
+   "<b>Silos №6 — kalsit</b> goşundysy (18 % resept)","<b>Gury garyndy ulgamy</b> — reseptler boýunça garyşdyrma",
+   "Halta gaplaýyş — 25 kg","Gips poroşogyny göni gaplaýyş ugry",
+   "Paddona ýygnaýyş we ugradyş ammary",
+   "<b>Önümler:</b> Tebigy gips poroşogy · Gruntowka · Ilkinji gat suwag · Soňky gat suwag"]},
+
+{id:"ammar", n:"Ammar", s:"Ammar ulgamy", img:"s5", type:"cards",
+ intro:"Çig maldan taýýar önüme çenli ähli ammar hereketleriniň yzarlanmagy. Her paddon, her partiýa, her ýer belgilenýär.",
+ enters:["Çig mal saklanýan meýdança","Karton rulon ammary","Goşundy we himiki maddalar ammary",
+   "Ätiýaçlyk şaýlar ammary","Taýýar önüm saklanýan meýdança — list we halta",
+   "<b>Karantin zolagy</b> — hil boýunça saklanan ýük","Ýükleýiş we ugradyş meýdançasy",
+   "Paddon we partiýa yzarlanylyşy · FIFO","Ýükleýji tabşyryklary we ýol kartasy"],
+ cards:[{l:"Ammar doluluk",v:"70",u:"%",i:"Taýýar önüm",c:"ok"},
+        {l:"Ätiýaç takyklygy",v:"96,4",u:"%",i:"Soňky sanaw",c:"ok"},
+        {l:"Hil boýunça saklanan",v:"0",u:"paddon",i:"Karantin zolagy",c:"ok"},
+        {l:"Işjeň ýükleýji tabşyryk",v:"3",u:"",i:"Ortaça 9 min",c:"ok"},
+        {l:"Gipsokarton paddon",v:"112",u:"/ 160",i:"A bölümi",c:"ok"},
+        {l:"Halta paddon",v:"64",u:"/ 90",i:"B bölümi",c:"ok"},
+        {l:"Karton rulon ätiýajy",v:"46",u:"sag",i:"Iň az 45 sag",c:"ok"},
+        {l:"Kalsit ätiýajy",v:"46",u:"%",i:"Silos №6",c:"ok"}]},
+
+{id:"tehniki", n:"Tehniki hyzmat", s:"Hyzmat ulgamy", img:"s6", type:"cards",
+ intro:"Duýduryşdan tabşyryga, tabşyrykdan ýapylyşa çenli. Emeli aň maslahat berýär, tabşyrygy adam açýar.",
+ enters:["Enjam kartotekasy we hiýerarhiýasy","Näsazlyk habarnamalary","Duýduryşdan tabşyryga geçiş",
+   "Meýilnamalaýyn (periodik) hyzmat","Iş sagady we sikl esasly hyzmat",
+   "Ätiýaçlyk şaýyň bronlanmagy","<b>LOTO howpsuzlyk barlag sanawy</b>",
+   "Hyzmat taryhy · MTBF / MTTR","Ýapylyş we barlag tassyklamasy"],
+ cards:[{l:"Enjam elýeterligi",v:"97,2",u:"%",i:"Çalşyk boýunça",c:"ok"},
+        {l:"Açyk tabşyryk",v:"4",u:"",i:"2-si meýilnamalaýyn",c:"ok"},
+        {l:"Möhleti geçen",v:"0",u:"",i:"Periodik hyzmat",c:"ok"},
+        {l:"MTBF",v:"186",u:"sag",i:"Kritiki enjamlar",c:"ok"},
+        {l:"MTTR",v:"2,4",u:"sag",i:"Ortaça dikeldiş",c:"ok"},
+        {l:"Ätiýaçlyk şaý ýetmezçiligi",v:"1",u:"",i:"Podşipnik 6312",c:"w"}]},
+
+{id:"hil", n:"Hil gözegçiligi", s:"Hil ulgamy", img:"s7", type:"cards",
+ intro:"Giriş barlagyndan taýýar önüme çenli. Hil saklamasy önümçilige we ammara awtomatiki geçýär.",
+ enters:["<b>Giriş barlagy</b> — çig mal, karton, goşundy","Proses içi barlag — galyňlyk, dykyzlyk, çyglylyk",
+   "<b>Taýýar önüm barlagy — OTK</b>","Tehniki şertler: TR 02131982-06-2023",
+   "Nusga alyş meýilnamasy","Hil boýunça saklama we boşatma",
+   "NCR / CAPA namalary","Ölçeg gurallarynyň kalibrlenmegi","Partiýa yzarlanylyşy"],
+ cards:[{l:"Laýyklyk derejesi",v:"98,6",u:"%",i:"Çalşyk boýunça",c:"ok"},
+        {l:"Galyňlyk",v:"12,48",u:"mm",i:"Şert 12,50 ± 0,3",c:"ok"},
+        {l:"Çykyş çyglylygy",v:"0,4",u:"%",i:"Şert ≤ 1,0",c:"ok"},
+        {l:"Ýitgi derejesi",v:"0,9",u:"%",i:"Soňky 1 sagat",c:"ok"},
+        {l:"Açyk NCR",v:"0",u:"",i:"Namalar",c:"ok"},
+        {l:"Kalibrlenme möhleti",v:"2",u:"gural",i:"30 günüň içinde",c:"w"}]},
+
+{id:"isgar", n:"Işgärler", s:"Işgär ulgamy", img:"s8", type:"cards",
+ intro:"Çalşyk düzümi, rugsatlar we başarnyklar. Rugsady bolmadyk işgär enjamy işledip bilmeýär.",
+ enters:["Işgär kartotekasy","Çalşyk meýilnamasy we gelim-gidim","Başarnyk we şahadatnama matrisasy",
+   "<b>Enjam boýunça rugsat</b> — interlok","Okuw möhletleriniň gözegçiligi",
+   "Çalşyk tabşyrylyş namasy","Sargyt boýunça zähmet wagty","Tehniki hünärmenleriň başarnyklary"],
+ cards:[{l:"Çalşykdaky işgär",v:"42",u:"",i:"A çalşygy",c:"ok"},
+        {l:"Gelim-gidim",v:"100",u:"%",i:"Meýilnama boýunça",c:"ok"},
+        {l:"Rugsatly operator",v:"38",u:"/ 42",i:"Enjam interlogy",c:"ok"},
+        {l:"Şahadatnama möhleti",v:"3",u:"işgär",i:"60 günüň içinde",c:"w"},
+        {l:"Tehniki hünärmen",v:"6",u:"",i:"2-si nobatçy",c:"ok"},
+        {l:"Açyk okuw",v:"1",u:"",i:"LOTO täzeleme",c:"ok"}]},
+
+{id:"energiya", n:"Energiýa", s:"EMS", img:"s9", type:"energy",
+ intro:"Elektrik, tebigy gaz, suw we gysylan howa — bölüm we enjam boýunça. Gurnalan kuwwat bilen hakyky sarp ediş bulaşdyrylmaýar.",
+ enters:["Elektrik energiýasy","Tebigy gaz","Suw","Gysylan howa",
+   "Bölüm we enjam boýunça paýlanyş","Bir tonna / bir m² üçin sarp ediş",
+   "<b>Çür depe kuwwatyna gözegçilik</b>","Bazis çyzygyndan gyşarma","Anomaliýa duýduryşlary"]},
+
+{id:"ai", n:"Emeli aň we hasabat", s:"AI · Hasabat", img:"s10", type:"ai",
+ intro:"Ulgam maglumaty diňe görkezmän, seljerýär: näsazlygy öňünden çaklaýar, hil gyşarmasyny irki ýüze çykarýar, energiýany optimizirleýär. Emma çözgüdi adam berýär.",
+ enters:["<b>Näsazlygy öňünden çaklamak</b> — titreme, temperatura, tok trendleri",
+   "<b>Hil gyşarmasyny irki ýüze çykarmak</b> — proses parametrleriniň arabaglanyşygy",
+   "<b>Energiýa optimizasiýasy</b> — çür depäni peseltmek maslahatlary",
+   "<b>Çig mal talabyny çaklamak</b> — ätiýaç we sargyt meýilnamasy",
+   "Resept maslahaty we öwezini dolmak hasaplamalary",
+   "Gündelik · çalşyk · aýlyk hasabatlar",
+   "Hil we energiýa hasabatlary","Ýolbaşçylyk üçin gysgaça syn"]}
+];
+
+const COL = {run:"#1E9BE0",warn:"#E0871F",crit:"#DC3A50",hold:"#7A5AF8"};
+const ST_TR = {run:"KADALY IŞLEÝÄR",warn:"DUÝDURYŞ",crit:"NÄSAZLYK",hold:"HIL BOÝUNÇA SAKLANDY"};
+const fmt = (v,d=0) => fmtTk(v,d);
+
+let scenario="normal", section="syn", t0=performance.now(), sel=null, activeAlarms=0, frame=0;
+const hist={}; KPI.forEach(k=>hist[k.k]=Array(40).fill(k.base));
+const statusOf = id => (SCEN[scenario].states || {})[id] || "run";
+
+/* ---------- çep menýu ---------- */
+document.getElementById("rail").innerHTML =
+  '<h6>Zawod</h6>'
+  + SECTIONS.slice(0,4).map(miHtml).join("")
+  + '<h6>Dolandyryş modullary</h6>'
+  + SECTIONS.slice(4,9).map(miHtml).join("")
+  + '<h6>Seljeriş</h6>'
+  + SECTIONS.slice(9).map(miHtml).join("");
+
+function miHtml(s){
+  const im = IMG[s.img] ? '<img src="'+IMG[s.img]+'" alt="">' : '<span class="ph"></span>';
+  return '<button class="mi" data-sec="'+s.id+'" aria-current="'+(s.id==="syn")+'">'
+       + im + '<span><b>'+s.n+'</b><i>'+s.s+'</i></span></button>';
+}
+
+/* ---------- KPI ---------- */
+document.getElementById("kpis").innerHTML = KPI.map(k =>
+  '<div class="kpi" data-k="'+k.k+'"><label>'+k.l+'</label>'
+  + '<div class="v"><span class="n">—</span>'+(k.u?'<small>'+k.u+'</small>':'')+'</div>'
+  + (k.spark ? '<svg class="spark" viewBox="0 0 100 13" preserveAspectRatio="none"><path class="sl" fill="none" stroke="#1E9BE0" stroke-width="1.4"/></svg>'
+             : '<div class="d">ssenariýden</div>')
+  + '</div>').join("");
+
+/* ---------- shema çyzgysy ---------- */
+function nodeSVG(n){
+  const w=48,h=30,half=w/2;
+  let tx=n.x, anchor="middle", ty;
+  if(n.side){ anchor = n.side>0?"start":"end"; tx = n.x + n.side*(half+9); ty = n.y - 3; }
+  else ty = n.up ? n.y - h/2 - 21 : n.y + h/2 + 14;
+  return '<g class="nd" data-st="'+n.id+'" tabindex="0" role="button" aria-label="'+n.n+'">'
+    + '<rect class="nhalo" x="'+(n.x-half-5)+'" y="'+(n.y-h/2-5)+'" width="'+(w+10)+'" height="'+(h+10)+'" rx="11" fill="#1E9BE0" opacity="0"/>'
+    + '<rect class="nbox" x="'+(n.x-half)+'" y="'+(n.y-h/2)+'" width="'+w+'" height="'+h+'" rx="7" fill="#FFFFFF" stroke="#1E9BE0" stroke-width="2"/>'
+    + '<circle class="ndot" cx="'+n.x+'" cy="'+n.y+'" r="5" fill="#1E9BE0"/>'
+    + '<text class="t-tag"  x="'+tx+'" y="'+(ty-10)+'" text-anchor="'+anchor+'">'+n.tag+'</text>'
+    + '<text class="t-name" x="'+tx+'" y="'+ty+'" text-anchor="'+anchor+'">'+n.n+'</text>'
+    + '<text class="t-val nval" x="'+tx+'" y="'+(ty+13)+'" text-anchor="'+anchor+'" fill="#63788A">'+n.kpi[0]+' '+n.kpi[1]+'</text>'
+    + '</g>';
+}
+function railLine(a,b,y,dir){
+  let s = '<line x1="'+a+'" y1="'+y+'" x2="'+b+'" y2="'+y+'" stroke="#D3E1EC" stroke-width="9" stroke-linecap="round"/>';
+  if(dir>0) for(let x=a+42;x<b-18;x+=128) s+='<line x1="'+x+'" y1="'+y+'" x2="'+(x+24)+'" y2="'+y+'" stroke="#AEC4D4" stroke-width="2" marker-end="url(#ar)"/>';
+  else      for(let x=b-42;x>a+18;x-=128) s+='<line x1="'+x+'" y1="'+y+'" x2="'+(x-24)+'" y2="'+y+'" stroke="#AEC4D4" stroke-width="2" marker-end="url(#ar)"/>';
+  return s;
+}
+const MARKER = '<defs><marker id="ar" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="11" markerHeight="11"'
+             + ' markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#AEC4D4"/></marker></defs>';
+
+function flowSVG(which){
+  let s = MARKER, vb;
+  if(which==="core"){
+    vb = "0 0 1520 345";
+    s += railLine(90,1370,90,1);
+    s += '<path d="M1370 90 L1455 90 L1455 240 L1400 240" fill="none" stroke="#D3E1EC" stroke-width="9" stroke-linecap="round"/>';
+    s += railLine(90,1370,240,-1);
+    s += '<path d="M968 300 L790 262" fill="none" stroke="#D3E1EC" stroke-width="6" marker-end="url(#ar)"/>';
+    s += '<path d="M90 256 L90 310 L172 310" fill="none" stroke="#D3E1EC" stroke-width="7" stroke-linecap="round" marker-end="url(#ar)"/>';
+    s += '<text class="t-band" x="180" y="315">SILOS №3 (A bölümi) we SILOS №4 (B bölümi) tarapa</text>';
+    s += F_CORE.map(nodeSVG).join("");
+  } else if(which==="A"){
+    vb = "0 0 1520 300";
+    s += railLine(90,1420,110,1);
+    s += '<path d="M350 234 L350 130" fill="none" stroke="#D3E1EC" stroke-width="6" marker-end="url(#ar)"/>';
+    s += '<path d="M480 234 L480 130" fill="none" stroke="#D3E1EC" stroke-width="6" marker-end="url(#ar)"/>';
+    s += F_A.map(nodeSVG).join("");
+  } else {
+    vb = "0 0 1060 350";
+    s += railLine(90,870,100,1);
+    s += '<path d="M540 204 L540 120" fill="none" stroke="#D3E1EC" stroke-width="6" marker-end="url(#ar)"/>';
+    s += '<path d="M90 116 L90 300 L206 300" fill="none" stroke="#D3E1EC" stroke-width="7" stroke-linecap="round" marker-end="url(#ar)"/>';
+    s += '<line x1="254" y1="300" x2="406" y2="300" stroke="#D3E1EC" stroke-width="7" stroke-linecap="round"/>';
+    s += '<line x1="320" y1="300" x2="344" y2="300" stroke="#AEC4D4" stroke-width="2" marker-end="url(#ar)"/>';
+    s += F_B.map(nodeSVG).join("");
+  }
+  return '<svg class="flow" viewBox="'+vb+'" role="img" aria-label="Tehnologiki shema">'+s+'</svg>';
+}
+
+/* ---------- bölüm gurluşy ---------- */
+function heroHtml(sec){
+  const im = IMG[sec.img] ? '<img src="'+IMG[sec.img]+'" alt="">' : '<div style="height:190px"></div>';
+  return '<div class="hero">'+im+'<div class="ov"><div class="kicker">'+sec.s+'</div>'
+       + '<h1>'+sec.n+'</h1><p>'+sec.intro+'</p></div></div>';
+}
+function entersHtml(sec){
+  return '<div class="card"><h4>Bu bölüme näme girýär</h4><ul class="enters">'
+       + sec.enters.map(e=>'<li><span>'+e+'</span></li>').join("") + '</ul></div>';
+}
+function cardsHtml(cards){
+  return '<div class="grid3">' + cards.map(c =>
+    '<div class="mc '+(c.c||"")+'"><label>'+c.l+'</label><b>'+c.v+(c.u?' <span style="font-size:12px;color:#63788A">'+c.u+'</span>':'')+'</b><i>'+c.i+'</i></div>'
+  ).join("") + '</div>';
+}
+
+function energyHtml(){
+  const mx = Math.max(...ENERGY.map(e=>e.v));
+  const rows = ENERGY.map(e =>
+    '<tr><td>'+e.n+'</td><td class="num">'+e.v.toFixed(2)+'</td>'
+    + '<td style="width:38%"><span style="display:block;height:6px;border-radius:3px;background:#E7EEF4">'
+    + '<i style="display:block;height:6px;border-radius:3px;background:#1E9BE0;width:'+((e.v/mx)*100).toFixed(0)+'%"></i></span></td></tr>').join("");
+  return cardsHtml([
+      {l:"Häzirki elektrik talaby",v:"4,12",u:"MW",i:"Çäk 5,70 MW",c:"ok"},
+      {l:"Çalşyk sarp edişi",v:"31,4",u:"MWt·sag",i:"Bazis 32,4",c:"ok"},
+      {l:"Tebigy gaz",v:"1 240",u:"m³/sag",i:"Peç + guradyjy",c:"ok"},
+      {l:"Suw",v:"18,6",u:"m³/sag",i:"Proses + sowadyş",c:"ok"},
+      {l:"Gysylan howa",v:"6,4",u:"bar",i:"Boş sarp ediş 9 %",c:"ok"},
+      {l:"Bir m² üçin",v:"1,64",u:"kWt·sag",i:"A bölümi",c:"ok"},
+      {l:"Bir tonna üçin",v:"48,2",u:"kWt·sag",i:"B bölümi",c:"ok"},
+      {l:"Bazisden gyşarma",v:"-3,1",u:"%",i:"Çalşyk boýunça",c:"ok"}])
+    + '<div class="card" style="margin-top:12px"><h4>Enjam boýunça paýlanyş · MW</h4>'
+    + '<table><thead><tr><th>Sarp ediji</th><th style="text-align:right">MW</th><th>Paý</th></tr></thead>'
+    + '<tbody>'+rows+'</tbody></table>'
+    + '<p class="note" style="margin-top:12px">Gurnalan hereketlendiriji kuwwaty bilen hakyky sarp ediş deň däldir. '
+    + 'Bu tablisada diňe hakyky (modelleşdirilen) sarp ediş görkezilýär.</p></div>';
+}
+
+function aiHtml(){
+  const reports = [
+    ["Gündelik önümçilik hasabaty","Her gün 07:00","A we B bölümi, ýitgi, duruş"],
+    ["Çalşyk hasabaty","Her çalşygyň soňy","Önüm, duýduryş, işgär"],
+    ["Hil hasabaty","Hepdelik","Laýyklyk, NCR, CAPA"],
+    ["Energiýa hasabaty","Aýlyk","Sarp ediş, çür depe, birlik görkeziji"],
+    ["Tehniki hyzmat hasabaty","Aýlyk","MTBF, MTTR, açyk tabşyryk"],
+    ["Ýolbaşçylyk syny","Aýlyk","Bir sahypada esasy görkezijiler"]
+  ];
+  return cardsHtml([
+      {l:"Öňünden çaklanan näsazlyk",v:"2",u:"",i:"30 gün içinde",c:"w"},
+      {l:"Hil gyşarma duýduryşy",v:"1",u:"",i:"Irki ýüze çykaryş",c:"w"},
+      {l:"Energiýa maslahaty",v:"3",u:"",i:"Çür depäni peseltmek",c:"ok"},
+      {l:"Kabul edilen maslahat",v:"84",u:"%",i:"Soňky 30 gün",c:"ok"}])
+    + '<div class="aiwarn" style="margin-top:12px"><b>Esasy düzgün</b>'
+    + 'Emeli aň diňe <b>maslahat berýär</b> — buýruk bermeýär. Tabşyryk, tizlik üýtgetmesi we hil çözgüdi '
+    + 'diňe rugsatly işgär tarapyndan tassyklanýar. Ulgamdan PLC-e ýazuw ýoly ýokdur; ähli hereket '
+    + 'audit ýazgysynda galýar.</div>'
+    + '<div class="card" style="margin-top:12px"><h4>Awtomatiki hasabatlar</h4>'
+    + '<table><thead><tr><th>Hasabat</th><th>Ýygylyk</th><th>Mazmuny</th></tr></thead><tbody>'
+    + reports.map(r=>'<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td style="color:#63788A">'+r[2]+'</td></tr>').join("")
+    + '</tbody></table></div>';
+}
+
+function overviewHtml(){
+  return '<div class="card"><h4>Zawodyň gurluşy</h4>'
+    + '<div class="grid3">'
+    + '<div class="mc ok"><label>Ortak çekirdek</label><b>19</b><i>Enjam we silos</i></div>'
+    + '<div class="mc ok"><label>A bölümi · Gipsokarton</label><b>13</b><i>Iş nokady</i></div>'
+    + '<div class="mc ok"><label>B bölümi · Gury garyndy</label><b>9</b><i>Iş nokady</i></div>'
+    + '<div class="mc ok"><label>Tassyklanan önüm</label><b>4</b><i>TR 02131982-06-2023</i></div>'
+    + '</div></div>'
+    + '<div class="flowbox" style="margin-top:12px"><div style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;'
+    + 'color:#9AAEBE;text-transform:uppercase;margin:2px 0 6px">Ortak çekirdek</div>'+flowSVG("core")+'</div>'
+    + '<div class="flowbox" style="margin-top:10px"><div style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;'
+    + 'color:#9AAEBE;text-transform:uppercase;margin:2px 0 6px">A bölümi · Gipsokarton</div>'+flowSVG("A")+'</div>'
+    + '<div class="flowbox" style="margin-top:10px"><div style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;'
+    + 'color:#9AAEBE;text-transform:uppercase;margin:2px 0 6px">B bölümi · Gury garyndy</div>'+flowSVG("B")+'</div>';
+}
+
+function renderSection(){
+  const sec = SECTIONS.find(s=>s.id===section);
+  let right = "";
+  if(sec.type==="flow")        right = '<div class="flowbox">'+flowSVG(sec.flow)+'</div>';
+  else if(sec.type==="cards")  right = cardsHtml(sec.cards);
+  else if(sec.type==="energy") right = energyHtml();
+  else if(sec.type==="ai")     right = aiHtml();
+  else                         right = overviewHtml();
+
+  document.getElementById("scroll").innerHTML =
+    heroHtml(sec) + '<div class="cols">' + entersHtml(sec) + '<div>' + right + '</div></div>';
+  applyStates();
+}
+
+/* ---------- ýagdaý ---------- */
+function applyStates(){
+  document.querySelectorAll(".nd").forEach(g=>{
+    const id = g.dataset.st, c = COL[statusOf(id)];
+    g.querySelector(".nbox").setAttribute("stroke", c);
+    g.querySelector(".ndot").setAttribute("fill", c);
+    g.querySelector(".nhalo").setAttribute("fill", c);
+    const n = ALL.find(x=>x.id===id), ov = (SCEN[scenario].over || {})[id];
+    const v = g.querySelector(".nval");
+    v.textContent = ov ? n.kpi[0]+" "+ov[0] : n.kpi[0]+" "+n.kpi[1];
+    v.setAttribute("fill", ov ? c : "#63788A");
+  });
+}
+function renderFeed(){
+  const sc = SCEN[scenario];
+  document.getElementById("feed").innerHTML = [...sc.events].reverse().map(e =>
+    '<div class="ev s-'+e.s+' new"><div class="bar"></div><div>'
+    + '<div class="h"><span class="src">'+e.src+'</span><span class="t">'+e.t+'</span></div>'
+    + '<p>'+e.x+'</p><div class="meta">'+e.m+'</div></div></div>').join("");
+  const active = sc.events.filter(e=>e.s!=="ok").length;
+  const el = document.getElementById("alarmCount");
+  el.textContent = active + " işjeň";
+  el.style.color = active ? (sc.events.some(e=>e.s==="crit") ? COL.crit : COL.warn) : COL.run;
+  return active;
+}
+function setScenario(name){
+  scenario = name; t0 = performance.now();
+  document.querySelectorAll(".sc").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.sc===name)));
+  applyStates();
+  activeAlarms = renderFeed();
+  if(sel) openDrawer(sel);
+}
+document.querySelectorAll(".sc").forEach(b => b.addEventListener("click", ()=>setScenario(b.dataset.sc)));
+document.getElementById("rail").addEventListener("click", e=>{
+  const b = e.target.closest(".mi"); if(!b) return;
+  section = b.dataset.sec;
+  document.querySelectorAll(".mi").forEach(x=>x.setAttribute("aria-current", String(x===b)));
+  document.getElementById("scroll").scrollTop = 0;
+  renderSection();
+});
+
+function val(k){
+  const sc = SCEN[scenario];
+  const base = (sc.kpi && sc.kpi[k.k]!==undefined) ? sc.kpi[k.k] : k.base;
+  if(k.k==="alarm") return activeAlarms;
+  const s=(performance.now()-t0)/1000, amp=base*0.012;
+  return base + amp*Math.sin(s/3.1 + k.k.length) + amp*0.4*Math.sin(s/1.3 + k.base);
+}
+function spark(el,arr){
+  const min=Math.min(...arr), max=Math.max(...arr), r=(max-min)||1;
+  el.setAttribute("d","M"+arr.map((v,i)=>(i/(arr.length-1)*100).toFixed(1)+","+(12-((v-min)/r)*10).toFixed(1)).join(" L"));
+}
+function tick(){
+  frame++;
+  const s=(performance.now()-t0)/1000;
+  document.getElementById("clock").textContent = new Date(Date.now()+5*3600e3).toISOString().slice(11,19);
+  KPI.forEach(k=>{
+    const v=val(k), cell=document.querySelector('.kpi[data-k="'+k.k+'"]');
+    cell.querySelector(".n").textContent = fmt(v,k.d);
+    let cls="";
+    if(k.k==="alarm" && v>0) cls = SCEN[scenario].events.some(e=>e.s==="crit") ? "is-crit":"is-warn";
+    if(k.target && v < k.target*0.93) cls="is-warn";
+    if(k.k==="power" && v>5) cls="is-warn";
+    if(k.k==="oee" && v<72) cls="is-crit";
+    cell.className="kpi "+cls;
+    if(frame%6===0){ hist[k.k].push(v); hist[k.k].shift(); }
+    const sl=cell.querySelector(".sl");
+    if(sl){ spark(sl,hist[k.k]); sl.setAttribute("stroke", cls==="is-crit"?COL.crit:cls==="is-warn"?COL.warn:COL.run); }
+  });
+  const bl=(s%1.6)/1.6;
+  document.querySelectorAll(".nd").forEach(g=>{
+    const st=statusOf(g.dataset.st), halo=g.querySelector(".nhalo");
+    halo.setAttribute("opacity", st==="run" ? "0" : (0.3*(1-bl)).toFixed(2));
+  });
+  requestAnimationFrame(tick);
+}
+
+/* ---------- çekmece ---------- */
+const drawer = document.getElementById("drawer");
+function openDrawer(id){
+  const n = ALL.find(x=>x.id===id); if(!n) return;
+  sel = id;
+  const st = statusOf(id), sc = SCEN[scenario], ov = (sc.over || {})[id];
+  document.getElementById("dTitle").textContent = n.n;
+  document.getElementById("dSub").innerHTML = n.tag + ' &nbsp;·&nbsp; <span style="color:'+COL[st]+'">● '+ST_TR[st]+'</span> &nbsp;·&nbsp; '+GRP_TR[GRP[id]];
+  const ch = (sc.chain && sc.chain.length)
+    ? '<section><h4 class="dh">Bölümler arasyndaky täsir zynjyry</h4><div class="chain">'
+      + sc.chain.map(c=>'<div class="step"><span class="dot" style="background:'+COL[st]+'"></span>'
+        + '<div><div class="mod-n">'+c.m+'</div><p>'+c.p+'</p></div></div>').join("")+'</div></section>' : '';
+  const cs = ov ? ' style="color:'+COL[st]+'"' : '';
+  document.getElementById("dBody").innerHTML =
+      '<div class="grid2">'
+    + '<div class="cell"><label>'+n.kpi[0]+'</label><b'+cs+'>'+(ov?ov[0]:n.kpi[1])+'</b></div>'
+    + '<div class="cell"><label>'+n.det[0]+'</label><b'+cs+'>'+(ov?ov[1]:n.det[1])+'</b></div>'
+    + '<div class="cell"><label>Çalşykdaky duruş</label><b>'+(st==="run"?"0 min":st==="crit"?"14 min":"4 min")+'</b></div>'
+    + '<div class="cell"><label>Energiýa</label><b>'+(0.06+n.n.length*0.010).toFixed(2)+' MW</b></div>'
+    + '</div>' + ch
+    + '<section><h4 class="dh">Hereket</h4><div class="act">'
+    + '<button class="btn p" data-act="wo">Tehniki tabşyryk döret</button>'
+    + '<button class="btn" data-act="ack">Duýduryşy kabul et</button>'
+    + '<button class="btn" data-act="map">Kartada görkez</button>'
+    + '</div><p class="note" style="margin-top:12px">Shema we enjam belgilenişi TR 02131982-06-2023 tassyklanan resminama laýyk gelýär. '
+    + 'Häzirki bahalar modelleşdirilendir, PLC-e ýazuw ýoly ýokdur. Tabşyryk diňe adam tassyklamasy bilen açylýar.</p></section>';
+  drawer.classList.add("open");
+  const ACT = {
+    wo:["ok","TEHNIKI","Tabşyryk WO-1042 döredildi — hünärmen bellenilmegine garaşylýar."],
+    ack:["ok","DUÝDURYŞ","Duýduryş operator tarapyndan kabul edildi."],
+    map:["ok","KARTA","Enjam meýdança kartasynda bellenildi."]
+  };
+  drawer.querySelectorAll(".btn").forEach(b => b.addEventListener("click", ()=>{
+    const a = ACT[b.dataset.act];
+    const d = document.createElement("div");
+    d.className = "ev s-"+a[0]+" new";
+    d.innerHTML = '<div class="bar"></div><div><div class="h"><span class="src">'+a[1]+'</span>'
+      + '<span class="t">'+document.getElementById("clock").textContent.slice(0,5)+'</span></div>'
+      + '<p>'+a[2]+'</p><div class="meta">'+n.tag+' · '+n.n+'</div></div>';
+    document.getElementById("feed").prepend(d);
+  }));
+}
+function closeDrawer(){ drawer.classList.remove("open"); sel=null; }
+document.getElementById("dClose").addEventListener("click", closeDrawer);
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeDrawer(); });
+document.getElementById("scroll").addEventListener("click", e=>{
+  const g = e.target.closest(".nd"); if(g) openDrawer(g.dataset.st);
+});
+document.getElementById("scroll").addEventListener("keydown", e=>{
+  if(e.key==="Enter"||e.key===" "){ const g=e.target.closest(".nd"); if(g){ e.preventDefault(); openDrawer(g.dataset.st);} }
+});
+
+renderSection();
+setScenario("normal");
+tick();
+</script>
+
+<script>document.querySelectorAll(".tag.sim").forEach(e=>e.textContent="SIMULÝASIÝA · SUNUM NUSGASY");</script><script>/*tg-duzeltme-2026-10-21*/
+(function(){
+ let snap=null;const orig=val;
+ fetch('../replay/sunum.json').then(r=>r.json()).then(c=>{
+  const pick=()=>{const d=new Date(Date.now()+5*3600e3),sec=(d.getUTCMinutes()*60+d.getUTCSeconds())%c.cycleSeconds;
+   snap=c.snapshots[Math.floor(sec/c.stepSeconds)%c.snapshots.length];
+   if(window.TgPresentation)snap=window.TgPresentation.presentationSnapshot(snap);
+   const open=snap.alarms.filter(a=>a.state!=='CLEARED'),map={CRITICAL:'crit',WARNING:'warn',INFO:'ok'};
+   SCEN.normal.events=open.length?open.map(a=>({t:String(a.startedAt).slice(11,16),s:map[a.severity]||'ok',src:a.lineId==='gipsokarton'?'A BÖLÜMI':'B BÖLÜMI',x:a.equipment+': '+a.message,m:'SIMULÝASIÝA'})):[{t:d.toISOString().slice(11,16),s:'ok',src:'ZAWOD',x:'Işjeň waka ýok. Ähli enjamlar kadaly işleýär.',m:'SIMULÝASIÝA'}];
+   activeAlarms=renderFeed();};
+  pick();setInterval(pick,1000);}).catch(()=>{});
+ val=function(k){
+  if(!snap)return orig(k);
+  const a=snap.lines.find(l=>l.id==='gipsokarton'),b=snap.lines.find(l=>l.id==='gury-garyndy');
+  switch(k.k){
+   case 'boardOut':return a?a.speed.value*60*1.2:0;
+   case 'powderOut':return b?b.speed.value:0;
+   case 'kiln':return snap.lines.flatMap(l=>l.equipment).filter(e=>e.status==='RUNNING').length;
+   case 'oee':return a?a.efficiencyPct.value:0;
+   case 'power':return a?a.fulfilmentPct.value:0;
+   case 'alarm':return snap.alarms.filter(x=>x.state!=='CLEARED').length;
+  }
+  return orig(k);};
+})();
+</script>
+<style>.scen{display:none!important}</style>
+<script src="shared-presentation.js"></script>

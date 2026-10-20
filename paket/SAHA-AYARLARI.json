@@ -1,0 +1,7 @@
+{
+  "merkezIp": "127.0.0.1",
+  "sunumPort": 3024,
+  "apiPort": 8010,
+  "veriKaynagy": "kayit",
+  "tema": "acik"
+}
