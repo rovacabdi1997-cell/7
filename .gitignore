@@ -24,3 +24,7 @@ sunum/raporlar/
 sunum/belgeler/
 sunum/*.pdf
 sunum/*TEK-DOSYA*
+
+# Oturum dosyalari
+.claude/
+sunum/.claude/
