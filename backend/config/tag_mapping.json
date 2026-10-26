@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "updated": "2026-10-18",
+  "updated": "2026-10-26",
   "statusLegend": {
     "VERIFIED": "Çeşme salt-okalýan synag bilen tassyklandy. Diňe şu ýagdaýda hakyky maglumat okalýar.",
     "CANDIDATE": "Mümkin çeşme bar, ýöne tag ýa-da tablisa ady tassyklanmadyk.",
     "NO_SOURCE": "Häzirki arhiwde çeşme tapylmady."
   },
   "fields": [
-    {"key": "gipsokarton.speed", "screen": "Gipsokarton", "label": "Häzirki önümçilik tizligi", "unit": "m/min", "sourceType": "WINCC_TAG", "candidate": "WinCC chengxing (二横wincc) taslamasy. Hat tizligi WinCC ekranynda görüldi (7.1 m/min, zawod suraty). Tag ady chengxing.mdf içinde, okalmady.", "query": null, "refresh": "Tassyklanmadyk", "status": "CANDIDATE"},
-    {"key": "gipsokarton.outputToday", "screen": "Gipsokarton", "label": "Öndürilen mukdar", "unit": "m²", "sourceType": "WINCC_TAG", "candidate": "Hasaplaýjy tag bolup biler. Tag Logging arhiwi kopiýada ýok.", "query": null, "refresh": "Tassyklanmadyk", "status": "CANDIDATE"},
+    {"key": "gipsokarton.speed", "screen": "Gipsokarton", "label": "Häzirki önümçilik tizligi", "unit": "m/min", "sourceType": "WINCC_TAG", "candidate": "WinCC CPI stansiýasy, tag 凝固皮带速度 (gataýan lentanyň tizligi), %DB6.%DD418, DWORD/REAL, birlik tassyklanmadyk (ekranda 7.1 m/min görüldi). chengxing.mdf kopiýasyndan okaldy.", "query": null, "refresh": "Tassyklanmadyk", "status": "CANDIDATE", "winccTag": "凝固皮带速度", "plcAddress": "%DB6.%DD418", "station": "CPI"},
+    {"key": "gipsokarton.outputToday", "screen": "Gipsokarton", "label": "Öndürilen mukdar", "unit": "m²", "sourceType": "WINCC_TAG", "candidate": "Jemleýji hasaplaýjy tag tapylmady. IOP-da 1#/2# 堆垛计数 (%DB66.%DW0, %DB66.%DW4) bar, ýöne bu her ýygnamanyň içindäki list sany, 清零 bilen nola düşýär. Gündelik mukdar diňe historian bilen hasaplanyp bilner.", "query": null, "refresh": "Tassyklanmadyk", "status": "CANDIDATE", "winccTag": "1#堆垛计数; 2#堆垛计数", "plcAddress": "%DB66.%DW0; %DB66.%DW4", "station": "IOP"},
     {"key": "gipsokarton.outputMonth", "screen": "Baş panel", "label": "Umumy önümçilik (aý başyndan)", "unit": "m²", "sourceType": "DERIVED", "candidate": "Gündelik hasaplaýjydan jemlener. Gündelik çeşme tassyklanandan soň.", "query": null, "refresh": "Tassyklanmadyk", "status": "CANDIDATE"},
     {"key": "gipsokarton.planToday", "screen": "Gipsokarton", "label": "Önümçilik meýilnamasy", "unit": "m²", "sourceType": "MANUAL", "candidate": "WinCC-de meýilnama ýok. Dolandyryş tarapyndan girizilmeli.", "query": null, "refresh": "Gündelik", "status": "NO_SOURCE"},
-    {"key": "gipsokarton.status", "screen": "Gipsokarton", "label": "Liniýanyň ýagdaýy", "unit": "ýagdaý", "sourceType": "WINCC_TAG", "candidate": "Hereketlendiriji işleýiş signallary WinCC ekranynda görüldi.", "query": null, "refresh": "Tassyklanmadyk", "status": "CANDIDATE"},
+    {"key": "gipsokarton.status", "screen": "Gipsokarton", "label": "Liniýanyň ýagdaýy", "unit": "ýagdaý", "sourceType": "WINCC_TAG", "candidate": "Liniýanyň umumy işleýiş tagy ýok. Iň ýakyn: 凝固皮带运行信号 (gataýan lenta işleýär), %DB6.%D154.0, BIT; 总急停 (umumy awariýa duruzmasy) CPI %DB2.%D4.6. Baha tablisasy (1/0) zawodda tassyklanmaly.", "query": null, "refresh": "Tassyklanmadyk", "status": "CANDIDATE", "winccTag": "凝固皮带运行信号", "plcAddress": "%DB6.%D154.0", "station": "CPI"},
     {"key": "gipsokarton.stopsToday", "screen": "Gipsokarton", "label": "Durmalar", "unit": "san", "sourceType": "DERIVED", "candidate": "Liniýanyň ýagdaý taglaryndan hasaplanar.", "query": null, "refresh": "Tassyklanmadyk", "status": "CANDIDATE"},
     {"key": "gipsokarton.errorsToday", "screen": "Gipsokarton", "label": "Ýalňyşlyklar", "unit": "san", "sourceType": "WINCC_ALARM", "candidate": "WinCC Alarm Logging. Arhiw diňe 2023-nji ýylyň iýun–iýul aýlaryny öz içine alýar.", "query": null, "refresh": "Tassyklanmadyk", "status": "CANDIDATE"},
     {"key": "gury-garyndy.outputToday", "screen": "Gury garyndy", "label": "Önüm mukdary", "unit": "t", "sourceType": "UNKNOWN", "candidate": "Gury garyndy bölümine degişli WinCC taslamasy arhiwde ýok.", "query": null, "refresh": "Tassyklanmadyk", "status": "NO_SOURCE"},

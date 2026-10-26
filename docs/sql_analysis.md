@@ -1,6 +1,14 @@
 # SQL Server analizi
 
-Durum: 2026-10-18. Veritabanı içerikleri henüz okunmadı.
+Durum: 2026-10-26. Yapılandırma veritabanlarından tag listesi metin çıkarma ile okundu.
+
+## Güncelleme 26.10.2026
+
+- `chengxing.mdf` kopyalarından 417 tag adı ve PLC adresi çıkarıldı: CPI 329, IOP 115 ham kayıt.
+- Liste: `docs/wincc/wincc-tag-listesi-2026-10-26.csv`.
+- Bağlantı `chengxingPLC`, kanal SIMATIC S7-1200/S7-1500, PLC adresi adayı `192.168.10.6`.
+- Üç canlı tag ve okuma yolu: `docs/handoff/HANDOFF-2026-10-26-002-UC-TAG.md`.
+- SQL Server yine kurulmadı. Tablo yapısı ve canlı değer okunmadı. Aşağıdaki 2026-10-18 notları geçerli.
 
 ## Bilinenler
 
