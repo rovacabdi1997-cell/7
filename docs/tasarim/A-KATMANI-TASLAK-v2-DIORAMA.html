@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="tk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gipsokarton diorama</title>
+<!-- TASLAK v2. Görsel öneri, kod değil. Analiz: REFERANS-ANALIZ-v2.md.
+     Veri: docs/api/examples (sözleşme v2.1.0, SIMULYASIYA). Makine görselleri: frontend/public/tv/machines. İnternetsiz açılır. -->
+<style>
+:root {
+  --zemin-ic: #C3BCB4;
+  --zemin-dis: #9C958C;
+  --plaka-ust: #D9D4CE;
+  --plaka-sol: #B7B0A8;
+  --plaka-sag: #A69F97;
+  --cam: rgba(58, 53, 50, .78);
+  --cam-kenar: rgba(255, 255, 255, .14);
+  --cam-ic: rgba(255, 255, 255, .06);
+  --metin: #F4F1ED;
+  --metin-2: #C9C2BA;
+  --metin-koyu: #2C2826;
+  --metin-koyu-2: #6A635D;
+  --akis: #F08A2E;
+  --akis-glow: rgba(240, 138, 46, .55);
+  --ok: #3CC46B;
+  --durdu: #F0B429;
+  --ariza: #E5484D;
+  --soluk: #9A938C;
+  --hap: rgba(250, 248, 245, .92);
+  --f: "Manrope", "Urbanist", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --r: 28px;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; overflow: hidden; background: #6F6862; }
+body { font-family: var(--f); color: var(--metin-koyu); }
+.num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+#tuval {
+  position: absolute; left: 0; top: 0; width: 3840px; height: 2160px; transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse 70% 75% at 62% 52%, var(--zemin-ic) 0%, #B4ADA5 55%, var(--zemin-dis) 100%);
+}
+
+/* Üst çubuk */
+.ust { position: absolute; left: 72px; right: 72px; top: 48px; height: 120px; display: flex; align-items: center; gap: 40px; }
+.marka { display: flex; align-items: center; gap: 28px; }
+.marka img { height: 96px; filter: grayscale(1) brightness(.35); }
+.marka small { display: block; font-size: 40px; color: var(--metin-koyu-2); font-weight: 600; }
+.marka b { font-size: 60px; font-weight: 700; letter-spacing: -.01em; }
+.haplar { display: flex; gap: 20px; margin-left: 40px; }
+.hap { height: 88px; padding: 0 36px; border-radius: 44px; display: flex; align-items: center; gap: 18px; font-size: 40px; font-weight: 600;
+  background: rgba(255,255,255,.38); border: 2px solid rgba(255,255,255,.45); color: var(--metin-koyu); }
+.hap i { width: 22px; height: 22px; border-radius: 50%; background: var(--soluk); }
+.hap.ok i { background: var(--ok); box-shadow: 0 0 16px var(--ok); }
+.hap.ariza { color: var(--ariza); } .hap.ariza i { background: var(--ariza); border-radius: 0; width: 0; height: 0; border-left: 13px solid transparent; border-right: 13px solid transparent; border-bottom: 22px solid var(--ariza); background: none; }
+.saat { margin-left: auto; text-align: right; }
+.saat b { display: block; font-size: 88px; font-weight: 700; letter-spacing: -.02em; line-height: 1; }
+.saat span { font-size: 40px; color: var(--metin-koyu-2); font-weight: 600; }
+
+/* Sol kolon: koyu cam kartlar */
+.sol { position: absolute; left: 72px; top: 230px; width: 1000px; bottom: 72px; display: flex; flex-direction: column; gap: 36px; }
+.kart { background: var(--cam); border: 2px solid var(--cam-kenar); border-radius: var(--r); color: var(--metin); padding: 36px 48px;
+  box-shadow: inset 0 2px 0 var(--cam-ic), 30px 40px 80px rgba(40, 32, 26, .28); backdrop-filter: blur(18px); }
+.kart h3 { font-size: 44px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.kart h3 small { font-size: 40px; font-weight: 500; color: var(--metin-2); }
+
+.tizlik { display: grid; grid-template-columns: 560px 1fr; align-items: center; }
+.yay { position: relative; width: 560px; height: 290px; }
+.yay svg { position: absolute; inset: 0; }
+.yay .ic { position: absolute; left: 0; right: 0; bottom: 4px; text-align: center; }
+.yay .ic b { font-size: 132px; font-weight: 700; letter-spacing: -.03em; line-height: 1; display: block; }
+.yay .ic span { font-size: 44px; color: var(--metin-2); font-weight: 600; }
+.yan { display: flex; flex-direction: column; gap: 22px; padding-left: 24px; font-size: 40px; color: var(--metin-2); }
+.yan b { color: var(--metin); font-weight: 700; }
+
+.duyduryslar { display: flex; flex-direction: column; gap: 16px; }
+.dy { background: rgba(255,255,255,.06); border-radius: 18px; padding: 18px 26px; display: grid; grid-template-columns: 1fr auto; row-gap: 10px; }
+.dy p { font-size: 40px; font-weight: 600; }
+.dy .etk { font-size: 40px; padding: 2px 22px; border-radius: 30px; justify-self: end; align-self: start; font-weight: 600; }
+.dy .etk.isjen { background: rgba(229,72,77,.25); color: #FF9A9D; }
+.dy .etk.yapyk { background: rgba(255,255,255,.1); color: var(--metin-2); }
+.dy small { font-size: 40px; color: var(--metin-2); grid-column: 1 / -1; }
+.bos { font-size: 40px; color: var(--metin-2); }
+
+.grid6 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.gk { background: rgba(255,255,255,.06); border-radius: 18px; padding: 18px 26px; }
+.gk .bas { display: flex; justify-content: space-between; align-items: center; font-size: 40px; color: var(--metin-2); font-weight: 600; }
+.gk .bas i { width: 22px; height: 22px; border-radius: 50%; background: var(--ok); }
+.gk .bas i.durdu { background: var(--durdu); border-radius: 0; }
+.gk .bas i.soluk { background: none; border: 3px solid var(--soluk); }
+.gk b { display: block; font-size: 72px; font-weight: 700; letter-spacing: -.02em; margin: 2px 0 10px; line-height: 1.05; }
+.gk b span { font-size: 40px; color: var(--metin-2); font-weight: 600; margin-left: 10px; }
+.cubuk { height: 8px; border-radius: 4px; background: rgba(255,255,255,.12); overflow: hidden; }
+.cubuk div { height: 100%; background: var(--akis); border-radius: 4px; }
+
+/* Diorama */
+#sahne { position: absolute; left: 1100px; top: 190px; width: 2740px; height: 1970px; }
+#sahne svg { position: absolute; inset: 0; overflow: visible; }
+.mak { position: absolute; transform: translate(-50%, -78%); pointer-events: none; }
+.mak img { width: 100%; display: block;
+  filter: grayscale(.92) sepia(.18) brightness(1.12) contrast(.92) drop-shadow(34px 46px 30px rgba(60, 48, 38, .38)); }
+.mak.ariza img { filter: grayscale(1) sepia(1) saturate(5.5) hue-rotate(-38deg) brightness(.92) drop-shadow(0 0 40px rgba(229,72,77,.7)) drop-shadow(34px 46px 30px rgba(60,48,38,.38)); }
+.etiket { position: absolute; transform: translate(-50%, -100%); white-space: nowrap; display: flex; align-items: center; gap: 16px;
+  background: var(--hap); border-radius: 20px; padding: 10px 26px; font-size: 40px; font-weight: 700; color: var(--metin-koyu);
+  box-shadow: 0 12px 30px rgba(60,48,38,.22); }
+.etiket i { width: 22px; height: 22px; border-radius: 50%; background: var(--ok); flex: none; animation: nabiz 2.4s ease-in-out infinite; }
+.etiket.ariza { color: var(--ariza); outline: 4px solid var(--ariza); }
+.etiket.ariza i { width: 0; height: 0; border-radius: 0; background: none; border-left: 13px solid transparent; border-right: 13px solid transparent; border-bottom: 22px solid var(--ariza); animation: none; }
+@keyframes nabiz { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+@keyframes akis { to { stroke-dashoffset: -112; } }
+.akan { stroke-dasharray: 16 40; animation: akis 1.6s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .akan, .etiket i { animation: none; } }
+
+/* Arıza kartı */
+.popup { position: absolute; width: 760px; background: rgba(250,248,245,.95); border-radius: var(--r); padding: 36px 44px; color: var(--metin-koyu);
+  box-shadow: 0 40px 90px rgba(50,38,30,.35); border: 2px solid rgba(255,255,255,.8); }
+.popup .ust2 { display: flex; align-items: center; gap: 20px; margin-bottom: 14px; }
+.popup .etk { background: rgba(229,72,77,.14); color: var(--ariza); font-size: 40px; font-weight: 700; padding: 4px 24px; border-radius: 30px; }
+.popup h4 { font-size: 60px; font-weight: 800; margin-bottom: 10px; }
+.popup p { font-size: 40px; color: var(--metin-koyu-2); line-height: 1.35; }
+.popup .bar { height: 12px; border-radius: 6px; background: #E9E3DC; margin-top: 22px; overflow: hidden; }
+.popup .bar div { height: 100%; background: var(--ariza); }
+
+
+/* Lejant */
+.lejant { position: absolute; right: 90px; bottom: 110px; display: flex; gap: 90px; font-size: 40px; color: var(--metin-koyu); }
+.lejant h5 { font-size: 40px; font-weight: 700; margin-bottom: 14px; }
+.lejant div div { display: flex; align-items: center; gap: 18px; margin-top: 8px; color: var(--metin-koyu-2); font-weight: 600; }
+.lejant svg { width: 90px; height: 16px; }
+.lejant .n { width: 22px; height: 22px; border-radius: 50%; }
+
+#arac { position: fixed; right: 12px; bottom: 12px; display: flex; gap: 6px; font: 13px system-ui; z-index: 9; }
+#arac button { padding: 6px 10px; border: 1px solid #555; background: #1E2221; color: #E8ECEA; border-radius: 6px; cursor: pointer; }
+#arac button[aria-pressed="true"] { background: #F08A2E; border-color: #F08A2E; color: #1E1A16; }
+</style>
+</head>
+<body>
+<div id="tuval">
+  <div class="ust">
+    <div class="marka">
+      <img src="../../frontend/public/tv/support/logo.png" alt="">
+      <div><small>Türkmen Gips</small><b>Gipsokarton önümçiligi</b></div>
+    </div>
+    <div class="haplar">
+      <div class="hap ok" id="hap-durum"><i></i><span>Işleýär</span></div>
+      <div class="hap"><span>I çalşyk · 08:00–16:00</span></div>
+      <div class="hap"><i></i><span>Simulýasiýa</span></div>
+    </div>
+    <div class="saat"><b class="num" id="saat">—</b><span id="sene">—</span></div>
+  </div>
+
+  <div class="sol">
+    <div class="kart">
+      <h3>Hat tizligi <small>kuwwatyň ulanylyşy</small></h3>
+      <div class="tizlik">
+        <div class="yay">
+          <svg viewBox="0 0 560 320"><path d="M60 300 A220 220 0 0 1 500 300" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="34" stroke-linecap="round"/>
+            <path id="yay-dolgu" d="M60 300 A220 220 0 0 1 500 300" fill="none" stroke="var(--akis)" stroke-width="34" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100"/></svg>
+          <div class="ic"><b class="num" id="tizlik">—</b><span>m/min</span></div>
+        </div>
+        <div class="yan">
+          <div>nominal<br><b class="num" id="nominal">—</b></div>
+          <div>kuwwat<br><b class="num" id="kuwwat">—</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kart">
+      <h3>Duýduryşlar <small class="num" id="dy-san">—</small></h3>
+      <div class="duyduryslar" id="dy"></div>
+    </div>
+
+    <div class="kart" style="flex:1">
+      <h3>Görkezijiler <small>şu gün</small></h3>
+      <div class="grid6" id="g6"></div>
+    </div>
+  </div>
+
+  <div id="sahne"></div>
+
+  <div class="lejant">
+    <div><h5>Baglanyşyk</h5>
+      <div><svg><line x1="0" y1="8" x2="90" y2="8" stroke="var(--akis)" stroke-width="6"/></svg>Material akymy</div>
+      <div><svg><line x1="0" y1="8" x2="90" y2="8" stroke="var(--akis)" stroke-width="6" stroke-dasharray="14 10"/></svg>Goşmaça iýmitleniş</div>
+    </div>
+    <div><h5>Ýagdaý</h5>
+      <div><span class="n" style="background:var(--ok)"></span>Işleýär</div>
+      <div><span class="n" style="background:var(--durdu);border-radius:0"></span>Durdy</div>
+      <div><span style="width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-bottom:22px solid var(--ariza)"></span>Näsazlyk</div>
+    </div>
+  </div>
+</div>
+
+<div id="arac">
+  <button id="b-normal" aria-pressed="true">Kadaly · 13:07</button>
+  <button id="b-ariza" aria-pressed="false">Näsazlyk · 15:25</button>
+</div>
+
+<script>
+const IMG = "../../frontend/public/tv/machines/";
+// Values from docs/api/examples (contract v2.1.0, SIMULYASIYA).
+const SAHNE = {
+  normal: { speed: 34.63, capacity: 99.7, outputToday: 11646.84, planToday: 54795, fulfil: 99.7, shiftOutput: 11646.84,
+            shiftPlan: 18265, stopMin: 18, oee: 89.7, fault: null,
+            alarms: [{ t: "Kagyz bobinasy çalşyrylýar", s: "10:40 · 18 min · meýilleşdirilen", st: "yapyk" }] },
+  ariza: { speed: 0, capacity: 0, outputToday: 17024.45, planToday: 54795, fulfil: 100.5, shiftOutput: 17024.45,
+           shiftPlan: 18265, stopMin: 35, oee: 87.9, fault: "kesiji",
+           alarms: [{ t: "Kesijiniň ýerleşiş datçigi ýalňyşlyk berdi", s: "15:20 · 5 min · Kesiji", st: "isjen" },
+                    { t: "Kagyz bobinasy çalşyrylýar", s: "10:40 · 18 min · meýilleşdirilen", st: "yapyk" }] },
+};
+const NOMINAL = 34.72;
+
+// Isometric floor: P(a, b) = top + a·A + b·B on a 10 × 10 grid; light from top-left.
+const TOP = [1380, 330], A = [124, 66], B = [-124, 66];
+const P = (a, b) => [TOP[0] + a * A[0] + b * B[0], TOP[1] + a * A[1] + b * B[1]];
+
+// U-line (master brief v4): wet end along the back, dryer turns, dry end along the front.
+const M = [
+  { id: "kagyz",  ad: "Kagyz bobinasy",   f: "tg-gk-10-kagyz-bobinasy",  a: 5.0, b: 5.0, w: 320, feed: "formirleme" },
+  { id: "gips",   ad: "Gips berijisi",    f: "tg-gk-01-gips-berijisi",   a: 0.9, b: 2.7, w: 380 },
+  { id: "garys",  ad: "Garyşdyryjy",      f: "tg-gk-02-garysdyryjy",     a: 2.9, b: 2.7, w: 360 },
+  { id: "kopuk",  ad: "Köpük generatory", f: "tg-gk-03-kopuk-generatory", a: 2.9, b: 0.5, w: 300, feed: "garys" },
+  { id: "formirleme", ad: "Formirleme stoly", f: "tg-gk-04-formirleme-stoly", a: 5.0, b: 2.7, w: 400 },
+  { id: "gatama", ad: "Gatama lentasy",   f: "tg-gk-05-gatama-lentasy",  a: 7.1, b: 2.7, w: 400 },
+  { id: "kesiji", ad: "Kesiji",           f: "tg-gk-06-kesiji",          a: 9.3, b: 2.7, w: 360 },
+  { id: "guradyjy", ad: "Guradyjy",       f: "tg-gk-07-guradyjy",        a: 9.2, b: 5.6, w: 640 },
+  { id: "gyra",   ad: "Gyra kesiji",      f: "tg-gk-08-gyra-kesiji",     a: 7.4, b: 8.6, w: 400 },
+  { id: "bukja",  ad: "Bukjalaýjy",       f: "tg-gk-11-bukjalayjy",      a: 5.2, b: 8.6, w: 400 },
+  { id: "gapla",  ad: "Gaplaýjy",         f: "tg-gk-09-gaplayjy",        a: 3.0, b: 8.6, w: 420 },
+];
+const CHAIN = ["gips", "garys", "formirleme", "gatama", "kesiji", "guradyjy", "gyra", "bukja", "gapla"];
+const byId = Object.fromEntries(M.map(m => [m.id, m]));
+
+function san(v, d = 0) {
+  const [i, f] = Math.abs(v).toFixed(d).split(".");
+  return (v < 0 ? "−" : "") + i.replace(/\B(?=(\d{3})+(?!\d))/g, " ") + (f ? "," + f : "");
+}
+
+function yol(m1, m2) {
+  // L-shaped iso path: along a, then along b.
+  const pts = [P(m1.a, m1.b), P(m2.a, m1.b), P(m2.a, m2.b)];
+  return "M" + pts.map(p => p.join(" ")).join(" L");
+}
+
+function sahne(fault) {
+  const s = document.getElementById("sahne");
+  const slab = [P(0, 0), P(10.4, 0), P(10.4, 10.4), P(0, 10.4)];
+  const th = 46;
+  const poly = pts => pts.map(p => p.join(",")).join(" ");
+  let svg = `<svg viewBox="0 0 2740 1970">
+    <defs><filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
+      <filter id="golge" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="40"/></filter></defs>
+    <polygon points="${poly(slab.map(([x, y]) => [x + 70, y + 120]))}" fill="rgba(60,48,38,.32)" filter="url(#golge)"/>
+    <polygon points="${poly([slab[3], slab[2], [slab[2][0], slab[2][1] + th], [slab[3][0], slab[3][1] + th]])}" fill="var(--plaka-sol)"/>
+    <polygon points="${poly([slab[2], slab[1], [slab[1][0], slab[1][1] + th], [slab[2][0], slab[2][1] + th]])}" fill="var(--plaka-sag)"/>
+    <polygon points="${poly(slab)}" fill="var(--plaka-ust)"/>`;
+  // floor grid, very faint
+  for (let k = 1; k < 10.4; k += 1) {
+    svg += `<line x1="${P(k, 0)[0]}" y1="${P(k, 0)[1]}" x2="${P(k, 10.4)[0]}" y2="${P(k, 10.4)[1]}" stroke="rgba(120,108,96,.12)" stroke-width="2"/>`;
+    svg += `<line x1="${P(0, k)[0]}" y1="${P(0, k)[1]}" x2="${P(10.4, k)[0]}" y2="${P(10.4, k)[1]}" stroke="rgba(120,108,96,.12)" stroke-width="2"/>`;
+  }
+  const links = CHAIN.slice(1).map((id, i) => [byId[CHAIN[i]], byId[id], false])
+    .concat(M.filter(m => m.feed).map(m => [m, byId[m.feed], true]));
+  for (const [m1, m2, dashed] of links) {
+    const broken = fault && (m1.id === fault || m2.id === fault);
+    const d = yol(m1, m2);
+    const color = broken ? "var(--ariza)" : "var(--akis)";
+    svg += `<path d="${d}" fill="none" stroke="${broken ? "rgba(229,72,77,.5)" : "var(--akis-glow)"}" stroke-width="16" filter="url(#glow)"/>`;
+    svg += `<path d="${d}" fill="none" stroke="${color}" stroke-width="6" ${dashed || broken ? 'stroke-dasharray="20 14"' : ""}/>`;
+    if (!broken && !dashed) svg += `<path class="akan" d="${d}" fill="none" stroke="#FFE2C4" stroke-width="7" stroke-linecap="round"/>`;
+    const [cx, cy] = P(m2.a, m1.b);
+    svg += `<rect x="${cx - 14}" y="${cy - 14}" width="28" height="28" rx="5" fill="#FBF8F4" stroke="${color}" stroke-width="4"/>`;
+  }
+  svg += "</svg>";
+  // draw back-to-front so nearer machines overlap farther ones
+  const order = [...M].sort((x, y) => (x.a + x.b) - (y.a + y.b));
+  let html = svg;
+  for (const m of order) {
+    const [x, y] = P(m.a, m.b);
+    const bad = m.id === fault;
+    html += `<div class="mak ${bad ? "ariza" : ""}" style="left:${x}px;top:${y}px;width:${m.w}px"><img src="${IMG}${m.f}-base.png" alt=""></div>`;
+  }
+  for (const m of order) {
+    const [x, y] = P(m.a, m.b);
+    const bad = m.id === fault;
+    html += `<div class="etiket ${bad ? "ariza" : ""}" style="left:${x}px;top:${y - m.w * 0.62}px"><i></i>${m.ad}</div>`;
+  }
+  if (fault) {
+    const m = byId[fault];
+    const [x, y] = P(m.a, m.b);
+    const px = 1950, py = 40, ly = y - m.w * 0.62 - 40;
+    html += `<svg style="position:absolute;inset:0;overflow:visible;pointer-events:none" viewBox="0 0 2740 1970">
+      <path d="M${px + 240} ${py + 380} L${px + 240} ${ly - 120} L${x} ${ly - 30}" fill="none" stroke="var(--ariza)" stroke-width="4" stroke-dasharray="10 10"/>
+      <circle cx="${x}" cy="${ly - 30}" r="10" fill="var(--ariza)"/></svg>`;
+    html += `<div class="popup" style="left:${px}px;top:${py}px">
+      <div class="ust2"><span class="etk">Näsazlyk</span><span style="font-size:40px;color:var(--metin-koyu-2)">15:20 başlady</span></div>
+      <h4>${m.ad}</h4>
+      <p>Ýerleşiş datçigi ýalňyşlyk berdi.<br>Duruş 5 min dowam edýär · sebäp kody ýok</p>
+      <div class="bar"><div style="width:42%"></div></div></div>`;
+  }
+  s.innerHTML = html;
+}
+
+function goster(key) {
+  const d = SAHNE[key];
+  document.getElementById("tizlik").textContent = san(d.speed, 1);
+  document.getElementById("nominal").textContent = san(NOMINAL, 1) + " m/min";
+  document.getElementById("kuwwat").textContent = san(d.capacity, 1) + " %";
+  document.getElementById("yay-dolgu").setAttribute("stroke-dasharray", `${Math.min(d.capacity, 100)} 100`);
+  const hap = document.getElementById("hap-durum");
+  hap.className = "hap " + (d.fault ? "ariza" : "ok");
+  hap.querySelector("span").textContent = d.fault ? "Näsazlyk · Kesiji" : "Işleýär";
+  const open = d.alarms.filter(a => a.st === "isjen").length;
+  document.getElementById("dy-san").textContent = open ? `${open} işjeň` : "işjeň ýok";
+  document.getElementById("dy").innerHTML = d.alarms.map(a =>
+    `<div class="dy"><p>${a.t}</p><span class="etk ${a.st}">${a.st === "isjen" ? "Işjeň" : "Ýapyldy"}</span><small class="num">${a.s}</small></div>`).join("");
+  const g = [
+    ["Gündelik önüm", san(d.outputToday), "m²", d.outputToday / d.planToday, "ok"],
+    ["Gündelik maksat", san(d.planToday), "m²", 1, "ok"],
+    ["Ýerine ýetiriliş", san(d.fulfil, 1), "%", Math.min(d.fulfil / 100, 1), "ok"],
+    ["Çalşyk önümi", san(d.shiftOutput), "m²", d.shiftOutput / d.shiftPlan, "ok"],
+    ["Duruş", san(d.stopMin), "min", Math.min(d.stopMin / 60, 1), d.fault ? "durdu" : "ok"],
+    ["OEE", san(d.oee, 1), "%", d.oee / 100, "ok"],
+  ];
+  document.getElementById("g6").innerHTML = g.map(([t, v, u, p, st]) =>
+    `<div class="gk"><div class="bas">${t}<i class="${st}"></i></div><b class="num">${v}<span>${u}</span></b>
+     <div class="cubuk"><div style="width:${Math.round(p * 100)}%"></div></div></div>`).join("");
+  sahne(d.fault);
+  for (const [id, k] of [["b-normal", "normal"], ["b-ariza", "ariza"]])
+    document.getElementById(id).setAttribute("aria-pressed", String(k === key));
+}
+
+function saat() {
+  const t = new Date(Date.now() + 5 * 3600e3), p = n => String(n).padStart(2, "0");
+  const gun = ["Ýekşenbe", "Duşenbe", "Sişenbe", "Çarşenbe", "Penşenbe", "Anna", "Şenbe"][t.getUTCDay()];
+  document.getElementById("saat").textContent = `${p(t.getUTCHours())}:${p(t.getUTCMinutes())}`;
+  document.getElementById("sene").textContent = `${gun} · ${p(t.getUTCDate())}.${p(t.getUTCMonth() + 1)}.${t.getUTCFullYear()} · Aşgabat`;
+}
+
+function olcek() {
+  const s = Math.min(innerWidth / 3840, innerHeight / 2160), t = document.getElementById("tuval");
+  t.style.transform = `translate(${(innerWidth - 3840 * s) / 2}px, ${(innerHeight - 2160 * s) / 2}px) scale(${s})`;
+}
+document.getElementById("b-normal").onclick = () => goster("normal");
+document.getElementById("b-ariza").onclick = () => goster("ariza");
+addEventListener("resize", olcek); addEventListener("load", olcek);
+olcek(); saat(); setInterval(saat, 10e3);
+goster(new URLSearchParams(location.search).get("sahne") === "ariza" ? "ariza" : "normal");
+</script>
+</body>
+</html>

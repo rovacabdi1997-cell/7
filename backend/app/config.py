@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 CONFIG_DIR = BASE_DIR / "config"
 QUERY_DIR = BASE_DIR.parent / "database" / "readonly_queries"
 
-API_VERSION = "2.0.0"
+API_VERSION = "2.1.0"
 
 
 def load_json(name: str) -> dict:

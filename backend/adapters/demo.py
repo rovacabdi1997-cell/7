@@ -12,7 +12,7 @@ from app.models import (PRIORITY, Alarm, Connection, CurrentStop, Energy, Hourly
 from app.timeutil import hhmm_to_minutes, now_tm, production_day_start
 from services.freshness import mark_stale
 from services.flow import build_equipment, build_flow, machine_states, resolve_asset_id
-from services.kpi import oee, overlap_minutes, pct
+from services.kpi import nominal_speed, oee, overlap_minutes, pct
 from services.shifts import shift_span, shift_state
 
 MODE = "SIMULYASIYA"
@@ -192,7 +192,7 @@ class DemoAdapter:
         states = machine_states(cfg, current_stop, MODE)
         equipment = build_equipment(line_id, cfg, states, MODE, now)
         # Nominal running speed: m/min for board (m²/h over board width), t/h for dry mix.
-        nominal = cfg["nominalPerHour"] / cfg["boardWidthM"] / 60 if is_board else cfg["nominalPerHour"]
+        nominal = nominal_speed(cfg)
         flow = build_flow(equipment, cfg, running_rate / nominal)
 
         stop = None
@@ -220,6 +220,7 @@ class DemoAdapter:
             fulfilmentPct=m("line.fulfilmentPct", pct(total, plan_to_date)),
             capacityPct=m("line.capacityPct", pct(rate_per_hour, cfg["nominalPerHour"]), nominal_src),
             nominalRate=m("line.nominalRate", cfg["nominalPerHour"], cfg["nominalSource"]),
+            nominalSpeed=m("line.nominalSpeed", nominal, cfg["nominalSource"]),
             oee=Oee(
                 availability=m("line.oee.availability", availability),
                 performance=m("line.oee.performance", performance, nominal_src),

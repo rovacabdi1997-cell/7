@@ -3,7 +3,7 @@
   "info": {
     "title": "Turkmen Gips önümçilik gözegçiligi",
     "description": "Salt-okalýan API. PLC/SCADA ulgamyna hiç hili ýazgy ýok.",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "x-contract": "docs/api/API-SOZLESMESI.md"
   },
   "paths": {
@@ -901,6 +901,9 @@
           "nominalRate": {
             "$ref": "#/components/schemas/Metric"
           },
+          "nominalSpeed": {
+            "$ref": "#/components/schemas/Metric"
+          },
           "oee": {
             "$ref": "#/components/schemas/Oee"
           },
@@ -994,6 +997,7 @@
           "fulfilmentPct",
           "capacityPct",
           "nominalRate",
+          "nominalSpeed",
           "oee",
           "productName",
           "stopsToday",

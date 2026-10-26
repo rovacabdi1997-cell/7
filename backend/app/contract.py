@@ -23,6 +23,7 @@ FIELDS: dict[str, tuple[str, str, str, int, str]] = {
     "line.fulfilmentPct": ("number", "%", "CALCULATED", 60, "outputToday ÷ planToDate × 100."),
     "line.capacityPct": ("number", "%", "CALCULATED", 15, "Anlık üretim hızı ÷ nominal kapasite × 100."),
     "line.nominalRate": ("number", "{nominalUnit}", "CONFIG", 86400, "Nominal kapasite. Kaynak Sanjin teklifi, tesis teyidi yok."),
+    "line.nominalSpeed": ("number", "{rateUnit}", "CONFIG", 86400, "Nominal hat hızı, hız ile aynı birimde. Gipsokarton: nominalRate ÷ levha eni ÷ 60. Kaynak Sanjin teklifi."),
     "line.oee.availability": ("number", "%", "CALCULATED", 60, "Kullanılabilirlik: çalışma süresi ÷ planlı süre × 100."),
     "line.oee.performance": ("number", "%", "CALCULATED", 60, "Performans: üretim ÷ (nominal × çalışma süresi) × 100."),
     "line.oee.quality": ("number", "%", "MANUAL", 3600, "Kalite: sağlam ürün ÷ toplam ürün × 100. Kalite ölçümü gelene kadar kaynak yok."),

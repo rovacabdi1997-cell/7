@@ -1,5 +1,5 @@
 {
-  "contractVersion": "2.0.0",
+  "contractVersion": "2.1.0",
   "timestamp": "2026-10-18T08:00:00Z",
   "dataMode": "HAKYKY",
   "adapter": "wincc",
@@ -114,6 +114,15 @@
         "staleAfterSec": 86400,
         "value": 2500.0,
         "unit": "m²/sag"
+      },
+      "nominalSpeed": {
+        "mode": "SIMULYASIYA",
+        "source": "Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
+        "sourceType": "CONFIG",
+        "sourceTs": "2026-10-18T08:00:00Z",
+        "staleAfterSec": 86400,
+        "value": 34.72,
+        "unit": "m/min"
       },
       "oee": {
         "availability": {
@@ -521,6 +530,15 @@
         "unit": "%"
       },
       "nominalRate": {
+        "mode": "SIMULYASIYA",
+        "source": "Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
+        "sourceType": "CONFIG",
+        "sourceTs": "2026-10-18T08:00:00Z",
+        "staleAfterSec": 86400,
+        "value": 25.0,
+        "unit": "t/sag"
+      },
+      "nominalSpeed": {
         "mode": "SIMULYASIYA",
         "source": "Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
         "sourceType": "CONFIG",

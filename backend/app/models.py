@@ -129,6 +129,8 @@ class Line(BaseModel):
     fulfilmentPct: Metric
     capacityPct: Metric
     nominalRate: Metric
+    # Nominal line speed in rateUnit, so the speed KPI has a reference in its own unit.
+    nominalSpeed: Metric
     oee: Oee
     productName: TextValue
     # Board line only: thickness in mm and board type. None on the dry-mix line.

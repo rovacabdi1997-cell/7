@@ -18,7 +18,7 @@ from app.models import (PRIORITY, Alarm, Connection, Energy, HourlySeries, Line,
 from app.timeutil import TM_TZ, now_tm, production_day_start
 from services.freshness import mark_stale
 from services.flow import build_equipment, build_flow, machine_states, resolve_asset_key
-from services.kpi import pct
+from services.kpi import nominal_speed, pct
 from services.shifts import shift_state
 
 # Numeric line fields read straight from a verified source: mapping key suffix -> contract key.
@@ -178,6 +178,8 @@ class WinCCSqlAdapter:
             # A supplier figure from plant.json, not a plant reading: never HAKYKY.
             nominalRate=metric("line.nominalRate", cfg["nominalPerHour"], "SIMULYASIYA", cfg["nominalSource"],
                                now, cfg),
+            nominalSpeed=metric("line.nominalSpeed", nominal_speed(cfg), "SIMULYASIYA", cfg["nominalSource"],
+                                now, cfg),
             oee=Oee(availability=empty("line.oee.availability", none),
                     performance=empty("line.oee.performance", none),
                     quality=empty("line.oee.quality", NO_SOURCE),

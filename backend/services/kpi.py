@@ -16,3 +16,10 @@ def oee(availability: Optional[float], performance: Optional[float], quality: Op
     if availability is None or performance is None or quality is None:
         return None
     return round(availability * performance * quality / 10000, 1)
+
+
+def nominal_speed(line_cfg: dict) -> float:
+    """Nominal speed in the line's rateUnit: m/min for board (m²/h over board width), t/h for dry mix."""
+    if "boardWidthM" in line_cfg:
+        return line_cfg["nominalPerHour"] / line_cfg["boardWidthM"] / 60
+    return line_cfg["nominalPerHour"]
