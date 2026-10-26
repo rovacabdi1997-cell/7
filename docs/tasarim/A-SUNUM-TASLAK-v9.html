@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="tk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A katmany taslak</title>
+<!-- TASLAK. Kod değil, görsel öneri. TAM-PLAN-v9 bölüm 10, 13, 14, 15, 16, 17.
+     Veri: docs/api/examples/snapshot-simulyasiya*.json (sözleşme v2.0.0). İnternetsiz açılır. -->
+<style>
+:root {
+  /* §13 Katman A — açık tema */
+  --zemin: #F7F8F7;
+  --kart: #FFFFFF;
+  --bant: #0F7A3D;
+  --yapisal: #0B5C2E;
+  --metin: #16181A;
+  --metin-2: #5C6360;
+  --soluk: #9AA19D;
+  --ayirici: #E2E6E3;
+  /* §13 durum renkleri, A */
+  --ok: #16A34A;
+  --durdu: #E8A33D;
+  --ariza: #D2382F;
+  /* §14 ölçek, 3840 × 2160 koordinatı */
+  --s-kahraman: 260px;
+  --s-buyuk: 180px;
+  --s-birim: 56px;
+  --s-baslik: 48px;
+  --s-etiket: 44px;
+  --s-govde: 40px;
+  --b-1: 8px; --b-2: 16px; --b-3: 24px; --b-4: 48px; --b-5: 92px; --b-6: 96px;
+  --r-1: 6px; --r-2: 12px;
+  --c-1: 1px; --c-2: 2px; --c-3: 3px;
+  --f-baslik: "Gilroy", "Urbanist", "Segoe UI", system-ui, sans-serif;
+  --f-veri: "Inter", "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --t-hareket: 200ms;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; background: #2A2F2D; overflow: hidden; }
+body { font-family: var(--f-veri); color: var(--metin); }
+
+/* 4K tuval, pencereye ölçeklenir */
+#tuval {
+  position: absolute; left: 0; top: 0;
+  width: 3840px; height: 2160px;
+  background: var(--zemin);
+  transform-origin: 0 0;
+  display: grid;
+  grid-template-rows: 132px 1fr;
+}
+.num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+/* Başlık bandı 132 px */
+header {
+  background: var(--bant); color: var(--kart);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--b-6);
+}
+header .ad { font-family: var(--f-baslik); font-size: var(--s-etiket); font-weight: 600; letter-spacing: .02em; }
+header .sag { display: flex; align-items: center; gap: var(--b-4); font-size: var(--s-etiket); font-weight: 500; }
+.mod { display: flex; align-items: center; gap: var(--b-2); font-size: var(--s-govde); opacity: .85; }
+.mod i { width: 24px; height: 24px; border-radius: 50%; background: var(--soluk); display: inline-block; }
+
+main {
+  padding: var(--b-5) var(--b-6) 84px;
+  display: grid;
+  grid-template-rows: 520px 1fr 96px;
+  row-gap: 80px;
+  min-height: 0;
+}
+
+/* KPI satırı: 4 × 912 */
+.kpi { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--kart); border-radius: var(--r-2); }
+.kpi > div { padding: var(--b-4) var(--b-4) var(--b-4) 72px; display: flex; flex-direction: column; justify-content: center; gap: var(--b-3); }
+.kpi > div + div { border-left: var(--c-2) solid var(--ayirici); }
+.etiket { font-size: var(--s-etiket); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--metin-2); }
+.deger { display: flex; align-items: baseline; gap: var(--b-3); line-height: .9; }
+.deger b { font-weight: 700; font-size: var(--s-buyuk); letter-spacing: -.02em; transition: color var(--t-hareket) ease-out; }
+.deger.kahraman b { font-size: var(--s-kahraman); }
+.deger span { font-size: var(--s-birim); font-weight: 500; color: var(--metin-2); }
+.ref { font-size: var(--s-govde); color: var(--metin-2); }
+.kpi .alarm b { color: var(--metin); }
+.kpi .alarm.var b { color: var(--ariza); }
+
+/* Ana satır: 2400 grafik + 48 + 1200 akış */
+.ana { display: grid; grid-template-columns: 2400px 1200px; column-gap: var(--b-4); min-height: 0; }
+.panel { background: var(--kart); border-radius: var(--r-2); padding: var(--b-4) 72px; display: flex; flex-direction: column; min-height: 0; }
+.panel h2 { font-family: var(--f-baslik); font-size: var(--s-baslik); font-weight: 500; margin-bottom: var(--b-4); display: flex; justify-content: space-between; align-items: baseline; }
+.panel h2 small { font-family: var(--f-veri); font-size: var(--s-govde); font-weight: 400; color: var(--metin-2); }
+svg text { font-family: var(--f-veri); font-variant-numeric: tabular-nums; }
+
+/* Önümçilik akymy: dikey, 11 makine */
+.akym { list-style: none; padding: 0; display: flex; flex-direction: column; justify-content: space-between; flex: 1; }
+.akym li { display: grid; grid-template-columns: 56px 1fr auto; align-items: center; column-gap: var(--b-3); font-size: var(--s-govde); position: relative; height: 64px; }
+.akym li + li::before {
+  content: ""; position: absolute; left: 27px; top: -26px; height: 22px; width: var(--c-2); background: var(--ayirici);
+}
+.akym .no { color: var(--soluk); font-size: var(--s-govde); text-align: right; }
+.akym .ad { font-weight: 500; }
+.akym .durum { display: flex; align-items: center; gap: var(--b-2); color: var(--metin-2); }
+/* §15 renk + şekil + yazı */
+.sekil { width: 32px; height: 32px; display: inline-block; flex: none; }
+.ok .sekil { background: var(--ok); border-radius: 50%; animation: nabiz 2.4s ease-in-out infinite; }
+.durdu .sekil { background: var(--durdu); border-radius: 0; }
+.ariza .sekil { width: 0; height: 0; border-left: 18px solid transparent; border-right: 18px solid transparent; border-bottom: 32px solid var(--ariza); background: none; }
+.ariza { color: var(--ariza); }
+.ariza .ad, .ariza .durum { color: var(--ariza); font-weight: 700; }
+.akym li.ariza { background: color-mix(in srgb, var(--ariza) 8%, var(--kart)); border-radius: var(--r-1); }
+@keyframes nabiz { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+@media (prefers-reduced-motion: reduce) { .ok .sekil { animation: none; } }
+
+/* Hedef çubuğu 96 px */
+.maksat { position: relative; background: var(--kart); border-radius: var(--r-2); overflow: hidden; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--b-4); font-size: var(--s-etiket); font-weight: 500; }
+.maksat .dolgu { position: absolute; inset: 0 auto 0 0; background: var(--bant); transition: width var(--t-hareket) ease-out; }
+.maksat span { position: relative; color: var(--kart); mix-blend-mode: normal; }
+.maksat .sag-yazi { color: var(--metin); }
+.maksat.dolu .sag-yazi { color: var(--kart); }
+
+/* Taslak araç çubuğu: tuvalin dışında, ekrana girmez */
+#arac { position: fixed; right: 12px; bottom: 12px; display: flex; gap: 6px; font: 13px system-ui; z-index: 9; }
+#arac button { padding: 6px 10px; border: 1px solid #555; background: #1E2221; color: #E8ECEA; border-radius: 6px; cursor: pointer; }
+#arac button[aria-pressed="true"] { background: #0F7A3D; border-color: #0F7A3D; }
+</style>
+</head>
+<body>
+<div id="tuval">
+  <header>
+    <div class="ad">Türkmen Gips · Sanly önümçilik</div>
+    <div class="sag">
+      <div class="mod" title="Ýeke-täk maglumat görkezijisi"><i></i>Simulýasiýa</div>
+      <div class="num" id="sene">—</div>
+    </div>
+  </header>
+  <main>
+    <section class="kpi">
+      <div>
+        <div class="etiket">Gündelik önüm</div>
+        <div class="deger kahraman"><b class="num" id="k-onum">—</b><span>m²</span></div>
+        <div class="ref num" id="k-onum-ref">—</div>
+      </div>
+      <div>
+        <div class="etiket">Gündelik maksat</div>
+        <div class="deger"><b class="num" id="k-maksat">—</b><span>m²</span></div>
+        <div class="ref num" id="k-maksat-ref">—</div>
+      </div>
+      <div>
+        <div class="etiket">Hat tizligi</div>
+        <div class="deger"><b class="num" id="k-tizlik">—</b><span>m/min</span></div>
+        <div class="ref num" id="k-tizlik-ref">—</div>
+      </div>
+      <div class="alarm" id="k-alarm-blok">
+        <div class="etiket">Işjeň duýduryş</div>
+        <div class="deger"><b class="num" id="k-alarm">—</b><span>sany</span></div>
+        <div class="ref" id="k-alarm-ref">—</div>
+      </div>
+    </section>
+
+    <section class="ana">
+      <div class="panel">
+        <h2>Sagatlaýyn önümçilik <small>m² / sagat · kesikli çyzyk: maksat</small></h2>
+        <svg id="grafik" style="flex:1; width:100%; min-height:0"></svg>
+      </div>
+      <div class="panel">
+        <h2>Önümçilik akymy <small>Gipsokarton</small></h2>
+        <ol class="akym" id="akym"></ol>
+      </div>
+    </section>
+
+    <section class="maksat" id="maksat">
+      <div class="dolgu" id="maksat-dolgu"></div>
+      <span class="num" id="maksat-yazi">—</span>
+      <span class="sag-yazi">Gipsokarton önümçiligi · A bölümi</span>
+    </section>
+  </main>
+</div>
+
+<div id="arac">
+  <button id="b-normal" aria-pressed="true">Kadaly · 13:07</button>
+  <button id="b-ariza" aria-pressed="false">Näsazlyk · 15:25</button>
+</div>
+
+<script>
+// Values copied from docs/api/examples (contract v2.0.0, mode SIMULYASIYA). Draft only, no API call.
+const SAHNE = {
+  normal: {
+    saat: "13:07", outputToday: 11646.84, planToday: 54795, planToDate: 11681.99, speed: 34.63,
+    nominalSpeed: 34.72, alarms: 0, fault: null,
+    trend: [["08:00", 2443.5], ["09:00", 2397.7], ["10:00", 1700.1], ["11:00", 2444.2], ["12:00", 2374.6], ["13:00", 286.7]],
+  },
+  ariza: {
+    saat: "15:25", outputToday: 17024.45, planToday: 54795, planToDate: 16933.18, speed: 0,
+    nominalSpeed: 34.72, alarms: 1, fault: "Kesiji",
+    trend: [["08:00", 2443.5], ["09:00", 2397.7], ["10:00", 1700.1], ["11:00", 2444.2], ["12:00", 2374.6],
+            ["13:00", 2435.2], ["14:00", 2414.8], ["15:00", 814.4]],
+  },
+};
+const PLAN_HOUR = 2283.1;
+// §17 order
+const MASYNLAR = ["Kagyz bobinasy", "Gips berijisi", "Garyşdyryjy", "Köpük generatory", "Formirleme stoly",
+  "Gatama lentasy", "Kesiji", "Guradyjy", "Gyra kesiji", "Bukjalaýjy", "Gaplaýjy"];
+const GUNLER = ["Ýekşenbe", "Duşenbe", "Sişenbe", "Çarşenbe", "Penşenbe", "Anna", "Şenbe"];
+
+// §21 / D6: decimal comma, thousands no-break space.
+function san(v, d = 0) {
+  if (v === null || v === undefined) return "—";
+  const [i, f] = Math.abs(v).toFixed(d).split(".");
+  const g = i.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return (v < 0 ? "−" : "") + g + (f ? "," + f : "");
+}
+
+function sene() {
+  // Asia/Ashgabat, UTC+5, no DST.
+  const t = new Date(Date.now() + 5 * 3600e3);
+  const p = n => String(n).padStart(2, "0");
+  document.getElementById("sene").textContent =
+    `${GUNLER[t.getUTCDay()]} · ${p(t.getUTCDate())}.${p(t.getUTCMonth() + 1)}.${t.getUTCFullYear()} · ${p(t.getUTCHours())}:${p(t.getUTCMinutes())}`;
+}
+
+function grafik(trend, nowHour) {
+  const svg = document.getElementById("grafik");
+  // Layout size on the 4K canvas (clientWidth ignores the fit-to-window scale), so text is never stretched.
+  const W = svg.clientWidth, H = svg.clientHeight, top = 70, bottom = 84, left = 150, right = 20;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const ph = H - top - bottom, pw = W - left - right;
+  const max = 3000;
+  const y = v => top + ph - (v / max) * ph;
+  const slots = 24, slot = pw / slots;
+  // §16: bar 24 px, gap 16 px is specified for the 3840 canvas; the slot here is wider, the bar keeps 24 × 2.
+  const bw = 48;
+  let s = "";
+  for (const v of [0, 1000, 2000, 3000]) {
+    s += `<line x1="${left}" x2="${W - right}" y1="${y(v)}" y2="${y(v)}" stroke="var(--ayirici)" stroke-width="2"/>`;
+    s += `<text x="${left - 24}" y="${y(v) + 14}" text-anchor="end" font-size="40" fill="var(--metin-2)">${san(v)}</text>`;
+  }
+  trend.forEach(([hour, val], i) => {
+    const x = left + i * slot + (slot - bw) / 2;
+    const partial = i === trend.length - 1;
+    s += `<rect x="${x}" y="${y(val)}" width="${bw}" height="${y(0) - y(val)}" rx="6"
+            fill="var(--yapisal)" opacity="${partial ? 0.28 : 0.55}"/>`;
+    if (partial) s += `<text x="${x}" y="${y(val) - 24}" text-anchor="start" font-size="40" fill="var(--metin-2)">${hour} · dowam edýär</text>`;
+  });
+  for (let i = 0; i < slots; i += 3) {
+    const h = String((8 + i) % 24).padStart(2, "0") + ":00";
+    s += `<text x="${left + i * slot + slot / 2}" y="${H - 24}" text-anchor="middle" font-size="40" fill="var(--metin-2)">${h}</text>`;
+  }
+  s += `<line x1="${left}" x2="${W - right}" y1="${y(PLAN_HOUR)}" y2="${y(PLAN_HOUR)}" stroke="var(--metin-2)" stroke-width="2" stroke-dasharray="14 10"/>`;
+  s += `<text x="${W - right}" y="${y(PLAN_HOUR) - 18}" text-anchor="end" font-size="40" fill="var(--metin-2)">maksat ${san(PLAN_HOUR)}</text>`;
+  svg.innerHTML = s;
+}
+
+function akym(fault) {
+  // §10 critical rule: only the failed box turns red; the screen does not go dark.
+  document.getElementById("akym").innerHTML = MASYNLAR.map((ad, i) => {
+    const bad = ad === fault;
+    return `<li class="${bad ? "ariza" : "ok"}">
+      <span class="no num">${String(i + 1).padStart(2, "0")}</span>
+      <span class="ad">${ad}</span>
+      <span class="durum"><i class="sekil"></i>${bad ? "Näsazlyk" : "Işleýär"}</span>
+    </li>`;
+  }).join("");
+}
+
+function goster(key) {
+  const d = SAHNE[key];
+  const pct = d.outputToday / d.planToDate * 100;
+  document.getElementById("k-onum").textContent = san(d.outputToday);
+  document.getElementById("k-onum-ref").textContent = `şu wagta çenli maksat ${san(d.planToDate)} m²`;
+  document.getElementById("k-maksat").textContent = san(d.planToday);
+  document.getElementById("k-maksat-ref").textContent = `${san(d.outputToday / d.planToday * 100, 1)} % ýerine ýetirildi`;
+  document.getElementById("k-tizlik").textContent = san(d.speed, 1);
+  document.getElementById("k-tizlik-ref").textContent = `nominal ${san(d.nominalSpeed, 1)} m/min`;
+  document.getElementById("k-alarm").textContent = san(d.alarms);
+  document.getElementById("k-alarm-ref").textContent = d.fault ? `${d.fault} · näsazlyk` : "duýduryş ýok";
+  document.getElementById("k-alarm-blok").classList.toggle("var", d.alarms > 0);
+  const fill = Math.min(pct, 100);
+  document.getElementById("maksat-dolgu").style.width = fill + "%";
+  document.getElementById("maksat").classList.toggle("dolu", fill >= 99);
+  document.getElementById("maksat-yazi").textContent = `Maksadyň ýerine ýetirilişi ${san(pct, 1)} %`;
+  grafik(d.trend);
+  akym(d.fault);
+  for (const [id, k] of [["b-normal", "normal"], ["b-ariza", "ariza"]])
+    document.getElementById(id).setAttribute("aria-pressed", String(k === key));
+}
+
+function olcek() {
+  const s = Math.min(innerWidth / 3840, innerHeight / 2160);
+  const t = document.getElementById("tuval");
+  t.style.transform = `translate(${(innerWidth - 3840 * s) / 2}px, ${(innerHeight - 2160 * s) / 2}px) scale(${s})`;
+}
+
+document.getElementById("b-normal").onclick = () => goster("normal");
+document.getElementById("b-ariza").onclick = () => goster("ariza");
+addEventListener("resize", olcek);
+addEventListener("load", olcek);
+olcek(); sene(); setInterval(sene, 10e3);
+goster(new URLSearchParams(location.search).get("sahne") === "ariza" ? "ariza" : "normal");
+</script>
+</body>
+</html>

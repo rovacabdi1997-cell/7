@@ -879,6 +879,7 @@ Son 48 saatte madde madde geçilir. Tören günü değişiklik yapılmaz.
 | Sürüm | Tarih | Değişiklik |
 |---|---|---|
 | 9.0 | 26.10.2026 | İlk yürürlük. Kilitli kararlar, kapsam kilidi, üç katman, token seti, mini motion spec, MES mimarisi, ajan talimatları, açılış listesi. |
+| 9.1 | 26.10.2026 | Proje sahibi A katmanı taslağını onayladı (`docs/tasarim/A-SUNUM-TASLAK-v9.html`). Bölüm 10'a altı karar: Türkmence etiketler (`Gündelik`, `Maksadyň`, `m/min`); akış dikey liste; satır arası 80 px; arızada A'da yalnız arızalı makine kırmızı, B backend durumunu gösterir; saatlik sütun 48 px; font gelene kadar sistem fontu. Ayrıntı: `docs/handoff/HANDOFF-2026-10-26-003-A-KATMANI.md`. |
 
 Sonraki değişiklik bu tabloya satır olarak eklenir; mevcut maddeler sessizce değiştirilmez.
 
