@@ -8,7 +8,7 @@ from typing import Literal, Optional
 from fastapi import APIRouter, HTTPException, Query, Request
 from fastapi.responses import StreamingResponse
 
-from app.config import API_VERSION, plant_config, tag_mapping, tv_config
+from app.config import API_VERSION, cad_identity, plant_config, tag_mapping, tv_config
 from app.models import Alarm, Line, ShiftState, Snapshot
 
 router = APIRouter(prefix="/api")
@@ -21,8 +21,9 @@ def _snapshot(request: Request) -> Snapshot:
 @router.get("/health")
 def health(request: Request) -> dict:
     snap = _snapshot(request)
-    return {"status": "ok", "version": API_VERSION, "adapter": snap.adapter,
-            "dataMode": snap.dataMode, "timestamp": snap.timestamp, "notes": snap.notes}
+    return {"status": "ok", "version": API_VERSION, "contractVersion": snap.contractVersion,
+            "adapter": snap.adapter, "dataMode": snap.dataMode, "connection": snap.connection.model_dump(),
+            "timestamp": snap.model_dump()["timestamp"], "notes": snap.notes}
 
 
 @router.get("/snapshot", response_model=Snapshot)
@@ -35,12 +36,14 @@ def overview(request: Request) -> dict:
     snap = _snapshot(request)
     open_alarms = [a for a in snap.alarms if a.state != "CLEARED"]
     return {
-        "timestamp": snap.timestamp, "dataMode": snap.dataMode,
+        "contractVersion": snap.contractVersion, "timestamp": snap.model_dump()["timestamp"],
+        "dataMode": snap.dataMode, "connection": snap.connection.model_dump(),
         "lines": [line.model_dump(exclude={"trend", "equipment"}) for line in snap.lines],
-        "runningLines": sum(1 for line in snap.lines if line.status == "RUNNING"),
+        "runningLines": sum(1 for line in snap.lines if line.status.value == "RUNNING" and line.status.mode != "KONE"),
         "totalLines": len(snap.lines),
         "alarmCounts": {s: sum(1 for a in open_alarms if a.severity == s) for s in ("CRITICAL", "WARNING", "INFO")},
-        "shift": snap.shift,
+        "shift": snap.shift.model_dump(),
+        "energy": snap.energy.model_dump(),
     }
 
 
@@ -65,6 +68,26 @@ def alarms(request: Request, state: Literal["open", "all"] = "open", line: Optio
 @router.get("/shift", response_model=ShiftState)
 def shift(request: Request) -> ShiftState:
     return _snapshot(request).shift
+
+
+@router.get("/cad/identity")
+def cad_identity_table(status: Optional[Literal["UNMATCHED", "CANDIDATE", "EVIDENCED", "AMBIGUOUS", "APPROVED"]] = None) -> dict:
+    """CAD instance -> monitoring asset link table. CANDIDATE is an explicit code match, not an approval."""
+    table = cad_identity()
+    if not status:
+        return table
+    return {**table, "rows": [r for r in table["rows"] if r["matchStatus"] == status]}
+
+
+@router.get("/cad/identity/assets/{asset_id}")
+def cad_identity_asset(asset_id: str) -> dict:
+    """One monitoring asset with every CAD instance linked or proposed for it (1:n is kept)."""
+    table = cad_identity()
+    asset = next((a for a in table["assets"] if a["assetId"] == asset_id), None)
+    if not asset:
+        raise HTTPException(status_code=404, detail=f"Enjam tapylmady: {asset_id}")
+    rows = [r for r in table["rows"] if r["targetAssetId"] == asset_id or asset_id in r["candidates"]]
+    return {"modelRevision": table["modelRevision"], "asset": asset, "instances": rows}
 
 
 @router.get("/mapping")

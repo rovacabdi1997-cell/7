@@ -34,7 +34,7 @@ def test_running_line_has_active_flow_and_feed_link(fixed_clock):
     assert len(flows) == 10  # 9 main-chain links + 1 feed link
     assert all(f.active and 0 < f.flowRate <= 1 for f in flows.values())
     assert [e.order for e in board.equipment] == list(range(1, 12))
-    assert all(e.mode == "SIMULÝASIÝA" for e in board.equipment)
+    assert all(e.mode == "SIMULYASIYA" for e in board.equipment)
 
 
 def test_continuous_line_stops_everything_on_fault(fixed_clock):
@@ -74,10 +74,10 @@ def test_buffered_line_fault_after_bunker_keeps_upstream_running(fixed_clock):
 
 def test_no_data_never_looks_running():
     for line_cfg in plant_config()["lines"].values():
-        assert set(machine_states(line_cfg, None, "ÝOK").values()) == {"UNKNOWN"}
+        assert set(machine_states(line_cfg, None, "MAGLUMAT_YOK").values()) == {"UNKNOWN"}
     snap = WinCCSqlAdapter(None).snapshot()
     for line in snap.lines:
-        assert line.equipment and all(e.status == "UNKNOWN" and e.mode == "ÝOK" for e in line.equipment)
+        assert line.equipment and all(e.status == "UNKNOWN" and e.mode == "MAGLUMAT_YOK" for e in line.equipment)
         assert not any(f.active for f in line.flow)
 
 
@@ -87,14 +87,14 @@ def test_presentation_loop_is_deterministic_and_shows_fault():
     again = DemoAdapter(at(2, 40), scenario="presentation").snapshot()
     assert first.model_dump() == again.model_dump()
     assert _states(_line(first, "gipsokarton"))["kesiji"] == "FAULT"
-    assert _line(first, "gury-garyndy").status == "RUNNING"
+    assert _line(first, "gury-garyndy").status.value == "RUNNING"
     assert any(a.id == "SIM-SUNUM-gipsokarton" and a.state == "ACTIVE" for a in first.alarms)
     # Clock-based stops do not happen in the loop, so they raise no alarms.
     assert all(a.id.startswith("SIM-SUNUM") or a.severity == "WARNING" for a in first.alarms)
 
     later = DemoAdapter(at(3, 40), scenario="presentation").snapshot()
     board = _line(later, "gipsokarton")
-    assert board.status == "RUNNING" and 0 < board.flow[0].flowRate < 1  # ramping back up
+    assert board.status.value == "RUNNING" and 0 < board.flow[0].flowRate < 1  # ramping back up
     mix = _states(_line(later, "gury-garyndy"))
     assert mix["garysdyryjy"] == "FAULT" and mix["dozirleyji"] == "STOPPED"
     assert mix["cig-mal-silosy"] == mix["gaplayjy-masyn"] == "RUNNING"

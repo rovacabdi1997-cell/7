@@ -1,0 +1,1003 @@
+{
+  "contractVersion": "2.0.0",
+  "timestamp": "2026-10-18T10:25:00Z",
+  "dataMode": "SIMULYASIYA",
+  "adapter": "demo",
+  "connection": {
+    "state": "SIMULATED",
+    "source": "Demo adapteri (SIMULYASIYA)",
+    "lastOkTs": "2026-10-18T10:25:00Z"
+  },
+  "productionDayStart": "2026-10-18T03:00:00Z",
+  "lines": [
+    {
+      "id": "gipsokarton",
+      "name": "Gipsokarton önümçiligi",
+      "section": "A bölümi",
+      "unit": "m²",
+      "rateUnit": "m/min",
+      "status": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "PLC_TAG",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 15,
+        "value": "FAULT"
+      },
+      "mode": "SIMULYASIYA",
+      "speed": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "PLC_TAG",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 15,
+        "value": 0.0,
+        "unit": "m/min"
+      },
+      "outputToday": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "PLC_TAG",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 17024.45,
+        "unit": "m²"
+      },
+      "outputMonth": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 946517.33,
+        "unit": "m²"
+      },
+      "planToday": {
+        "mode": "SIMULYASIYA",
+        "source": "SIMULÝASIÝA: kuwwat hasaby 20 mln m²/ýyl ÷ 365",
+        "sourceType": "MANUAL",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 86400,
+        "value": 54795.0,
+        "unit": "m²"
+      },
+      "planToDate": {
+        "mode": "SIMULYASIYA",
+        "source": "SIMULÝASIÝA: kuwwat hasaby 20 mln m²/ýyl ÷ 365",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 86400,
+        "value": 16933.18,
+        "unit": "m²"
+      },
+      "shiftOutput": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "PLC_TAG",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 17024.45,
+        "unit": "m²"
+      },
+      "shiftPlan": {
+        "mode": "SIMULYASIYA",
+        "source": "SIMULÝASIÝA: kuwwat hasaby 20 mln m²/ýyl ÷ 365",
+        "sourceType": "MANUAL",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 86400,
+        "value": 18265.0,
+        "unit": "m²"
+      },
+      "fulfilmentPct": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 100.5,
+        "unit": "%"
+      },
+      "capacityPct": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA); nominal: Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 15,
+        "value": 0.0,
+        "unit": "%"
+      },
+      "nominalRate": {
+        "mode": "SIMULYASIYA",
+        "source": "Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
+        "sourceType": "CONFIG",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 86400,
+        "value": 2500.0,
+        "unit": "m²/sag"
+      },
+      "oee": {
+        "availability": {
+          "mode": "SIMULYASIYA",
+          "source": "Demo adapteri (SIMULYASIYA)",
+          "sourceType": "CALCULATED",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 60,
+          "value": 94.8,
+          "unit": "%"
+        },
+        "performance": {
+          "mode": "SIMULYASIYA",
+          "source": "Demo adapteri (SIMULYASIYA); nominal: Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
+          "sourceType": "CALCULATED",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 60,
+          "value": 96.8,
+          "unit": "%"
+        },
+        "quality": {
+          "mode": "SIMULYASIYA",
+          "source": "Demo adapteri (SIMULYASIYA); hil ölçegi ýok",
+          "sourceType": "MANUAL",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 3600,
+          "value": 98.6,
+          "unit": "%"
+        },
+        "oee": {
+          "mode": "SIMULYASIYA",
+          "source": "Demo adapteri (SIMULYASIYA)",
+          "sourceType": "CALCULATED",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 60,
+          "value": 90.5,
+          "unit": "%"
+        }
+      },
+      "productName": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "MANUAL",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 86400,
+        "value": "Gipsokarton list"
+      },
+      "thicknessMm": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "MANUAL",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 86400,
+        "value": 12.5,
+        "unit": "mm"
+      },
+      "boardType": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "MANUAL",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 86400,
+        "value": "Adaty (GKL)"
+      },
+      "bagsToday": null,
+      "stopsToday": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 2.0,
+        "unit": "san"
+      },
+      "stopMinutesToday": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 23.0,
+        "unit": "min"
+      },
+      "errorsToday": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 1.0,
+        "unit": "san"
+      },
+      "currentStop": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "PLC_TAG",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 15,
+        "startedAt": "2026-10-18T10:20:00Z",
+        "durationMin": 5.0,
+        "planned": false,
+        "reasonCode": null,
+        "reasonText": "Kesijiniň ýerleşiş datçigi ýalňyşlyk berdi",
+        "equipmentId": "gipsokarton-06"
+      },
+      "trend": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 3600,
+        "unit": "m²",
+        "points": [
+          {
+            "hour": "08:00",
+            "actual": 2443.5,
+            "plan": 2283.1
+          },
+          {
+            "hour": "09:00",
+            "actual": 2397.7,
+            "plan": 2283.1
+          },
+          {
+            "hour": "10:00",
+            "actual": 1700.1,
+            "plan": 2283.1
+          },
+          {
+            "hour": "11:00",
+            "actual": 2444.2,
+            "plan": 2283.1
+          },
+          {
+            "hour": "12:00",
+            "actual": 2374.6,
+            "plan": 2283.1
+          },
+          {
+            "hour": "13:00",
+            "actual": 2435.2,
+            "plan": 2283.1
+          },
+          {
+            "hour": "14:00",
+            "actual": 2414.8,
+            "plan": 2283.1
+          },
+          {
+            "hour": "15:00",
+            "actual": 814.4,
+            "plan": 2283.1
+          }
+        ]
+      },
+      "equipment": [
+        {
+          "id": "gipsokarton-01",
+          "name": "Gips berijisi",
+          "status": "STOPPED",
+          "order": 1,
+          "assetKey": "gips-berijisi",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "Sanjin 1.1",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-02",
+          "name": "Garyşdyryjy",
+          "status": "STOPPED",
+          "order": 2,
+          "assetKey": "garysdyryjy",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "Sanjin 6",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-03",
+          "name": "Köpük generatory",
+          "status": "STOPPED",
+          "order": 3,
+          "assetKey": "kopuk-generatory",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "Sanjin 67",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-04",
+          "name": "Formirleme stoly",
+          "status": "STOPPED",
+          "order": 4,
+          "assetKey": "formirleme-stoly",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "Sanjin 7–9",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-05",
+          "name": "Gatama lentasy",
+          "status": "STOPPED",
+          "order": 5,
+          "assetKey": "gatama-lentasy",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "Sanjin 10–12",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-06",
+          "name": "Kesiji",
+          "status": "FAULT",
+          "order": 6,
+          "assetKey": "kesiji",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "Sanjin 13",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-07",
+          "name": "Guradyjy",
+          "status": "STOPPED",
+          "order": 7,
+          "assetKey": "guradyjy",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "Sanjin 18 L4041",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-08",
+          "name": "Gyra kesiji",
+          "status": "STOPPED",
+          "order": 8,
+          "assetKey": "gyra-kesiji",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "Saha: REF 07 · kenar testereleri",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-09",
+          "name": "Bukjalaýjy",
+          "status": "STOPPED",
+          "order": 9,
+          "assetKey": "bukjalayjy",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "Sanjin 24/25/29",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-10",
+          "name": "Gaplaýjy",
+          "status": "STOPPED",
+          "order": 10,
+          "assetKey": "gaplayjy",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "Sanjin 36/39",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-11",
+          "name": "Kagyz bobinasy",
+          "status": "STOPPED",
+          "order": 11,
+          "assetKey": "kagyz-bobinasy",
+          "kind": "feed",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "Sanjin 1–5",
+          "equipmentCodes": []
+        }
+      ],
+      "flow": [
+        {
+          "fromId": "gipsokarton-01",
+          "toId": "gipsokarton-02",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-02",
+          "toId": "gipsokarton-03",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-03",
+          "toId": "gipsokarton-04",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-04",
+          "toId": "gipsokarton-05",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-05",
+          "toId": "gipsokarton-06",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-06",
+          "toId": "gipsokarton-07",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-07",
+          "toId": "gipsokarton-08",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-08",
+          "toId": "gipsokarton-09",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-09",
+          "toId": "gipsokarton-10",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-11",
+          "toId": "gipsokarton-04",
+          "active": false,
+          "flowRate": 0.0
+        }
+      ]
+    },
+    {
+      "id": "gury-garyndy",
+      "name": "Gury garyndy önümçiligi",
+      "section": "B bölümi",
+      "unit": "t",
+      "rateUnit": "t/sag",
+      "status": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "PLC_TAG",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 15,
+        "value": "RUNNING"
+      },
+      "mode": "SIMULYASIYA",
+      "speed": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "PLC_TAG",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 15,
+        "value": 22.65,
+        "unit": "t/sag"
+      },
+      "outputToday": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "PLC_TAG",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 138.09,
+        "unit": "t"
+      },
+      "outputMonth": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 8413.07,
+        "unit": "t"
+      },
+      "planToday": {
+        "mode": "SIMULYASIYA",
+        "source": "SIMULÝASIÝA: kuwwat hasaby 250 000 t/ýyl (teklip) ÷ 365",
+        "sourceType": "MANUAL",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 86400,
+        "value": 685.0,
+        "unit": "t"
+      },
+      "planToDate": {
+        "mode": "SIMULYASIYA",
+        "source": "SIMULÝASIÝA: kuwwat hasaby 250 000 t/ýyl (teklip) ÷ 365",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 86400,
+        "value": 211.68,
+        "unit": "t"
+      },
+      "shiftOutput": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "PLC_TAG",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 138.09,
+        "unit": "t"
+      },
+      "shiftPlan": {
+        "mode": "SIMULYASIYA",
+        "source": "SIMULÝASIÝA: kuwwat hasaby 250 000 t/ýyl (teklip) ÷ 365",
+        "sourceType": "MANUAL",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 86400,
+        "value": 228.33,
+        "unit": "t"
+      },
+      "fulfilmentPct": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 65.2,
+        "unit": "%"
+      },
+      "capacityPct": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA); nominal: Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 15,
+        "value": 90.6,
+        "unit": "%"
+      },
+      "nominalRate": {
+        "mode": "SIMULYASIYA",
+        "source": "Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
+        "sourceType": "CONFIG",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 86400,
+        "value": 25.0,
+        "unit": "t/sag"
+      },
+      "oee": {
+        "availability": {
+          "mode": "SIMULYASIYA",
+          "source": "Demo adapteri (SIMULYASIYA)",
+          "sourceType": "CALCULATED",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 60,
+          "value": 85.4,
+          "unit": "%"
+        },
+        "performance": {
+          "mode": "SIMULYASIYA",
+          "source": "Demo adapteri (SIMULYASIYA); nominal: Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
+          "sourceType": "CALCULATED",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 60,
+          "value": 87.2,
+          "unit": "%"
+        },
+        "quality": {
+          "mode": "SIMULYASIYA",
+          "source": "Demo adapteri (SIMULYASIYA); hil ölçegi ýok",
+          "sourceType": "MANUAL",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 3600,
+          "value": 98.6,
+          "unit": "%"
+        },
+        "oee": {
+          "mode": "SIMULYASIYA",
+          "source": "Demo adapteri (SIMULYASIYA)",
+          "sourceType": "CALCULATED",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 60,
+          "value": 73.4,
+          "unit": "%"
+        }
+      },
+      "productName": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "MANUAL",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 86400,
+        "value": "Şpatlýowka"
+      },
+      "thicknessMm": null,
+      "boardType": null,
+      "bagsToday": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "PLC_TAG",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 5081.0,
+        "unit": "halta"
+      },
+      "stopsToday": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 2.0,
+        "unit": "san"
+      },
+      "stopMinutesToday": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 65.0,
+        "unit": "min"
+      },
+      "errorsToday": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 60,
+        "value": 2.0,
+        "unit": "san"
+      },
+      "currentStop": null,
+      "trend": {
+        "mode": "SIMULYASIYA",
+        "source": "Demo adapteri (SIMULYASIYA)",
+        "sourceType": "CALCULATED",
+        "sourceTs": "2026-10-18T10:25:00Z",
+        "staleAfterSec": 3600,
+        "unit": "t",
+        "points": [
+          {
+            "hour": "08:00",
+            "actual": 22.5,
+            "plan": 28.5
+          },
+          {
+            "hour": "09:00",
+            "actual": 13.9,
+            "plan": 28.5
+          },
+          {
+            "hour": "10:00",
+            "actual": 22.3,
+            "plan": 28.5
+          },
+          {
+            "hour": "11:00",
+            "actual": 20.9,
+            "plan": 28.5
+          },
+          {
+            "hour": "12:00",
+            "actual": 21.9,
+            "plan": 28.5
+          },
+          {
+            "hour": "13:00",
+            "actual": 21.4,
+            "plan": 28.5
+          },
+          {
+            "hour": "14:00",
+            "actual": 5.7,
+            "plan": 28.5
+          },
+          {
+            "hour": "15:00",
+            "actual": 9.5,
+            "plan": 28.5
+          }
+        ]
+      },
+      "equipment": [
+        {
+          "id": "gury-garyndy-01",
+          "name": "Çig mal silolary",
+          "status": "RUNNING",
+          "order": 1,
+          "assetKey": "cig-mal-silosy",
+          "kind": "buffer",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "1-005-510…590",
+          "equipmentCodes": [
+            "1-005-510",
+            "1-005-590"
+          ]
+        },
+        {
+          "id": "gury-garyndy-02",
+          "name": "Tartym bunkeri",
+          "status": "RUNNING",
+          "order": 2,
+          "assetKey": "dozirleyji",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "1-005-600",
+          "equipmentCodes": [
+            "1-005-600"
+          ]
+        },
+        {
+          "id": "gury-garyndy-03",
+          "name": "Garyşdyryjy",
+          "status": "RUNNING",
+          "order": 3,
+          "assetKey": "garysdyryjy",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "1-005-605",
+          "equipmentCodes": [
+            "1-005-605"
+          ]
+        },
+        {
+          "id": "gury-garyndy-04",
+          "name": "Taýýar önüm bunkeri",
+          "status": "RUNNING",
+          "order": 4,
+          "assetKey": "tayyar-onum-bunkeri",
+          "kind": "buffer",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "1-005-610",
+          "equipmentCodes": [
+            "1-005-610"
+          ]
+        },
+        {
+          "id": "gury-garyndy-05",
+          "name": "Gaplaýjy maşyn",
+          "status": "RUNNING",
+          "order": 5,
+          "assetKey": "gaplayjy-masyn",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "1-005-615",
+          "equipmentCodes": [
+            "1-005-615"
+          ]
+        },
+        {
+          "id": "gury-garyndy-06",
+          "name": "Palet örüji",
+          "status": "RUNNING",
+          "order": 6,
+          "assetKey": "palet-oruji",
+          "kind": "process",
+          "mode": "SIMULYASIYA",
+          "sourceTs": "2026-10-18T10:25:00Z",
+          "staleAfterSec": 15,
+          "ref": "1-005-692/820/825",
+          "equipmentCodes": [
+            "1-005-692",
+            "1-005-820",
+            "1-005-825"
+          ]
+        }
+      ],
+      "flow": [
+        {
+          "fromId": "gury-garyndy-01",
+          "toId": "gury-garyndy-02",
+          "active": true,
+          "flowRate": 0.91
+        },
+        {
+          "fromId": "gury-garyndy-02",
+          "toId": "gury-garyndy-03",
+          "active": true,
+          "flowRate": 0.91
+        },
+        {
+          "fromId": "gury-garyndy-03",
+          "toId": "gury-garyndy-04",
+          "active": true,
+          "flowRate": 0.91
+        },
+        {
+          "fromId": "gury-garyndy-04",
+          "toId": "gury-garyndy-05",
+          "active": true,
+          "flowRate": 0.91
+        },
+        {
+          "fromId": "gury-garyndy-05",
+          "toId": "gury-garyndy-06",
+          "active": true,
+          "flowRate": 0.91
+        }
+      ]
+    }
+  ],
+  "alarms": [
+    {
+      "id": "SIM-20261018-002",
+      "lineId": "gipsokarton",
+      "equipment": "Kesiji",
+      "message": "Kesijiniň ýerleşiş datçigi ýalňyşlyk berdi",
+      "severity": "CRITICAL",
+      "priority": 1,
+      "state": "ACTIVE",
+      "startedAt": "2026-10-18T10:20:00Z",
+      "durationMin": 5.0,
+      "mode": "SIMULYASIYA",
+      "assetId": "gipsokarton-06"
+    },
+    {
+      "id": "SIM-20261018-005",
+      "lineId": "gury-garyndy",
+      "equipment": "Gaplaýjy maşyn",
+      "message": "Gaplaýjy maşynda halta dykylmasy",
+      "severity": "CRITICAL",
+      "priority": 1,
+      "state": "CLEARED",
+      "startedAt": "2026-10-18T04:30:00Z",
+      "durationMin": 20.0,
+      "mode": "SIMULYASIYA",
+      "assetId": "gury-garyndy-05"
+    },
+    {
+      "id": "SIM-20261018-009",
+      "lineId": "gury-garyndy",
+      "equipment": "Çig mal silolary",
+      "message": "Silosdaky material derejesi pes",
+      "severity": "WARNING",
+      "priority": 2,
+      "state": "CLEARED",
+      "startedAt": "2026-10-18T06:15:00Z",
+      "durationMin": 50.0,
+      "mode": "SIMULYASIYA",
+      "assetId": "gury-garyndy-01"
+    },
+    {
+      "id": "SIM-20261018-006",
+      "lineId": "gury-garyndy",
+      "equipment": "Garyşdyryjy",
+      "message": "Meýilleşdirilen arassalaýyş",
+      "severity": "INFO",
+      "priority": 3,
+      "state": "CLEARED",
+      "startedAt": "2026-10-18T09:00:00Z",
+      "durationMin": 45.0,
+      "mode": "SIMULYASIYA",
+      "assetId": "gury-garyndy-03"
+    },
+    {
+      "id": "SIM-20261018-001",
+      "lineId": "gipsokarton",
+      "equipment": "Kagyz bobinasy",
+      "message": "Kagyz bobinasy çalşyrylýar",
+      "severity": "INFO",
+      "priority": 3,
+      "state": "CLEARED",
+      "startedAt": "2026-10-18T05:40:00Z",
+      "durationMin": 18.0,
+      "mode": "SIMULYASIYA",
+      "assetId": "gipsokarton-11"
+    }
+  ],
+  "energy": {
+    "powerKw": {
+      "mode": "MAGLUMAT_YOK",
+      "source": "Energiýa hasaplaýjysy ýok",
+      "sourceType": "PLC_TAG",
+      "sourceTs": null,
+      "staleAfterSec": 15,
+      "value": null,
+      "unit": "kW"
+    },
+    "energyKwhToday": {
+      "mode": "MAGLUMAT_YOK",
+      "source": "Energiýa hasaplaýjysy ýok",
+      "sourceType": "PLC_TAG",
+      "sourceTs": null,
+      "staleAfterSec": 300,
+      "value": null,
+      "unit": "kWh"
+    }
+  },
+  "shift": {
+    "current": {
+      "id": "I",
+      "name": "I çalşyk",
+      "start": "08:00",
+      "end": "16:00",
+      "breakStart": "12:00",
+      "breakEnd": "12:30"
+    },
+    "next": {
+      "id": "II",
+      "name": "II çalşyk",
+      "start": "16:00",
+      "end": "00:00",
+      "breakStart": "20:00",
+      "breakEnd": "20:30"
+    },
+    "schedule": [
+      {
+        "id": "I",
+        "name": "I çalşyk",
+        "start": "08:00",
+        "end": "16:00",
+        "breakStart": "12:00",
+        "breakEnd": "12:30"
+      },
+      {
+        "id": "II",
+        "name": "II çalşyk",
+        "start": "16:00",
+        "end": "00:00",
+        "breakStart": "20:00",
+        "breakEnd": "20:30"
+      },
+      {
+        "id": "III",
+        "name": "III çalşyk",
+        "start": "00:00",
+        "end": "08:00",
+        "breakStart": "04:00",
+        "breakEnd": "04:30"
+      }
+    ],
+    "elapsedMin": 445,
+    "remainingMin": 35,
+    "onBreak": false,
+    "staffCount": {
+      "mode": "SIMULYASIYA",
+      "source": "Demo adapteri (SIMULYASIYA)",
+      "sourceType": "MANUAL",
+      "sourceTs": "2026-10-18T10:25:00Z",
+      "staleAfterSec": 86400,
+      "value": 46.0,
+      "unit": "adam"
+    },
+    "safetyNotices": [
+      "Şahsy gorag serişdelerini hemişe geýiň.",
+      "Işleýän enjamyň goragyny açmaň.",
+      "Ýük göterijiniň hereket zolagynda durmaň.",
+      "Tozan süzgüjiniň basyşyny her çalşykda barlaň."
+    ],
+    "mode": "SIMULYASIYA",
+    "source": "SIMULÝASIÝA: çalşyk tertibi zawod tarapyndan tassyklanmadyk"
+  },
+  "notes": [
+    "Ähli bahalar SIMULYASIYA. Hakyky çeşme tassyklanmadyk."
+  ]
+}

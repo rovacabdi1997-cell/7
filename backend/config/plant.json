@@ -103,37 +103,44 @@
           "name": "Çig mal silolary",
           "assetKey": "cig-mal-silosy",
           "kind": "buffer",
-          "ref": "1-005-510…590"
+          "ref": "1-005-510…590",
+          "cadCodes": ["1-005-510", "1-005-590"],
+          "cadCodeRange": ["1-005-510", "1-005-590"]
         },
         {
           "name": "Tartym bunkeri",
           "assetKey": "dozirleyji",
           "kind": "process",
-          "ref": "1-005-600"
+          "ref": "1-005-600",
+          "cadCodes": ["1-005-600"]
         },
         {
           "name": "Garyşdyryjy",
           "assetKey": "garysdyryjy",
           "kind": "process",
-          "ref": "1-005-605"
+          "ref": "1-005-605",
+          "cadCodes": ["1-005-605"]
         },
         {
           "name": "Taýýar önüm bunkeri",
           "assetKey": "tayyar-onum-bunkeri",
           "kind": "buffer",
-          "ref": "1-005-610"
+          "ref": "1-005-610",
+          "cadCodes": ["1-005-610"]
         },
         {
           "name": "Gaplaýjy maşyn",
           "assetKey": "gaplayjy-masyn",
           "kind": "process",
-          "ref": "1-005-615"
+          "ref": "1-005-615",
+          "cadCodes": ["1-005-615"]
         },
         {
           "name": "Palet örüji",
           "assetKey": "palet-oruji",
           "kind": "process",
-          "ref": "1-005-692/820/825"
+          "ref": "1-005-692/820/825",
+          "cadCodes": ["1-005-692", "1-005-820", "1-005-825"]
         }
       ],
       "equipmentSource": "Baumak enjam sanawy, Mixing line-1 (1-005-xxx); zawod tarapyndan tassyklanmadyk"

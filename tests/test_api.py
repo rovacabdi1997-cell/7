@@ -14,7 +14,7 @@ def client(fixed_clock):
 
 def test_health(client):
     body = client.get("/api/health").json()
-    assert body["status"] == "ok" and body["dataMode"] == "SIMULÝASIÝA"
+    assert body["status"] == "ok" and body["dataMode"] == "SIMULYASIYA"
 
 
 def test_overview(client):
@@ -47,7 +47,7 @@ def test_stream_sends_snapshot_events(client):
         assert response.headers["content-type"].startswith("text/event-stream")
         text = "".join(response.iter_text())
     data = next(line[6:] for line in text.splitlines() if line.startswith("data: "))
-    assert json.loads(data)["dataMode"] == "SIMULÝASIÝA"
+    assert json.loads(data)["dataMode"] == "SIMULYASIYA"
 
 
 def test_only_get_is_allowed(client):

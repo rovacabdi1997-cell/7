@@ -12,6 +12,12 @@ def _span(shift: dict) -> tuple[int, int]:
     return start, end
 
 
+def shift_span(shift: dict) -> int:
+    """Shift length in minutes."""
+    start, end = _span(shift)
+    return end - start
+
+
 def _in_window(minute: int, start: int, end: int) -> bool:
     return start <= minute < end or start <= minute + 24 * 60 < end
 

@@ -53,9 +53,9 @@ def verified(key, query="SELECT v FROM t", **extra):
 
 def test_unverified_mapping_returns_empty_not_demo(fixed_clock):
     snap = WinCCSqlAdapter(FakeExecutor(), fixed_clock(13), mapping()).snapshot()
-    assert snap.dataMode == "ÝOK"
+    assert snap.dataMode == "MAGLUMAT_YOK"
     board = snap.lines[0]
-    assert board.speed.value is None and board.speed.mode == "ÝOK"
+    assert board.speed.value is None and board.speed.mode == "MAGLUMAT_YOK"
     assert snap.alarms == []
 
 
@@ -71,14 +71,14 @@ def test_verified_field_is_read_as_real(fixed_clock):
     snap = WinCCSqlAdapter(executor, fixed_clock(13), mapping(verified("gipsokarton.speed"))).snapshot()
     assert snap.dataMode == "HAKYKY"
     assert snap.lines[0].speed.value == 31.4 and snap.lines[0].speed.mode == "HAKYKY"
-    assert snap.lines[0].outputToday.mode == "ÝOK"
+    assert snap.lines[0].outputToday.mode == "MAGLUMAT_YOK"
 
 
 def test_source_failure_reports_without_inventing(fixed_clock):
     adapter = WinCCSqlAdapter(FakeExecutor(fail=True), fixed_clock(13), mapping(verified("gipsokarton.speed")))
     snap = adapter.snapshot()
     assert snap.lines[0].speed.value is None
-    assert snap.dataMode == "ÝOK"
+    assert snap.dataMode == "MAGLUMAT_YOK"
     assert any("ConnectionError" in n for n in snap.notes)
 
 

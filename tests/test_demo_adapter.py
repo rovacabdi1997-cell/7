@@ -8,7 +8,7 @@ def lines(snap):
 def all_metrics(snap):
     for line in snap.lines:
         for name in ("speed", "outputToday", "planToday", "planToDate", "fulfilmentPct",
-                     "efficiencyPct", "stopsToday", "stopMinutesToday", "errorsToday"):
+                     "shiftOutput", "shiftPlan", "capacityPct", "stopsToday", "stopMinutesToday", "errorsToday"):
             yield getattr(line, name)
         if line.bagsToday:
             yield line.bagsToday
@@ -23,10 +23,10 @@ def test_same_clock_gives_same_snapshot(fixed_clock):
 
 def test_every_value_is_labelled_simulation(fixed_clock):
     snap = DemoAdapter(fixed_clock(13, 7)).snapshot()
-    assert snap.dataMode == "SIMULÝASIÝA"
-    assert all(m.mode == "SIMULÝASIÝA" for m in all_metrics(snap))
-    assert all(a.mode == "SIMULÝASIÝA" for a in snap.alarms)
-    assert all(line.mode == "SIMULÝASIÝA" for line in snap.lines)
+    assert snap.dataMode == "SIMULYASIYA"
+    assert all(m.mode == "SIMULYASIYA" for m in all_metrics(snap))
+    assert all(a.mode == "SIMULYASIYA" for a in snap.alarms)
+    assert all(line.mode == "SIMULYASIYA" for line in snap.lines)
 
 
 def test_only_two_production_lines(fixed_clock):
@@ -36,14 +36,14 @@ def test_only_two_production_lines(fixed_clock):
 
 def test_fault_window_stops_board_line(fixed_clock):
     board = lines(DemoAdapter(fixed_clock(15, 25)).snapshot())["gipsokarton"]
-    assert board.status == "FAULT"
+    assert board.status.value == "FAULT"
     assert board.speed.value == 0
     assert any(e.name == "Kesiji" and e.status == "FAULT" for e in board.equipment)
 
 
 def test_planned_stop_is_not_a_fault(fixed_clock):
     board = lines(DemoAdapter(fixed_clock(10, 45)).snapshot())["gipsokarton"]
-    assert board.status == "STOPPED"
+    assert board.status.value == "STOPPED"
 
 
 def test_output_grows_through_the_day(fixed_clock):
@@ -98,4 +98,4 @@ def test_schedule_lists_all_shifts(fixed_clock):
 
 def test_trend_has_one_point_per_elapsed_hour(fixed_clock):
     board = lines(DemoAdapter(fixed_clock(12, 30)).snapshot())["gipsokarton"]
-    assert [p.hour for p in board.trend] == ["08:00", "09:00", "10:00", "11:00", "12:00"]
+    assert [p.hour for p in board.trend.points] == ["08:00", "09:00", "10:00", "11:00", "12:00"]

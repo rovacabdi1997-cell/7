@@ -1,0 +1,1480 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Turkmen Gips önümçilik gözegçiligi",
+    "description": "Salt-okalýan API. PLC/SCADA ulgamyna hiç hili ýazgy ýok.",
+    "version": "2.0.0",
+    "x-contract": "docs/api/API-SOZLESMESI.md"
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Health Api Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/snapshot": {
+      "get": {
+        "summary": "Snapshot",
+        "operationId": "snapshot_api_snapshot_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snapshot"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/overview": {
+      "get": {
+        "summary": "Overview",
+        "operationId": "overview_api_overview_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Overview Api Overview Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/lines/{line_id}": {
+      "get": {
+        "summary": "Line",
+        "operationId": "line_api_lines__line_id__get",
+        "parameters": [
+          {
+            "name": "line_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Line Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Line"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/alarms": {
+      "get": {
+        "summary": "Alarms",
+        "operationId": "alarms_api_alarms_get",
+        "parameters": [
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "open",
+                "all"
+              ],
+              "type": "string",
+              "default": "open",
+              "title": "State"
+            }
+          },
+          {
+            "name": "line",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Line"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Alarm"
+                  },
+                  "title": "Response Alarms Api Alarms Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shift": {
+      "get": {
+        "summary": "Shift",
+        "operationId": "shift_api_shift_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShiftState"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cad/identity": {
+      "get": {
+        "summary": "Cad Identity Table",
+        "description": "CAD instance -> monitoring asset link table. CANDIDATE is an explicit code match, not an approval.",
+        "operationId": "cad_identity_table_api_cad_identity_get",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "UNMATCHED",
+                    "CANDIDATE",
+                    "EVIDENCED",
+                    "AMBIGUOUS",
+                    "APPROVED"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Cad Identity Table Api Cad Identity Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cad/identity/assets/{asset_id}": {
+      "get": {
+        "summary": "Cad Identity Asset",
+        "description": "One monitoring asset with every CAD instance linked or proposed for it (1:n is kept).",
+        "operationId": "cad_identity_asset_api_cad_identity_assets__asset_id__get",
+        "parameters": [
+          {
+            "name": "asset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Asset Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Cad Identity Asset Api Cad Identity Assets  Asset Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mapping": {
+      "get": {
+        "summary": "Mapping",
+        "description": "Tag map of the plant: only from the central PC itself unless MAPPING_REMOTE=1.",
+        "operationId": "mapping_api_mapping_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Mapping Api Mapping Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/stream": {
+      "get": {
+        "summary": "Stream",
+        "description": "Server-Sent Events: one snapshot per refresh interval, `: ping` comments in\nbetween. With `line` the payload carries only that line and its alarms.",
+        "operationId": "stream_api_stream_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "0 = sonsuz; synag üçin",
+              "default": 0,
+              "title": "Limit"
+            },
+            "description": "0 = sonsuz; synag üçin"
+          },
+          {
+            "name": "line",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "gipsokarton | gury-garyndy; boş = iki liniýa",
+              "title": "Line"
+            },
+            "description": "gipsokarton | gury-garyndy; boş = iki liniýa"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tv/{tv_id}": {
+      "get": {
+        "summary": "Tv",
+        "description": "Fixed layout of one factory TV: its line, KPIs and machine order with asset keys.",
+        "operationId": "tv_api_tv__tv_id__get",
+        "parameters": [
+          {
+            "name": "tv_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Tv Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Tv Api Tv  Tv Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Alarm": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "lineId": {
+            "type": "string",
+            "title": "Lineid"
+          },
+          "equipment": {
+            "type": "string",
+            "title": "Equipment"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "CRITICAL",
+              "WARNING",
+              "INFO"
+            ],
+            "title": "Severity"
+          },
+          "priority": {
+            "type": "integer",
+            "title": "Priority"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ACKNOWLEDGED",
+              "CLEARED"
+            ],
+            "title": "State"
+          },
+          "startedAt": {
+            "type": "string",
+            "title": "Startedat"
+          },
+          "durationMin": {
+            "type": "number",
+            "title": "Durationmin"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "SIMULYASIYA",
+              "HAKYKY",
+              "KONE",
+              "MAGLUMAT_YOK"
+            ],
+            "title": "Mode"
+          },
+          "assetId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assetid"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "lineId",
+          "equipment",
+          "message",
+          "severity",
+          "priority",
+          "state",
+          "startedAt",
+          "durationMin",
+          "mode"
+        ],
+        "title": "Alarm"
+      },
+      "Connection": {
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "ONLINE",
+              "OFFLINE",
+              "NOT_CONFIGURED",
+              "SIMULATED"
+            ],
+            "title": "State"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "lastOkTs": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lastokts"
+          }
+        },
+        "type": "object",
+        "required": [
+          "state",
+          "source"
+        ],
+        "title": "Connection"
+      },
+      "CurrentStop": {
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "SIMULYASIYA",
+              "HAKYKY",
+              "KONE",
+              "MAGLUMAT_YOK"
+            ],
+            "title": "Mode"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "PLC_TAG",
+              "CALCULATED",
+              "MANUAL",
+              "CONFIG"
+            ],
+            "title": "Sourcetype"
+          },
+          "sourceTs": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sourcets"
+          },
+          "staleAfterSec": {
+            "type": "integer",
+            "title": "Staleaftersec"
+          },
+          "startedAt": {
+            "type": "string",
+            "title": "Startedat"
+          },
+          "durationMin": {
+            "type": "number",
+            "title": "Durationmin"
+          },
+          "planned": {
+            "type": "boolean",
+            "title": "Planned"
+          },
+          "reasonCode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reasoncode"
+          },
+          "reasonText": {
+            "type": "string",
+            "title": "Reasontext"
+          },
+          "equipmentId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Equipmentid"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mode",
+          "source",
+          "sourceType",
+          "staleAfterSec",
+          "startedAt",
+          "durationMin",
+          "planned",
+          "reasonText"
+        ],
+        "title": "CurrentStop",
+        "description": "The stop happening now. Measured from its own start, never derived from daily totals."
+      },
+      "Energy": {
+        "properties": {
+          "powerKw": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "energyKwhToday": {
+            "$ref": "#/components/schemas/Metric"
+          }
+        },
+        "type": "object",
+        "required": [
+          "powerKw",
+          "energyKwhToday"
+        ],
+        "title": "Energy",
+        "description": "Plant-level energy: instantaneous power and the production day's energy, separately."
+      },
+      "Equipment": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RUNNING",
+              "STOPPED",
+              "FAULT",
+              "UNKNOWN"
+            ],
+            "title": "Status"
+          },
+          "order": {
+            "type": "integer",
+            "title": "Order",
+            "default": 0
+          },
+          "assetKey": {
+            "type": "string",
+            "title": "Assetkey",
+            "default": ""
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "process",
+              "buffer",
+              "feed"
+            ],
+            "title": "Kind",
+            "default": "process"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "SIMULYASIYA",
+              "HAKYKY",
+              "KONE",
+              "MAGLUMAT_YOK"
+            ],
+            "title": "Mode",
+            "default": "MAGLUMAT_YOK"
+          },
+          "sourceTs": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sourcets"
+          },
+          "staleAfterSec": {
+            "type": "integer",
+            "title": "Staleaftersec",
+            "default": 15
+          },
+          "ref": {
+            "type": "string",
+            "title": "Ref",
+            "default": ""
+          },
+          "equipmentCodes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Equipmentcodes",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "status"
+        ],
+        "title": "Equipment"
+      },
+      "Flow": {
+        "properties": {
+          "fromId": {
+            "type": "string",
+            "title": "Fromid"
+          },
+          "toId": {
+            "type": "string",
+            "title": "Toid"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "flowRate": {
+            "type": "number",
+            "title": "Flowrate"
+          }
+        },
+        "type": "object",
+        "required": [
+          "fromId",
+          "toId",
+          "active",
+          "flowRate"
+        ],
+        "title": "Flow",
+        "description": "Material link between two machines. The TV draws moving material only\nwhen `active`; animation speed follows `flowRate` (0..1 of nominal)."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HourlySeries": {
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "SIMULYASIYA",
+              "HAKYKY",
+              "KONE",
+              "MAGLUMAT_YOK"
+            ],
+            "title": "Mode"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "PLC_TAG",
+              "CALCULATED",
+              "MANUAL",
+              "CONFIG"
+            ],
+            "title": "Sourcetype"
+          },
+          "sourceTs": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sourcets"
+          },
+          "staleAfterSec": {
+            "type": "integer",
+            "title": "Staleaftersec"
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit"
+          },
+          "points": {
+            "items": {
+              "$ref": "#/components/schemas/TrendPoint"
+            },
+            "type": "array",
+            "title": "Points"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mode",
+          "source",
+          "sourceType",
+          "staleAfterSec",
+          "unit",
+          "points"
+        ],
+        "title": "HourlySeries"
+      },
+      "Line": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "section": {
+            "type": "string",
+            "title": "Section"
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit"
+          },
+          "rateUnit": {
+            "type": "string",
+            "title": "Rateunit"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusValue"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "SIMULYASIYA",
+              "HAKYKY",
+              "KONE",
+              "MAGLUMAT_YOK"
+            ],
+            "title": "Mode"
+          },
+          "speed": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "outputToday": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "outputMonth": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "planToday": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "planToDate": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "shiftOutput": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "shiftPlan": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "fulfilmentPct": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "capacityPct": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "nominalRate": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "oee": {
+            "$ref": "#/components/schemas/Oee"
+          },
+          "productName": {
+            "$ref": "#/components/schemas/TextValue"
+          },
+          "thicknessMm": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "boardType": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TextValue"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "bagsToday": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "stopsToday": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "stopMinutesToday": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "errorsToday": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "currentStop": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CurrentStop"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "trend": {
+            "$ref": "#/components/schemas/HourlySeries"
+          },
+          "equipment": {
+            "items": {
+              "$ref": "#/components/schemas/Equipment"
+            },
+            "type": "array",
+            "title": "Equipment"
+          },
+          "flow": {
+            "items": {
+              "$ref": "#/components/schemas/Flow"
+            },
+            "type": "array",
+            "title": "Flow",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "section",
+          "unit",
+          "rateUnit",
+          "status",
+          "mode",
+          "speed",
+          "outputToday",
+          "outputMonth",
+          "planToday",
+          "planToDate",
+          "shiftOutput",
+          "shiftPlan",
+          "fulfilmentPct",
+          "capacityPct",
+          "nominalRate",
+          "oee",
+          "productName",
+          "stopsToday",
+          "stopMinutesToday",
+          "errorsToday",
+          "trend",
+          "equipment"
+        ],
+        "title": "Line"
+      },
+      "Metric": {
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "SIMULYASIYA",
+              "HAKYKY",
+              "KONE",
+              "MAGLUMAT_YOK"
+            ],
+            "title": "Mode"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "PLC_TAG",
+              "CALCULATED",
+              "MANUAL",
+              "CONFIG"
+            ],
+            "title": "Sourcetype"
+          },
+          "sourceTs": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sourcets"
+          },
+          "staleAfterSec": {
+            "type": "integer",
+            "title": "Staleaftersec"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mode",
+          "source",
+          "sourceType",
+          "staleAfterSec",
+          "unit"
+        ],
+        "title": "Metric"
+      },
+      "Oee": {
+        "properties": {
+          "availability": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "performance": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "oee": {
+            "$ref": "#/components/schemas/Metric"
+          }
+        },
+        "type": "object",
+        "required": [
+          "availability",
+          "performance",
+          "quality",
+          "oee"
+        ],
+        "title": "Oee",
+        "description": "Three components and their product, never a single efficiency figure.\noee = availability × performance × quality ÷ 10000."
+      },
+      "ShiftInfo": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "start": {
+            "type": "string",
+            "title": "Start"
+          },
+          "end": {
+            "type": "string",
+            "title": "End"
+          },
+          "breakStart": {
+            "type": "string",
+            "title": "Breakstart"
+          },
+          "breakEnd": {
+            "type": "string",
+            "title": "Breakend"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "start",
+          "end",
+          "breakStart",
+          "breakEnd"
+        ],
+        "title": "ShiftInfo"
+      },
+      "ShiftState": {
+        "properties": {
+          "current": {
+            "$ref": "#/components/schemas/ShiftInfo"
+          },
+          "next": {
+            "$ref": "#/components/schemas/ShiftInfo"
+          },
+          "schedule": {
+            "items": {
+              "$ref": "#/components/schemas/ShiftInfo"
+            },
+            "type": "array",
+            "title": "Schedule"
+          },
+          "elapsedMin": {
+            "type": "integer",
+            "title": "Elapsedmin"
+          },
+          "remainingMin": {
+            "type": "integer",
+            "title": "Remainingmin"
+          },
+          "onBreak": {
+            "type": "boolean",
+            "title": "Onbreak"
+          },
+          "staffCount": {
+            "$ref": "#/components/schemas/Metric"
+          },
+          "safetyNotices": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Safetynotices"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "SIMULYASIYA",
+              "HAKYKY",
+              "KONE",
+              "MAGLUMAT_YOK"
+            ],
+            "title": "Mode"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          }
+        },
+        "type": "object",
+        "required": [
+          "current",
+          "next",
+          "schedule",
+          "elapsedMin",
+          "remainingMin",
+          "onBreak",
+          "staffCount",
+          "safetyNotices",
+          "mode",
+          "source"
+        ],
+        "title": "ShiftState"
+      },
+      "Snapshot": {
+        "properties": {
+          "contractVersion": {
+            "type": "string",
+            "title": "Contractversion"
+          },
+          "timestamp": {
+            "type": "string",
+            "title": "Timestamp"
+          },
+          "dataMode": {
+            "type": "string",
+            "enum": [
+              "SIMULYASIYA",
+              "HAKYKY",
+              "KONE",
+              "MAGLUMAT_YOK"
+            ],
+            "title": "Datamode"
+          },
+          "adapter": {
+            "type": "string",
+            "title": "Adapter"
+          },
+          "connection": {
+            "$ref": "#/components/schemas/Connection"
+          },
+          "productionDayStart": {
+            "type": "string",
+            "title": "Productiondaystart"
+          },
+          "lines": {
+            "items": {
+              "$ref": "#/components/schemas/Line"
+            },
+            "type": "array",
+            "title": "Lines"
+          },
+          "alarms": {
+            "items": {
+              "$ref": "#/components/schemas/Alarm"
+            },
+            "type": "array",
+            "title": "Alarms"
+          },
+          "energy": {
+            "$ref": "#/components/schemas/Energy"
+          },
+          "shift": {
+            "$ref": "#/components/schemas/ShiftState"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Notes",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "contractVersion",
+          "timestamp",
+          "dataMode",
+          "adapter",
+          "connection",
+          "productionDayStart",
+          "lines",
+          "alarms",
+          "energy",
+          "shift"
+        ],
+        "title": "Snapshot"
+      },
+      "StatusValue": {
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "SIMULYASIYA",
+              "HAKYKY",
+              "KONE",
+              "MAGLUMAT_YOK"
+            ],
+            "title": "Mode"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "PLC_TAG",
+              "CALCULATED",
+              "MANUAL",
+              "CONFIG"
+            ],
+            "title": "Sourcetype"
+          },
+          "sourceTs": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sourcets"
+          },
+          "staleAfterSec": {
+            "type": "integer",
+            "title": "Staleaftersec"
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "RUNNING",
+              "STOPPED",
+              "FAULT",
+              "UNKNOWN"
+            ],
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mode",
+          "source",
+          "sourceType",
+          "staleAfterSec",
+          "value"
+        ],
+        "title": "StatusValue"
+      },
+      "TextValue": {
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "SIMULYASIYA",
+              "HAKYKY",
+              "KONE",
+              "MAGLUMAT_YOK"
+            ],
+            "title": "Mode"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "PLC_TAG",
+              "CALCULATED",
+              "MANUAL",
+              "CONFIG"
+            ],
+            "title": "Sourcetype"
+          },
+          "sourceTs": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sourcets"
+          },
+          "staleAfterSec": {
+            "type": "integer",
+            "title": "Staleaftersec"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mode",
+          "source",
+          "sourceType",
+          "staleAfterSec"
+        ],
+        "title": "TextValue"
+      },
+      "TrendPoint": {
+        "properties": {
+          "hour": {
+            "type": "string",
+            "title": "Hour"
+          },
+          "actual": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actual"
+          },
+          "plan": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Plan"
+          }
+        },
+        "type": "object",
+        "required": [
+          "hour"
+        ],
+        "title": "TrendPoint"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

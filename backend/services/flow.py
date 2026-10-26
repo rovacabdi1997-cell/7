@@ -7,6 +7,7 @@ here, from the line config and the adapter's raw stop information.
 - buffered (dry mix): silos/bunkers decouple the chain; only the segment
   between two buffers around the stopped machine stops.
 """
+from datetime import datetime
 from typing import Optional
 
 from app.models import DataMode, Equipment, Flow, RunStatus
@@ -14,6 +15,28 @@ from app.models import DataMode, Equipment, Flow, RunStatus
 
 def equipment_id(line_id: str, order: int) -> str:
     return f"{line_id}-{order:02d}"
+
+
+def resolve_asset_id(plant: dict, line_id: str, equipment_name: str) -> Optional[str]:
+    """Equipment.id for an alarm raised on `equipment_name` of `line_id`, or None.
+
+    Exact name inside the alarm's own line only, and only when that line has exactly one machine
+    with the name. The same name on another line never counts; a repeated name inside the line
+    returns None instead of picking one."""
+    line = plant["lines"].get(line_id)
+    if not line:
+        return None
+    hits = [order for order, e in enumerate(line["equipment"], start=1) if e["name"] == equipment_name]
+    return equipment_id(line_id, hits[0]) if len(hits) == 1 else None
+
+
+def resolve_asset_key(plant: dict, line_id: str, asset_key: str) -> Optional[str]:
+    """Equipment.id for a verified `assetKey` column of a real alarm source (unique per line)."""
+    line = plant["lines"].get(line_id)
+    if not line or not asset_key:
+        return None
+    hits = [order for order, e in enumerate(line["equipment"], start=1) if e["assetKey"] == asset_key]
+    return equipment_id(line_id, hits[0]) if len(hits) == 1 else None
 
 
 def _segment(chain: list[dict], index: int) -> range:
@@ -35,9 +58,9 @@ def machine_states(
     mode: DataMode,
 ) -> dict[str, RunStatus]:
     """Status per assetKey. `stop` is {"equipment": name, "kind": "fault"|"planned"} or None.
-    With mode ÝOK every machine is UNKNOWN: no data never looks like running."""
+    With mode MAGLUMAT_YOK every machine is UNKNOWN: no data never looks like running."""
     items = line_cfg["equipment"]
-    if mode == "ÝOK":
+    if mode == "MAGLUMAT_YOK":
         return {e["assetKey"]: "UNKNOWN" for e in items}
     states: dict[str, RunStatus] = {e["assetKey"]: "RUNNING" for e in items}
     if not stop:
@@ -66,11 +89,12 @@ def machine_states(
     return states
 
 
-def build_equipment(line_id: str, line_cfg: dict, states: dict[str, RunStatus], mode: DataMode) -> list[Equipment]:
+def build_equipment(line_id: str, line_cfg: dict, states: dict[str, RunStatus], mode: DataMode,
+                    source_ts: Optional[datetime] = None) -> list[Equipment]:
     return [
         Equipment(id=equipment_id(line_id, order), name=e["name"], status=states[e["assetKey"]],
-                  order=order, assetKey=e["assetKey"], kind=e["kind"], mode=mode,
-                  ref=e.get("ref", ""))
+                  order=order, assetKey=e["assetKey"], kind=e["kind"], mode=mode, sourceTs=source_ts,
+                  ref=e.get("ref", ""), equipmentCodes=list(e.get("cadCodes", [])))
         for order, e in enumerate(line_cfg["equipment"], start=1)
     ]
 

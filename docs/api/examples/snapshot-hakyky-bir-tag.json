@@ -1,0 +1,841 @@
+{
+  "contractVersion": "2.0.0",
+  "timestamp": "2026-10-18T08:00:00Z",
+  "dataMode": "HAKYKY",
+  "adapter": "wincc",
+  "connection": {
+    "state": "ONLINE",
+    "source": "WinCC",
+    "lastOkTs": "2026-10-18T08:00:00Z"
+  },
+  "productionDayStart": "2026-10-18T03:00:00Z",
+  "lines": [
+    {
+      "id": "gipsokarton",
+      "name": "Gipsokarton önümçiligi",
+      "section": "A bölümi",
+      "unit": "m²",
+      "rateUnit": "m/min",
+      "status": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "PLC_TAG",
+        "sourceTs": null,
+        "staleAfterSec": 15,
+        "value": "UNKNOWN"
+      },
+      "mode": "HAKYKY",
+      "speed": {
+        "mode": "HAKYKY",
+        "source": "Nusga tag: gipsokarton.speed",
+        "sourceType": "PLC_TAG",
+        "sourceTs": "2026-10-18T08:00:00Z",
+        "staleAfterSec": 15,
+        "value": 31.4,
+        "unit": "m/min"
+      },
+      "outputToday": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "PLC_TAG",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "m²"
+      },
+      "outputMonth": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "m²"
+      },
+      "planToday": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "MANUAL",
+        "sourceTs": null,
+        "staleAfterSec": 86400,
+        "value": null,
+        "unit": "m²"
+      },
+      "planToDate": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 86400,
+        "value": null,
+        "unit": "m²"
+      },
+      "shiftOutput": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "PLC_TAG",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "m²"
+      },
+      "shiftPlan": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "MANUAL",
+        "sourceTs": null,
+        "staleAfterSec": 86400,
+        "value": null,
+        "unit": "m²"
+      },
+      "fulfilmentPct": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Hasaplamak üçin maglumat ýok",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "%"
+      },
+      "capacityPct": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Hasaplamak üçin maglumat ýok",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 15,
+        "value": null,
+        "unit": "%"
+      },
+      "nominalRate": {
+        "mode": "SIMULYASIYA",
+        "source": "Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
+        "sourceType": "CONFIG",
+        "sourceTs": "2026-10-18T08:00:00Z",
+        "staleAfterSec": 86400,
+        "value": 2500.0,
+        "unit": "m²/sag"
+      },
+      "oee": {
+        "availability": {
+          "mode": "MAGLUMAT_YOK",
+          "source": "Hasaplamak üçin maglumat ýok",
+          "sourceType": "CALCULATED",
+          "sourceTs": null,
+          "staleAfterSec": 60,
+          "value": null,
+          "unit": "%"
+        },
+        "performance": {
+          "mode": "MAGLUMAT_YOK",
+          "source": "Hasaplamak üçin maglumat ýok",
+          "sourceType": "CALCULATED",
+          "sourceTs": null,
+          "staleAfterSec": 60,
+          "value": null,
+          "unit": "%"
+        },
+        "quality": {
+          "mode": "MAGLUMAT_YOK",
+          "source": "Çeşme tassyklanmadyk",
+          "sourceType": "MANUAL",
+          "sourceTs": null,
+          "staleAfterSec": 3600,
+          "value": null,
+          "unit": "%"
+        },
+        "oee": {
+          "mode": "MAGLUMAT_YOK",
+          "source": "Hasaplamak üçin maglumat ýok",
+          "sourceType": "CALCULATED",
+          "sourceTs": null,
+          "staleAfterSec": 60,
+          "value": null,
+          "unit": "%"
+        }
+      },
+      "productName": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "MANUAL",
+        "sourceTs": null,
+        "staleAfterSec": 86400,
+        "value": null
+      },
+      "thicknessMm": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "MANUAL",
+        "sourceTs": null,
+        "staleAfterSec": 86400,
+        "value": null,
+        "unit": "mm"
+      },
+      "boardType": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "MANUAL",
+        "sourceTs": null,
+        "staleAfterSec": 86400,
+        "value": null
+      },
+      "bagsToday": null,
+      "stopsToday": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "san"
+      },
+      "stopMinutesToday": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "min"
+      },
+      "errorsToday": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "san"
+      },
+      "currentStop": null,
+      "trend": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 3600,
+        "unit": "m²",
+        "points": []
+      },
+      "equipment": [
+        {
+          "id": "gipsokarton-01",
+          "name": "Gips berijisi",
+          "status": "UNKNOWN",
+          "order": 1,
+          "assetKey": "gips-berijisi",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "Sanjin 1.1",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-02",
+          "name": "Garyşdyryjy",
+          "status": "UNKNOWN",
+          "order": 2,
+          "assetKey": "garysdyryjy",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "Sanjin 6",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-03",
+          "name": "Köpük generatory",
+          "status": "UNKNOWN",
+          "order": 3,
+          "assetKey": "kopuk-generatory",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "Sanjin 67",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-04",
+          "name": "Formirleme stoly",
+          "status": "UNKNOWN",
+          "order": 4,
+          "assetKey": "formirleme-stoly",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "Sanjin 7–9",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-05",
+          "name": "Gatama lentasy",
+          "status": "UNKNOWN",
+          "order": 5,
+          "assetKey": "gatama-lentasy",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "Sanjin 10–12",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-06",
+          "name": "Kesiji",
+          "status": "UNKNOWN",
+          "order": 6,
+          "assetKey": "kesiji",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "Sanjin 13",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-07",
+          "name": "Guradyjy",
+          "status": "UNKNOWN",
+          "order": 7,
+          "assetKey": "guradyjy",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "Sanjin 18 L4041",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-08",
+          "name": "Gyra kesiji",
+          "status": "UNKNOWN",
+          "order": 8,
+          "assetKey": "gyra-kesiji",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "Saha: REF 07 · kenar testereleri",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-09",
+          "name": "Bukjalaýjy",
+          "status": "UNKNOWN",
+          "order": 9,
+          "assetKey": "bukjalayjy",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "Sanjin 24/25/29",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-10",
+          "name": "Gaplaýjy",
+          "status": "UNKNOWN",
+          "order": 10,
+          "assetKey": "gaplayjy",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "Sanjin 36/39",
+          "equipmentCodes": []
+        },
+        {
+          "id": "gipsokarton-11",
+          "name": "Kagyz bobinasy",
+          "status": "UNKNOWN",
+          "order": 11,
+          "assetKey": "kagyz-bobinasy",
+          "kind": "feed",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "Sanjin 1–5",
+          "equipmentCodes": []
+        }
+      ],
+      "flow": [
+        {
+          "fromId": "gipsokarton-01",
+          "toId": "gipsokarton-02",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-02",
+          "toId": "gipsokarton-03",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-03",
+          "toId": "gipsokarton-04",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-04",
+          "toId": "gipsokarton-05",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-05",
+          "toId": "gipsokarton-06",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-06",
+          "toId": "gipsokarton-07",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-07",
+          "toId": "gipsokarton-08",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-08",
+          "toId": "gipsokarton-09",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-09",
+          "toId": "gipsokarton-10",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gipsokarton-11",
+          "toId": "gipsokarton-04",
+          "active": false,
+          "flowRate": 0.0
+        }
+      ]
+    },
+    {
+      "id": "gury-garyndy",
+      "name": "Gury garyndy önümçiligi",
+      "section": "B bölümi",
+      "unit": "t",
+      "rateUnit": "t/sag",
+      "status": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "PLC_TAG",
+        "sourceTs": null,
+        "staleAfterSec": 15,
+        "value": "UNKNOWN"
+      },
+      "mode": "MAGLUMAT_YOK",
+      "speed": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "PLC_TAG",
+        "sourceTs": null,
+        "staleAfterSec": 15,
+        "value": null,
+        "unit": "t/sag"
+      },
+      "outputToday": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "PLC_TAG",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "t"
+      },
+      "outputMonth": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "t"
+      },
+      "planToday": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "MANUAL",
+        "sourceTs": null,
+        "staleAfterSec": 86400,
+        "value": null,
+        "unit": "t"
+      },
+      "planToDate": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 86400,
+        "value": null,
+        "unit": "t"
+      },
+      "shiftOutput": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "PLC_TAG",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "t"
+      },
+      "shiftPlan": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "MANUAL",
+        "sourceTs": null,
+        "staleAfterSec": 86400,
+        "value": null,
+        "unit": "t"
+      },
+      "fulfilmentPct": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Hasaplamak üçin maglumat ýok",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "%"
+      },
+      "capacityPct": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Hasaplamak üçin maglumat ýok",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 15,
+        "value": null,
+        "unit": "%"
+      },
+      "nominalRate": {
+        "mode": "SIMULYASIYA",
+        "source": "Sanjin teklifi (üpjün ediji resminamasy), zawod tarapyndan tassyklanmadyk",
+        "sourceType": "CONFIG",
+        "sourceTs": "2026-10-18T08:00:00Z",
+        "staleAfterSec": 86400,
+        "value": 25.0,
+        "unit": "t/sag"
+      },
+      "oee": {
+        "availability": {
+          "mode": "MAGLUMAT_YOK",
+          "source": "Hasaplamak üçin maglumat ýok",
+          "sourceType": "CALCULATED",
+          "sourceTs": null,
+          "staleAfterSec": 60,
+          "value": null,
+          "unit": "%"
+        },
+        "performance": {
+          "mode": "MAGLUMAT_YOK",
+          "source": "Hasaplamak üçin maglumat ýok",
+          "sourceType": "CALCULATED",
+          "sourceTs": null,
+          "staleAfterSec": 60,
+          "value": null,
+          "unit": "%"
+        },
+        "quality": {
+          "mode": "MAGLUMAT_YOK",
+          "source": "Çeşme tassyklanmadyk",
+          "sourceType": "MANUAL",
+          "sourceTs": null,
+          "staleAfterSec": 3600,
+          "value": null,
+          "unit": "%"
+        },
+        "oee": {
+          "mode": "MAGLUMAT_YOK",
+          "source": "Hasaplamak üçin maglumat ýok",
+          "sourceType": "CALCULATED",
+          "sourceTs": null,
+          "staleAfterSec": 60,
+          "value": null,
+          "unit": "%"
+        }
+      },
+      "productName": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "MANUAL",
+        "sourceTs": null,
+        "staleAfterSec": 86400,
+        "value": null
+      },
+      "thicknessMm": null,
+      "boardType": null,
+      "bagsToday": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "PLC_TAG",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "halta"
+      },
+      "stopsToday": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "san"
+      },
+      "stopMinutesToday": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "min"
+      },
+      "errorsToday": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 60,
+        "value": null,
+        "unit": "san"
+      },
+      "currentStop": null,
+      "trend": {
+        "mode": "MAGLUMAT_YOK",
+        "source": "Çeşme tassyklanmadyk",
+        "sourceType": "CALCULATED",
+        "sourceTs": null,
+        "staleAfterSec": 3600,
+        "unit": "t",
+        "points": []
+      },
+      "equipment": [
+        {
+          "id": "gury-garyndy-01",
+          "name": "Çig mal silolary",
+          "status": "UNKNOWN",
+          "order": 1,
+          "assetKey": "cig-mal-silosy",
+          "kind": "buffer",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "1-005-510…590",
+          "equipmentCodes": [
+            "1-005-510",
+            "1-005-590"
+          ]
+        },
+        {
+          "id": "gury-garyndy-02",
+          "name": "Tartym bunkeri",
+          "status": "UNKNOWN",
+          "order": 2,
+          "assetKey": "dozirleyji",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "1-005-600",
+          "equipmentCodes": [
+            "1-005-600"
+          ]
+        },
+        {
+          "id": "gury-garyndy-03",
+          "name": "Garyşdyryjy",
+          "status": "UNKNOWN",
+          "order": 3,
+          "assetKey": "garysdyryjy",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "1-005-605",
+          "equipmentCodes": [
+            "1-005-605"
+          ]
+        },
+        {
+          "id": "gury-garyndy-04",
+          "name": "Taýýar önüm bunkeri",
+          "status": "UNKNOWN",
+          "order": 4,
+          "assetKey": "tayyar-onum-bunkeri",
+          "kind": "buffer",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "1-005-610",
+          "equipmentCodes": [
+            "1-005-610"
+          ]
+        },
+        {
+          "id": "gury-garyndy-05",
+          "name": "Gaplaýjy maşyn",
+          "status": "UNKNOWN",
+          "order": 5,
+          "assetKey": "gaplayjy-masyn",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "1-005-615",
+          "equipmentCodes": [
+            "1-005-615"
+          ]
+        },
+        {
+          "id": "gury-garyndy-06",
+          "name": "Palet örüji",
+          "status": "UNKNOWN",
+          "order": 6,
+          "assetKey": "palet-oruji",
+          "kind": "process",
+          "mode": "MAGLUMAT_YOK",
+          "sourceTs": null,
+          "staleAfterSec": 15,
+          "ref": "1-005-692/820/825",
+          "equipmentCodes": [
+            "1-005-692",
+            "1-005-820",
+            "1-005-825"
+          ]
+        }
+      ],
+      "flow": [
+        {
+          "fromId": "gury-garyndy-01",
+          "toId": "gury-garyndy-02",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gury-garyndy-02",
+          "toId": "gury-garyndy-03",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gury-garyndy-03",
+          "toId": "gury-garyndy-04",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gury-garyndy-04",
+          "toId": "gury-garyndy-05",
+          "active": false,
+          "flowRate": 0.0
+        },
+        {
+          "fromId": "gury-garyndy-05",
+          "toId": "gury-garyndy-06",
+          "active": false,
+          "flowRate": 0.0
+        }
+      ]
+    }
+  ],
+  "alarms": [],
+  "energy": {
+    "powerKw": {
+      "mode": "MAGLUMAT_YOK",
+      "source": "Çeşme tassyklanmadyk",
+      "sourceType": "PLC_TAG",
+      "sourceTs": null,
+      "staleAfterSec": 15,
+      "value": null,
+      "unit": "kW"
+    },
+    "energyKwhToday": {
+      "mode": "MAGLUMAT_YOK",
+      "source": "Çeşme tassyklanmadyk",
+      "sourceType": "PLC_TAG",
+      "sourceTs": null,
+      "staleAfterSec": 300,
+      "value": null,
+      "unit": "kWh"
+    }
+  },
+  "shift": {
+    "current": {
+      "id": "I",
+      "name": "I çalşyk",
+      "start": "08:00",
+      "end": "16:00",
+      "breakStart": "12:00",
+      "breakEnd": "12:30"
+    },
+    "next": {
+      "id": "II",
+      "name": "II çalşyk",
+      "start": "16:00",
+      "end": "00:00",
+      "breakStart": "20:00",
+      "breakEnd": "20:30"
+    },
+    "schedule": [
+      {
+        "id": "I",
+        "name": "I çalşyk",
+        "start": "08:00",
+        "end": "16:00",
+        "breakStart": "12:00",
+        "breakEnd": "12:30"
+      },
+      {
+        "id": "II",
+        "name": "II çalşyk",
+        "start": "16:00",
+        "end": "00:00",
+        "breakStart": "20:00",
+        "breakEnd": "20:30"
+      },
+      {
+        "id": "III",
+        "name": "III çalşyk",
+        "start": "00:00",
+        "end": "08:00",
+        "breakStart": "04:00",
+        "breakEnd": "04:30"
+      }
+    ],
+    "elapsedMin": 300,
+    "remainingMin": 180,
+    "onBreak": false,
+    "staffCount": {
+      "mode": "MAGLUMAT_YOK",
+      "source": "Çeşme tassyklanmadyk",
+      "sourceType": "MANUAL",
+      "sourceTs": null,
+      "staleAfterSec": 86400,
+      "value": null,
+      "unit": "adam"
+    },
+    "safetyNotices": [
+      "Şahsy gorag serişdelerini hemişe geýiň.",
+      "Işleýän enjamyň goragyny açmaň.",
+      "Ýük göterijiniň hereket zolagynda durmaň.",
+      "Tozan süzgüjiniň basyşyny her çalşykda barlaň."
+    ],
+    "mode": "SIMULYASIYA",
+    "source": "SIMULÝASIÝA: çalşyk tertibi zawod tarapyndan tassyklanmadyk"
+  },
+  "notes": []
+}

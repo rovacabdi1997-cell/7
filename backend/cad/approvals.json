@@ -1,0 +1,137 @@
+[
+ {
+  "cadInstanceId": "_Mv5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E230",
+  "equipmentCode": "1-005-510",
+  "targetAssetId": "gury-garyndy-01",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette 6 dalaşgär bağlantıyı onayladı (2026-10-25). Dayanak: plant.json cadCodes ile CAD etiket kodu tam eşleşmesi. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "_8v5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E231",
+  "equipmentCode": "1-005-510",
+  "targetAssetId": "gury-garyndy-01",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette 6 dalaşgär bağlantıyı onayladı (2026-10-25). Dayanak: plant.json cadCodes ile CAD etiket kodu tam eşleşmesi. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "v8z5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E295",
+  "equipmentCode": "1-005-590",
+  "targetAssetId": "gury-garyndy-01",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette 6 dalaşgär bağlantıyı onayladı (2026-10-25). Dayanak: plant.json cadCodes ile CAD etiket kodu tam eşleşmesi. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "1Mz5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E302",
+  "equipmentCode": "1-005-600",
+  "targetAssetId": "gury-garyndy-02",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette 6 dalaşgär bağlantıyı onayladı (2026-10-25). Dayanak: plant.json cadCodes ile CAD etiket kodu tam eşleşmesi. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "48z5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E307",
+  "equipmentCode": "1-005-605",
+  "targetAssetId": "gury-garyndy-03",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette 6 dalaşgär bağlantıyı onayladı (2026-10-25). Dayanak: plant.json cadCodes ile CAD etiket kodu tam eşleşmesi. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "78z5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E311",
+  "equipmentCode": "1-005-610",
+  "targetAssetId": "gury-garyndy-04",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette 6 dalaşgär bağlantıyı onayladı (2026-10-25). Dayanak: plant.json cadCodes ile CAD etiket kodu tam eşleşmesi. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "F8z5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E239",
+  "equipmentCode": "1-005-520",
+  "targetAssetId": "gury-garyndy-01",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette A grubunu (9 silo gövdesi) onayladı (2026-10-25). Dayanak: plant.json cadCodeRange 1-005-510…590 içinde silo gövde kodu (X0 deseni), Baumak adı 'Silo', CAD grubu MixingUnit:1, onaylı 510/590 gövdeleriyle aynı ızgara; ONAY-ADAYLARI-1-005-510-590.md. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "Gsz5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E240",
+  "equipmentCode": "1-005-520",
+  "targetAssetId": "gury-garyndy-01",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette A grubunu (9 silo gövdesi) onayladı (2026-10-25). Dayanak: plant.json cadCodeRange 1-005-510…590 içinde silo gövde kodu (X0 deseni), Baumak adı 'Silo', CAD grubu MixingUnit:1, onaylı 510/590 gövdeleriyle aynı ızgara; ONAY-ADAYLARI-1-005-510-590.md. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "Ncz5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E249",
+  "equipmentCode": "1-005-530",
+  "targetAssetId": "gury-garyndy-01",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette A grubunu (9 silo gövdesi) onayladı (2026-10-25). Dayanak: plant.json cadCodeRange 1-005-510…590 içinde silo gövde kodu (X0 deseni), Baumak adı 'Silo', CAD grubu MixingUnit:1, onaylı 510/590 gövdeleriyle aynı ızgara; ONAY-ADAYLARI-1-005-510-590.md. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "OMz5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E250",
+  "equipmentCode": "1-005-530",
+  "targetAssetId": "gury-garyndy-01",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette A grubunu (9 silo gövdesi) onayladı (2026-10-25). Dayanak: plant.json cadCodeRange 1-005-510…590 içinde silo gövde kodu (X0 deseni), Baumak adı 'Silo', CAD grubu MixingUnit:1, onaylı 510/590 gövdeleriyle aynı ızgara; ONAY-ADAYLARI-1-005-510-590.md. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "U8z5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E259",
+  "equipmentCode": "1-005-540",
+  "targetAssetId": "gury-garyndy-01",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette A grubunu (9 silo gövdesi) onayladı (2026-10-25). Dayanak: plant.json cadCodeRange 1-005-510…590 içinde silo gövde kodu (X0 deseni), Baumak adı 'Silo', CAD grubu MixingUnit:1, onaylı 510/590 gövdeleriyle aynı ızgara; ONAY-ADAYLARI-1-005-510-590.md. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "aMz5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E266",
+  "equipmentCode": "1-005-550",
+  "targetAssetId": "gury-garyndy-01",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette A grubunu (9 silo gövdesi) onayladı (2026-10-25). Dayanak: plant.json cadCodeRange 1-005-510…590 içinde silo gövde kodu (X0 deseni), Baumak adı 'Silo', CAD grubu MixingUnit:1, onaylı 510/590 gövdeleriyle aynı ızgara; ONAY-ADAYLARI-1-005-510-590.md. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "gMz5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E274",
+  "equipmentCode": "1-005-560",
+  "targetAssetId": "gury-garyndy-01",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette A grubunu (9 silo gövdesi) onayladı (2026-10-25). Dayanak: plant.json cadCodeRange 1-005-510…590 içinde silo gövde kodu (X0 deseni), Baumak adı 'Silo', CAD grubu MixingUnit:1, onaylı 510/590 gövdeleriyle aynı ızgara; ONAY-ADAYLARI-1-005-510-590.md. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "lcz5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E281",
+  "equipmentCode": "1-005-570",
+  "targetAssetId": "gury-garyndy-01",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette A grubunu (9 silo gövdesi) onayladı (2026-10-25). Dayanak: plant.json cadCodeRange 1-005-510…590 içinde silo gövde kodu (X0 deseni), Baumak adı 'Silo', CAD grubu MixingUnit:1, onaylı 510/590 gövdeleriyle aynı ızgara; ONAY-ADAYLARI-1-005-510-590.md. Saha doğrulaması yapılmadı."
+ },
+ {
+  "cadInstanceId": "qsz5Kl_0qEO95PQ3kHCt6Q",
+  "cadMarker": "E288",
+  "equipmentCode": "1-005-580",
+  "targetAssetId": "gury-garyndy-01",
+  "approvedBy": "globalakbulut@gmail.com",
+  "approvedAt": "2026-10-25",
+  "basis": "Kullanıcı sohbette A grubunu (9 silo gövdesi) onayladı (2026-10-25). Dayanak: plant.json cadCodeRange 1-005-510…590 içinde silo gövde kodu (X0 deseni), Baumak adı 'Silo', CAD grubu MixingUnit:1, onaylı 510/590 gövdeleriyle aynı ızgara; ONAY-ADAYLARI-1-005-510-590.md. Saha doğrulaması yapılmadı."
+ }
+]

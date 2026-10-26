@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 CONFIG_DIR = BASE_DIR / "config"
 QUERY_DIR = BASE_DIR.parent / "database" / "readonly_queries"
 
-API_VERSION = "1.1.0"
+API_VERSION = "2.0.0"
 
 
 def load_json(name: str) -> dict:
@@ -23,6 +23,12 @@ def plant_config() -> dict:
 @lru_cache
 def tv_config() -> dict:
     return load_json("tv.json")
+
+
+@lru_cache
+def cad_identity() -> dict:
+    """Generated CAD instance -> asset link table (scripts/cad/build_identity.py)."""
+    return json.loads((BASE_DIR / "cad" / "identity.json").read_text(encoding="utf-8"))
 
 
 @lru_cache
