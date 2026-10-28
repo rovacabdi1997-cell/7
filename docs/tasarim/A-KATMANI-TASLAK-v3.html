@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="tk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gipsokarton diorama v3</title>
+<!-- TASLAK v3. Referans: OptivionAI operasyon ekranı (proje sahibinin görselleri). Font: Inter, yerel, OFL.
+     Veri: docs/api/examples (sözleşme v2.1.0, SIMULYASIYA). İnternetsiz açılır. -->
+<style>
+@font-face { font-family: "Inter"; src: url("font/Inter-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "Inter"; src: url("font/Inter-Medium.ttf"); font-weight: 500; }
+@font-face { font-family: "Inter"; src: url("font/Inter-SemiBold.ttf"); font-weight: 600; }
+@font-face { font-family: "Inter"; src: url("font/Inter-Bold.ttf"); font-weight: 700; }
+:root {
+  --zemin: #B3ACA5;
+  --zemin-ic: #C2BCB5;
+  --zemin-dis: #9D968F;
+  --panel: rgba(112, 105, 99, .72);
+  --panel-ic: rgba(255, 255, 255, .09);
+  --panel-kenar: rgba(255, 255, 255, .22);
+  --hap: rgba(255, 255, 255, .30);
+  --hap-kenar: rgba(255, 255, 255, .45);
+  --etiket: rgba(72, 66, 62, .78);
+  --beyaz: #FFFFFF;
+  --metin: #F6F3F0;
+  --metin-2: rgba(246, 243, 240, .66);
+  --koyu: #2E2A27;
+  --koyu-2: #5F5852;
+  --akis: #F59A3E;
+  --akis-2: #FFC98F;
+  --ok: #52D07A;
+  --durdu: #F4BB3A;
+  --ariza: #E4565A;
+  --ariza-2: #F08A8C;
+  --f: "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; overflow: hidden; background: #6E6761; }
+body { font-family: var(--f); color: var(--metin); -webkit-font-smoothing: antialiased; }
+.num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+#tuval { position: absolute; left: 0; top: 0; width: 3840px; height: 2160px; transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse 65% 70% at 60% 55%, var(--zemin-ic) 0%, var(--zemin) 55%, var(--zemin-dis) 100%); }
+
+/* Üst çubuk — referanstaki iki satırlı haplar */
+.ust { position: absolute; left: 56px; right: 56px; top: 40px; height: 116px; display: flex; align-items: center; gap: 20px; }
+.kutu { height: 116px; border-radius: 30px; background: var(--hap); border: 2px solid var(--hap-kenar);
+  display: flex; align-items: center; gap: 22px; padding: 0 34px; color: var(--koyu); backdrop-filter: blur(16px); white-space: nowrap; flex: none; }
+.kutu.ikon { width: 116px; padding: 0; justify-content: center; }
+.kutu.ikon b { display: grid; grid-template-columns: repeat(3, 12px); gap: 8px; }
+.kutu.ikon b i { width: 12px; height: 12px; border-radius: 3px; background: var(--koyu-2); }
+.marka img { height: 74px; filter: grayscale(1) brightness(.3); }
+.marka div b { display: block; font-size: 48px; font-weight: 700; letter-spacing: -.02em; }
+.iki small { display: flex; align-items: center; gap: 12px; font-size: 40px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--koyu); }
+.iki span { display: block; font-size: 40px; color: var(--koyu-2); font-weight: 500; }
+.nokta { width: 20px; height: 20px; border-radius: 50%; display: inline-block; flex: none; }
+.ucgen { width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 20px solid var(--ariza); display: inline-block; }
+.saat { margin-left: auto; text-align: right; color: var(--koyu); white-space: nowrap; }
+.saat b { display: block; font-size: 84px; font-weight: 600; letter-spacing: -.03em; line-height: 1; }
+.saat span { font-size: 40px; color: var(--koyu-2); font-weight: 500; }
+
+/* Sol kolon — referansın cam panelleri */
+.sol { position: absolute; left: 56px; top: 196px; bottom: 48px; width: 1000px; display: flex; flex-direction: column; gap: 18px; }
+.panel { background: var(--panel); border: 2px solid var(--panel-kenar); border-radius: 40px; padding: 28px 34px;
+  backdrop-filter: blur(24px) saturate(1.1); box-shadow: inset 0 2px 0 rgba(255,255,255,.18), 24px 40px 90px rgba(55,44,36,.25); }
+.ph { display: flex; align-items: center; gap: 18px; margin-bottom: 18px; }
+.ph .ik { width: 56px; height: 56px; border-radius: 16px; background: rgba(255,255,255,.16); display: grid; place-items: center; }
+.ph .ik i { width: 22px; height: 22px; border-radius: 6px; border: 4px solid var(--metin); }
+.ph h3 { font-size: 48px; font-weight: 600; letter-spacing: -.01em; }
+.ph small { margin-left: auto; font-size: 40px; color: var(--metin-2); font-weight: 500; }
+.ic-kart { background: var(--panel-ic); border-radius: 28px; padding: 22px 30px; }
+
+.olcer { position: relative; height: 284px; }
+.olcer svg { position: absolute; left: 50%; top: 0; transform: translateX(-50%); }
+.olcer .deger { position: absolute; left: 0; right: 0; top: 128px; text-align: center; }
+.olcer .deger b { font-size: 96px; font-weight: 700; letter-spacing: -.04em; line-height: 1; }
+.olcer .deger b span { display: block; font-size: 40px; font-weight: 500; color: var(--metin-2); letter-spacing: 0; margin-top: 4px; }
+.olcer .deger small { display: none; }
+.olcer .uc { position: absolute; bottom: 4px; font-size: 40px; color: var(--metin-2); }
+.ust-satir { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.ust-satir b { font-size: 44px; font-weight: 600; display: block; }
+.ust-satir span { font-size: 40px; color: var(--metin-2); white-space: nowrap; }
+.rozet { font-size: 40px; padding: 6px 22px; border-radius: 16px; background: rgba(255,255,255,.14); color: var(--metin); white-space: nowrap; }
+
+.dy { display: grid; grid-template-columns: 1fr 230px; gap: 8px 20px; align-items: center; }
+.dy + .dy { margin-top: 18px; }
+.dy p { font-size: 40px; font-weight: 600; line-height: 1.2; }
+.dy .alt { display: flex; align-items: center; gap: 18px; font-size: 40px; color: var(--metin-2); }
+.etk { font-size: 40px; font-weight: 600; padding: 2px 20px; border-radius: 12px; }
+.etk.isjen { background: rgba(228, 86, 90, .9); color: #fff; }
+.etk.tassyk { background: rgba(244, 187, 58, .9); color: #2E2A27; }
+.etk.yapyk { background: rgba(255,255,255,.18); color: var(--metin); }
+.dy svg { grid-row: 1 / 3; grid-column: 2; }
+
+.g6 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 14px; flex: 1; min-height: 0; }
+.gk { background: rgba(255,255,255,.12); border-radius: 26px; padding: 12px 24px 14px; display: flex; flex-direction: column; justify-content: space-between; min-width: 0; overflow: hidden; }
+.gk .b { display: flex; justify-content: space-between; align-items: center; font-size: 40px; color: rgba(255,255,255,.92); font-weight: 600; }
+.gk .d { display: flex; align-items: baseline; gap: 10px; margin: 0; }
+.gk .d b { font-size: 78px; font-weight: 700; letter-spacing: -.04em; line-height: 1; color: #fff; text-shadow: 0 2px 10px rgba(40,30,22,.25); }
+.gk .d span { font-size: 44px; font-weight: 600; color: rgba(255,255,255,.85); }
+.gk .ref { font-size: 40px; color: rgba(255,255,255,.80); font-weight: 500; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dugme { width: 92px; height: 92px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #E6E1DC 60%, #CFC8C1);
+  box-shadow: 0 8px 18px rgba(0,0,0,.25), inset 0 -3px 6px rgba(0,0,0,.12); display: grid; place-items: center; color: var(--koyu); font-size: 48px; font-weight: 700; position: relative; }
+.seg { height: 14px; border-radius: 7px; background: rgba(255,255,255,.18); overflow: hidden; }
+.seg i { display: block; height: 100%; border-radius: 9px; }
+
+/* Sahne */
+#sahne { position: absolute; left: 1100px; top: 170px; width: 2740px; height: 1990px; }
+#sahne svg.zemin { position: absolute; inset: 0; overflow: visible; }
+.mak { position: absolute; transform: translate(-50%, -78%); }
+.mak img { width: 100%; display: block;
+  filter: grayscale(1) brightness(1.5) contrast(.62) sepia(.06) drop-shadow(46px 58px 34px rgba(72, 60, 50, .34)); }
+.mak.ariza img { filter: grayscale(1) brightness(1.15) contrast(.8) sepia(1) saturate(4.2) hue-rotate(-42deg) drop-shadow(0 0 36px rgba(228,86,90,.55)) drop-shadow(46px 58px 34px rgba(72,60,50,.34)); }
+.etiket { position: absolute; transform: translate(-50%, 0); white-space: nowrap; display: flex; align-items: center; gap: 14px;
+  background: var(--etiket); color: var(--beyaz); border-radius: 18px; padding: 8px 24px; font-size: 40px; font-weight: 500;
+  backdrop-filter: blur(10px); box-shadow: 0 10px 24px rgba(55,44,36,.22); }
+.etiket.ariza { background: rgba(228, 86, 90, .92); }
+.etiket .nokta { width: 18px; height: 18px; animation: nabiz 2.4s ease-in-out infinite; }
+@keyframes nabiz { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+@keyframes akis { to { stroke-dashoffset: -96; } }
+.akan { stroke-dasharray: 4 44; animation: akis 1.4s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .akan, .etiket .nokta { animation: none; } }
+
+.popup { position: absolute; width: 820px; background: rgba(96, 90, 85, .80); border: 2px solid var(--panel-kenar); border-radius: 34px;
+  padding: 30px 36px; color: var(--metin); backdrop-filter: blur(24px); box-shadow: 0 40px 90px rgba(50,40,32,.35); }
+.popup .r1 { display: flex; align-items: center; gap: 18px; margin-bottom: 16px; }
+.popup .r1 .ik { width: 56px; height: 56px; border-radius: 14px; background: rgba(228,86,90,.9); display: grid; place-items: center; }
+.popup h4 { font-size: 56px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 14px; }
+.popup .cizgi { display: flex; align-items: center; gap: 14px; margin: 6px 0 18px; }
+.popup .cizgi div { flex: 1; height: 12px; border-radius: 6px; background: rgba(255,255,255,.18); overflow: hidden; }
+.popup .cizgi div i { display: block; height: 100%; background: linear-gradient(90deg, var(--ariza), var(--ariza-2)); }
+.popup .cizgi span { display: flex; gap: 8px; } .popup .cizgi span i { width: 14px; height: 14px; border-radius: 50%; background: var(--ariza); }
+.popup p { font-size: 40px; line-height: 1.35; color: var(--metin); }
+.popup .alt { margin-top: 18px; display: flex; gap: 16px; }
+.popup .alt span { font-size: 40px; padding: 10px 26px; border-radius: 16px; background: rgba(255,255,255,.14); }
+.popup .alt span.k { background: rgba(228,86,90,.85); }
+
+.lejant { position: absolute; right: 80px; bottom: 110px; display: flex; gap: 80px; color: var(--koyu); }
+.lejant h5 { display: flex; align-items: center; gap: 12px; font-size: 40px; font-weight: 600; margin-bottom: 12px; }
+.lejant h5::before { content: ""; width: 20px; height: 20px; border: 3px solid var(--koyu-2); border-radius: 5px; }
+.lejant div div { display: flex; align-items: center; gap: 18px; margin-top: 6px; font-size: 40px; color: var(--koyu-2); font-weight: 500; text-transform: uppercase; letter-spacing: .03em; }
+
+#arac { position: fixed; right: 12px; bottom: 12px; display: flex; gap: 6px; font: 13px system-ui; z-index: 9; }
+#arac button { padding: 6px 10px; border: 1px solid #555; background: #1E2221; color: #E8ECEA; border-radius: 6px; cursor: pointer; }
+#arac button[aria-pressed="true"] { background: #F59A3E; border-color: #F59A3E; color: #1E1A16; }
+</style>
+</head>
+<body>
+<div id="tuval">
+  <div class="ust">
+    <div class="kutu ikon"><b><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></b></div>
+    <div class="kutu marka"><img src="../../frontend/public/tv/support/logo.png" alt=""><div><b>Türkmen Gips</b></div></div>
+    <div class="kutu"><div class="iki"><small>Gipsokarton önümçiligi</small><span>A bölümi · 11 enjam</span></div></div>
+    <div class="kutu"><div class="iki"><small id="u-durum"><i class="nokta" style="background:var(--ok)"></i>Işleýär</small><span>Liniýanyň ýagdaýy</span></div></div>
+    <div class="kutu"><div class="iki"><small><i class="nokta" style="background:#8E8781"></i>Simulýasiýa</small><span>Maglumat çeşmesi</span></div></div>
+    <div class="kutu"><div class="iki"><small>I çalşyk</small><span class="num">08:00–16:00 · her 5 s</span></div></div>
+    <div class="saat"><b class="num" id="saat">—</b><span id="sene">—</span></div>
+  </div>
+
+  <div class="sol">
+    <div class="panel">
+      <div class="ph"><span class="ik"><i></i></span><h3>Hat tizligi</h3><small>Gatama lentasy</small></div>
+      <div class="ic-kart">
+        <div class="ust-satir"><div><b>Kuwwatyň ulanylyşy</b><span class="num" id="nominal">—</span></div><span class="rozet">soňky 5 s</span></div>
+        <div class="olcer">
+          <svg width="510" height="283" viewBox="0 0 720 400" id="olcer"></svg>
+          <div class="deger"><b class="num" id="tizlik">—<span>m/min</span></b><small class="num" id="kuwwat">—</small></div>
+          <span class="uc num" style="left:40px">0 %</span><span class="uc num" style="right:20px">100 %</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="ph"><span class="ik"><i></i></span><h3>Duýduryşlar</h3><small id="dy-san">—</small></div>
+      <div class="ic-kart" id="dy"></div>
+    </div>
+
+    <div class="panel" style="flex:1;display:flex;flex-direction:column;min-height:0">
+      <div class="ph"><span class="ik"><i></i></span><h3>Görkezijiler</h3><small>şu gün</small></div>
+      <div class="g6" id="g6"></div>
+    </div>
+  </div>
+
+  <div id="sahne"></div>
+
+  <div class="lejant">
+    <div><h5>Baglanyşyk görnüşi</h5>
+      <div><svg width="90" height="14"><line x1="0" y1="7" x2="90" y2="7" stroke="var(--akis)" stroke-width="6"/></svg>Material akymy</div>
+      <div><svg width="90" height="14"><line x1="0" y1="7" x2="90" y2="7" stroke="var(--akis)" stroke-width="6" stroke-dasharray="12 10"/></svg>Goşmaça iýmitleniş</div>
+    </div>
+    <div><h5>Ýagdaý</h5>
+      <div><i class="nokta" style="background:var(--ok)"></i>Işleýär</div>
+      <div><i class="nokta" style="background:var(--durdu);border-radius:3px"></i>Durdy</div>
+      <div><i class="ucgen"></i>Näsazlyk</div>
+    </div>
+  </div>
+</div>
+
+<div id="arac">
+  <button id="b-normal" aria-pressed="true">Kadaly · 13:07</button>
+  <button id="b-ariza" aria-pressed="false">Näsazlyk · 15:25</button>
+</div>
+
+<script>
+const IMG = "../../frontend/public/tv/machines/";
+const SAHNE = {
+  normal: { speed: 34.63, capacity: 99.7, outputToday: 11646.84, planToday: 54795, fulfil: 99.7, shiftOutput: 11646.84,
+            shiftPlan: 18265, stops: 1, stopMin: 18, open: 0, oee: 89.7, apq: [94.1, 96.7, 98.6], fault: null,
+            alarms: [{ t: "Kagyz bobinasy çalşyrylýar", s: "10:40 · 18 min", st: "yapyk", e: "Ýapyldy", from: 160, to: 178 }] },
+  ariza: { speed: 0, capacity: 0, outputToday: 17024.45, planToday: 54795, fulfil: 100.5, shiftOutput: 17024.45,
+           shiftPlan: 18265, stops: 2, stopMin: 23, open: 1, oee: 90.5, apq: [94.8, 96.8, 98.6], fault: "kesiji",
+           alarms: [{ t: "Kesijiniň ýerleşiş datçigi ýalňyşlyk berdi", s: "15:20 · 5 min", st: "isjen", e: "Işjeň", from: 440, to: 445 },
+                    { t: "Kagyz bobinasy çalşyrylýar", s: "10:40 · 18 min", st: "yapyk", e: "Ýapyldy", from: 160, to: 178 }] },
+};
+const NOMINAL = 34.72;
+
+const TOP = [1380, 330], A = [124, 66], B = [-124, 66];
+const P = (a, b) => [TOP[0] + a * A[0] + b * B[0], TOP[1] + a * A[1] + b * B[1]];
+const M = [
+  { id: "kagyz",  ad: "Kagyz bobinasy",   f: "tg-gk-10-kagyz-bobinasy",  a: 5.0, b: 5.0, w: 320, feed: "formirleme", lab: "ast" },
+  { id: "gips",   ad: "Gips berijisi",    f: "tg-gk-01-gips-berijisi",   a: 0.9, b: 2.7, w: 380, lab: "ust" },
+  { id: "garys",  ad: "Garyşdyryjy",      f: "tg-gk-02-garysdyryjy",     a: 2.9, b: 2.7, w: 360, lab: "ust" },
+  { id: "kopuk",  ad: "Köpük generatory", f: "tg-gk-03-kopuk-generatory", a: 2.9, b: 0.5, w: 300, feed: "garys", lab: "ust" },
+  { id: "formirleme", ad: "Formirleme stoly", f: "tg-gk-04-formirleme-stoly", a: 5.0, b: 2.7, w: 400, lab: "ust" },
+  { id: "gatama", ad: "Gatama lentasy",   f: "tg-gk-05-gatama-lentasy",  a: 7.1, b: 2.7, w: 400, lab: "ust" },
+  { id: "kesiji", ad: "Kesiji",           f: "tg-gk-06-kesiji",          a: 9.3, b: 2.7, w: 360, lab: "ust" },
+  { id: "guradyjy", ad: "Guradyjy",       f: "tg-gk-07-guradyjy",        a: 9.2, b: 5.6, w: 640, lab: "ast" },
+  { id: "gyra",   ad: "Gyra kesiji",      f: "tg-gk-08-gyra-kesiji",     a: 7.4, b: 8.6, w: 400, lab: "ast" },
+  { id: "bukja",  ad: "Bukjalaýjy",       f: "tg-gk-11-bukjalayjy",      a: 5.2, b: 8.6, w: 400, lab: "ast" },
+  { id: "gapla",  ad: "Gaplaýjy",         f: "tg-gk-09-gaplayjy",        a: 3.0, b: 8.6, w: 420, lab: "ast" },
+];
+const CHAIN = ["gips", "garys", "formirleme", "gatama", "kesiji", "guradyjy", "gyra", "bukja", "gapla"];
+const byId = Object.fromEntries(M.map(m => [m.id, m]));
+
+function san(v, d = 0) {
+  const [i, f] = Math.abs(v).toFixed(d).split(".");
+  return (v < 0 ? "−" : "") + i.replace(/\B(?=(\d{3})+(?!\d))/g, " ") + (f ? "," + f : "");
+}
+
+function olcer(pct) {
+  // Thick arc with tick marks, like the reference gauge. 210° sweep.
+  const cx = 360, cy = 370, r = 290, start = 195, sweep = 150;
+  const pt = (deg, rr) => [cx + rr * Math.cos(deg * Math.PI / 180), cy - rr * Math.sin(deg * Math.PI / 180)];
+  const arc = (from, to, rr) => { const [x1, y1] = pt(from, rr), [x2, y2] = pt(to, rr); return `M${x1} ${y1} A${rr} ${rr} 0 ${from - to > 180 ? 1 : 0} 1 ${x2} ${y2}`; };
+  const a0 = 180 - (180 - sweep) / 2 + 15, a1 = a0 - sweep - 30;
+  const end = a0 - (a0 - a1) * Math.min(pct, 100) / 100;
+  let s = `<defs><linearGradient id="og" x1="0" x2="1"><stop offset="0" stop-color="#F7B267"/><stop offset="1" stop-color="#F0703A"/></linearGradient></defs>`;
+  s += `<path d="${arc(a0, a1, r)}" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="64" stroke-linecap="round"/>`;
+  if (pct > 0) s += `<path d="${arc(a0, end, r)}" fill="none" stroke="url(#og)" stroke-width="64" stroke-linecap="round"/>`;
+  for (let k = 0; k <= 40; k++) {
+    const d = a0 - (a0 - a1) * k / 40, [x1, y1] = pt(d, r - 58), [x2, y2] = pt(d, r - (k % 5 ? 70 : 84));
+    s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(255,255,255,${k % 5 ? .28 : .55})" stroke-width="4"/>`;
+  }
+  const [px, py] = pt(end, r + 46), [qx, qy] = pt(end, r - 46);
+  s += `<line x1="${px}" y1="${py}" x2="${qx}" y2="${qy}" stroke="#fff" stroke-width="10" stroke-linecap="round"/>`;
+  document.getElementById("olcer").innerHTML = s;
+}
+
+function serit(from, to, renk) {
+  // Where the event sits inside the 8-hour shift (minutes from shift start); hour ticks below.
+  const x = m => 6 + m / 480 * 218;
+  let t = "";
+  for (let h = 0; h <= 8; h++) t += `<line x1="${x(h * 60)}" y1="58" x2="${x(h * 60)}" y2="${h % 4 ? 64 : 70}" stroke="rgba(255,255,255,.4)" stroke-width="3"/>`;
+  return `<svg width="230" height="80" viewBox="0 0 230 80"><rect x="6" y="30" width="218" height="16" rx="8" fill="rgba(255,255,255,.14)"/>
+    <rect x="${x(from)}" y="30" width="${Math.max(x(to) - x(from), 10)}" height="16" rx="8" fill="${renk}"/>${t}</svg>`;
+}
+
+function yol(m1, m2) {
+  const pts = [P(m1.a, m1.b), P(m2.a, m1.b), P(m2.a, m2.b)];
+  return "M" + pts.map(p => p.join(" ")).join(" L");
+}
+
+function sahne(fault) {
+  const s = document.getElementById("sahne");
+  const slab = [P(-0.2, -0.2), P(10.6, -0.2), P(10.6, 10.6), P(-0.2, 10.6)];
+  const th = 30, poly = pts => pts.map(p => p.join(",")).join(" ");
+  let svg = `<svg class="zemin" viewBox="0 0 2740 1990">
+    <defs><filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter>
+      <filter id="golge" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="50"/></filter></defs>
+    <polygon points="${poly(slab.map(([x, y]) => [x + 90, y + 130]))}" fill="rgba(70,58,48,.22)" filter="url(#golge)"/>
+    <polygon points="${poly([slab[3], slab[2], [slab[2][0], slab[2][1] + th], [slab[3][0], slab[3][1] + th]])}" fill="#A8A19A"/>
+    <polygon points="${poly([slab[2], slab[1], [slab[1][0], slab[1][1] + th], [slab[2][0], slab[2][1] + th]])}" fill="#9C958E"/>
+    <polygon points="${poly(slab)}" fill="#CBC5BF"/>`;
+  const links = CHAIN.slice(1).map((id, i) => [byId[CHAIN[i]], byId[id], false])
+    .concat(M.filter(m => m.feed).map(m => [m, byId[m.feed], true]));
+  for (const [m1, m2, dashed] of links) {
+    const broken = fault && (m1.id === fault || m2.id === fault);
+    const d = yol(m1, m2), color = broken ? "var(--ariza)" : "var(--akis)";
+    svg += `<path d="${d}" fill="none" stroke="${broken ? "rgba(228,86,90,.55)" : "rgba(245,154,62,.65)"}" stroke-width="18" filter="url(#glow)"/>`;
+    svg += `<path d="${d}" fill="none" stroke="${color}" stroke-width="5" ${dashed || broken ? 'stroke-dasharray="18 12"' : ""}/>`;
+    if (!broken && !dashed) svg += `<path class="akan" d="${d}" fill="none" stroke="#FFF1E2" stroke-width="9" stroke-linecap="round"/>`;
+    const [cx, cy] = P(m2.a, m1.b);
+    svg += `<g transform="translate(${cx} ${cy})"><rect x="-20" y="-20" width="40" height="40" rx="7" fill="#F7F4F0" stroke="${color}" stroke-width="4"/><rect x="-7" y="-7" width="14" height="14" rx="3" fill="${color}"/></g>`;
+  }
+  svg += "</svg>";
+  const order = [...M].sort((x, y) => (x.a + x.b) - (y.a + y.b));
+  let html = svg;
+  for (const m of order) {
+    const [x, y] = P(m.a, m.b);
+    html += `<div class="mak ${m.id === fault ? "ariza" : ""}" style="left:${x}px;top:${y}px;width:${m.w}px"><img src="${IMG}${m.f}-base.png" alt=""></div>`;
+  }
+  for (const m of order) {
+    const [x, y] = P(m.a, m.b);
+    const bad = m.id === fault;
+    const top = m.lab === "ust" ? y - m.w * 0.78 - 64 : y + m.w * 0.24;
+    const dot = bad ? `<i class="ucgen" style="border-bottom-color:#fff"></i>` : `<i class="nokta" style="background:var(--ok)"></i>`;
+    html += `<div class="etiket ${bad ? "ariza" : ""}" style="left:${x}px;top:${top}px">${dot}${m.ad}</div>`;
+  }
+  if (fault) {
+    const m = byId[fault], [x, y] = P(m.a, m.b);
+    const px = 1880, py = 30, ly = y - m.w * 0.78 - 64;
+    html += `<svg class="zemin" viewBox="0 0 2740 1990" style="pointer-events:none">
+      <path d="M${px + 200} ${py + 470} L${px + 200} ${ly - 70} L${x} ${ly - 70} L${x} ${ly}" fill="none" stroke="var(--ariza)" stroke-width="4" stroke-dasharray="10 10"/></svg>`;
+    html += `<div class="popup" style="left:${px}px;top:${py}px">
+      <div class="r1"><span class="ik"><i class="ucgen" style="border-bottom-color:#fff"></i></span><span class="etk isjen">Näsazlyk</span></div>
+      <h4>${m.ad}</h4>
+      <div class="cizgi"><div><i style="width:42%"></i></div><span><i></i><i></i><i></i></span></div>
+      <p>Ýerleşiş datçigi ýalňyşlyk berdi.</p>
+      <div class="alt"><span class="num">15:20 başlady</span><span class="num k">5 min dowam edýär</span></div></div>`;
+  }
+  s.innerHTML = html;
+}
+
+function goster(key) {
+  const d = SAHNE[key];
+  olcer(d.capacity);
+  document.getElementById("tizlik").innerHTML = `${san(d.speed, 1)}<span>m/min</span>`;
+  document.getElementById("kuwwat").textContent = `kuwwat ${san(d.capacity, 1)} %`;
+  document.getElementById("nominal").textContent = `nominal ${san(NOMINAL, 1)} · kuwwat ${san(d.capacity, 1)} %`;
+  document.getElementById("u-durum").innerHTML = d.fault
+    ? `<i class="ucgen"></i>Näsazlyk · Kesiji` : `<i class="nokta" style="background:var(--ok)"></i>Işleýär`;
+  document.getElementById("dy-san").textContent = d.open ? `${d.open} işjeň` : "işjeň ýok";
+  document.getElementById("dy").innerHTML = d.alarms.map(a => {
+    const renk = a.st === "isjen" ? "#F08A8C" : a.st === "tassyk" ? "#F4BB3A" : "rgba(255,255,255,.5)";
+    return `<div class="dy"><p>${a.t}</p>${serit(a.from, a.to, renk)}<div class="alt"><span class="etk ${a.st}">${a.e}</span><span class="num">${a.s}</span></div></div>`;
+  }).join("");
+  const seg = (p, renk) => `<div class="seg"><i style="width:${Math.round(Math.min(Math.max(p, 0), 1) * 100)}%;background:${renk}"></i></div>`;
+  // Every number has its reference under it (TAM-PLAN-v9 §8).
+  const cells = [
+    ["Gündelik önüm", san(d.outputToday), "m²", `maksat ${san(d.planToday)}`, seg(d.outputToday / d.planToday, "var(--akis)"), "var(--ok)"],
+    ["Ýerine ýetiriliş", san(d.fulfil, 1), "%", "şu wagta çenli", seg(d.fulfil / 100, "var(--ok)"), "var(--ok)"],
+    ["Çalşyk önümi", san(d.shiftOutput), "m²", `maksat ${san(d.shiftPlan)}`, seg(d.shiftOutput / d.shiftPlan, "var(--akis)"), "var(--ok)"],
+    ["OEE", san(d.oee, 1), "%", `E ${san(d.apq[0])} · Ö ${san(d.apq[1])} · H ${san(d.apq[2])} %`, seg(d.oee / 100, "var(--akis)"), "var(--ok)"],
+    ["Işjeň duýduryş", san(d.open), "sany", d.open ? "Kesiji" : "hemmesi kadaly", seg(d.open / 5, "var(--ariza)"), d.open ? "var(--ariza)" : "var(--ok)"],
+    ["Duruş sany", san(d.stops), "sany", `jemi ${san(d.stopMin)} min`, seg(d.stops / 5, "var(--durdu)"), "var(--durdu)"],
+  ];
+  document.getElementById("g6").innerHTML = cells.map(([t, v, u, ref, bar, dot]) =>
+    `<div class="gk"><div class="b">${t}<i class="nokta" style="background:${dot};width:26px;height:26px"></i></div>
+     <div><div class="d"><b class="num">${v}</b><span>${u}</span></div><div class="ref num">${ref}</div>${bar}</div></div>`).join("");
+  sahne(d.fault);
+  for (const [id, k] of [["b-normal", "normal"], ["b-ariza", "ariza"]])
+    document.getElementById(id).setAttribute("aria-pressed", String(k === key));
+}
+
+function saat() {
+  const t = new Date(Date.now() + 5 * 3600e3), p = n => String(n).padStart(2, "0");
+  const gun = ["Ýekşenbe", "Duşenbe", "Sişenbe", "Çarşenbe", "Penşenbe", "Anna", "Şenbe"][t.getUTCDay()];
+  document.getElementById("saat").textContent = `${p(t.getUTCHours())}:${p(t.getUTCMinutes())}`;
+  document.getElementById("sene").textContent = `${gun} · ${p(t.getUTCDate())}.${p(t.getUTCMonth() + 1)}.${t.getUTCFullYear()} · Aşgabat`;
+}
+function olcek() {
+  const s = Math.min(innerWidth / 3840, innerHeight / 2160), t = document.getElementById("tuval");
+  t.style.transform = `translate(${(innerWidth - 3840 * s) / 2}px, ${(innerHeight - 2160 * s) / 2}px) scale(${s})`;
+}
+document.getElementById("b-normal").onclick = () => goster("normal");
+document.getElementById("b-ariza").onclick = () => goster("ariza");
+addEventListener("resize", olcek); addEventListener("load", olcek);
+olcek(); saat(); setInterval(saat, 10e3);
+goster(new URLSearchParams(location.search).get("sahne") === "ariza" ? "ariza" : "normal");
+</script>
+</body>
+</html>
